@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, develop]
   pull_request:
-    branches: [main]
+    branches: [main, develop]
 
 jobs:
   lint:
@@ -23,9 +23,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: sea-of-code/package-lock.json
 
       - name: Install modules
-        run: npm install
+        run: npm ci
 
       - name: Run linter
         run: npm run lint
+
+      - name: Build
+        run: npm run build

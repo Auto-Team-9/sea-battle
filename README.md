@@ -6,4 +6,6 @@ Players roll dice to move across the game board, solving JavaScript, TypeScript,
   - Андрей - [heyArtik-dev](https://github.com/heyArtik-dev)
   - Александра - [Ch-alexandra](https://github.com/Ch-alexandra)
 
+[**Deploy**](https://orgris.github.io/Auto-Team-9-Widget-Trainer/)
+
 [**Trello**](https://trello.com/b/uKf8wGni/rss-tandem)
