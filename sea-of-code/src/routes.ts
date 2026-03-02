@@ -31,7 +31,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: '/Auto-Team-9-Widget-Trainer/',
+    basename: '/Auto-Team-9-Widget-Trainer',
   }
 );
 
