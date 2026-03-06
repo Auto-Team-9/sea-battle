@@ -8,8 +8,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: 'bg-indigo-500 text-white hover:bg-indigo-400 focus-visible:outline-indigo-600',
-  secondary: 'bg-stone-500 hover:bg-gray-200 focus-visible:outline-gray-400',
+  primary: 'bg-indigo-900/50 hover:bg-indigo-500 focus-visible:outline-indigo-600',
+  secondary: 'bg-slate-900/50 hover:bg-slate-800 focus-visible:outline-gray-400',
 };
 
 const Button: FC<ButtonProps> = ({
