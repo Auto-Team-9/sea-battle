@@ -190,3 +190,7 @@
 .doodle a:focus-visible {
   outline-offset: 3px;
 }
+
+.doodle input[type="checkbox"] {
+  outline-offset: 3px;
+}
