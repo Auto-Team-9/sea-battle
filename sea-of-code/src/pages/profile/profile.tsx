@@ -1,7 +1,7 @@
-import BattleButton from './components/battle-button/battle-button';
 import Journal from './components/journal/journal';
-import Avatar from './components/avatar/avatar';
+import UserProfileCard from './components/user-profile-card/userProfileCard';
 import Progress from './components/progress/progress';
+import { Link } from 'react-router';
 
 const Profile = () => {
   return (
@@ -16,8 +16,13 @@ const Profile = () => {
       mx-auto               
       my-4'
     >
-      <BattleButton />
-      <Avatar />
+      <Link
+        to={'/Auto-Team-9-Widget-Trainer/'}
+        className='text-3xl text-[--color-text] px-8 py-2 border-2 doodle-border rounded-xs cursor-pointer mx-auto hover:animate-pulse hover:text-amber-500 transition-colors'
+      >
+        Dashboard
+      </Link>
+      <UserProfileCard />
       <Journal />
       <Progress />
     </section>
