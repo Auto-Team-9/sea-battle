@@ -1,10 +1,11 @@
-import type { ButtonHTMLAttributes, FC, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 type ButtonVariant = 'primary' | 'secondary';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   icon?: ReactNode;
+  children?: ReactNode;
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
@@ -12,13 +13,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   secondary: 'bg-slate-300 hover:bg-slate-400 dark:bg-slate-900/50 dark:hover:bg-slate-800',
 };
 
-const Button: FC<ButtonProps> = ({
-  variant = 'primary',
-  icon,
-  className = '',
-  children,
-  ...props
-}) => {
+const Button = ({ variant = 'primary', icon, className = '', children, ...props }: ButtonProps) => {
   return (
     <button
       className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 ${variantStyles[variant]} ${className}`}
