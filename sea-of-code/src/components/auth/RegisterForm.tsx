@@ -85,8 +85,8 @@ const RegisterForm = () => {
     <form onSubmit={handleSubmit} className='space-y-4' noValidate>
       <Input
         label='Name'
-        name='text'
-        type='name'
+        name='name'
+        type='text'
         onChange={handleChange}
         error={errors.name}
         autoComplete='text'
