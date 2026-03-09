@@ -1,13 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Short+Stack&display=swap');
+@import "./styles/vendor/doodleCss/doodle.css";
 @import 'tailwindcss';
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --color-text: #3c3c3c;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #bbdbe7;
+  --color-accent: var(--color-indigo-500);
+
+  font-family: 'Short Stack', cursive;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+
+  color: var(--color-text);
+  background-color: var(--color-bg-primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,17 +27,20 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  justify-content: center;
+
+  background: linear-gradient(var(--color-bg-secondary), transparent 2px), linear-gradient(90deg, var(--color-bg-secondary), transparent 2px);
+  background-size: 20px 20px;
+  background-position: center center;
+
+  user-select: none;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+    --color-text: #ffffff;
+    --color-bg-primary: #242424;
+    --color-bg-secondary: #2d2d2d;
+    --color-accent: var(--color-indigo-500);
   }
 }
