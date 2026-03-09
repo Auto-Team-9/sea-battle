@@ -103,13 +103,6 @@
   vertical-align: top;
 }
 
-.doodle img {
-  border-radius: 3px;
-  border-style: solid;
-  border-width: 3px 3px 3px 3px;
-  border-image: url(button.svg) 3 3 3 3 stretch stretch;
-}
-
 .doodle select {
   -webkit-appearance: none;
   appearance: none;
@@ -127,7 +120,6 @@
 .doodle textarea,
 .doodle input,
 .doodle select {
-  background-color: unset;
   font-family: 'Short Stack', cursive;
   font-size: 1em;
 }
@@ -182,7 +174,16 @@
 .doodle button:focus-visible,
 .doodle textarea:focus-visible,
 .doodle input:focus-visible,
+.doodle a:focus-visible,
 .doodle select:focus-visible {
   outline-offset: -8px;
   outline: 2px dashed var(--color-accent);
+}
+
+.doodle a:focus-visible {
+  outline-offset: 3px;
+}
+
+.doodle input[type="checkbox"] {
+  outline-offset: 3px;
 }
