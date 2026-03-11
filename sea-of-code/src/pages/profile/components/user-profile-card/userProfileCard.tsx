@@ -1,8 +1,11 @@
 import { useState, type JSX } from 'react';
-import { defaultAvatar, ranks } from '../../../../constants/images';
+import { defaultAvatar, ranks } from '../../../../constants/ranks';
+import type { UserData } from '../../../../types/types';
 
-const UserProfileCard = (): JSX.Element => {
+const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
   const [image, setImage] = useState<string>(defaultAvatar);
+  const { nickname, rank, to_rank } = userData;
+  const { name, src, alt } = ranks[rank as keyof typeof ranks];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const image = e.target.files?.[0].name;
@@ -10,17 +13,17 @@ const UserProfileCard = (): JSX.Element => {
   };
 
   return (
-    <div className='w-full doodle-border'>
+    <div className='doodle-border w-full'>
       <div className='flex items-center'>
-        <img src='./profile-images/personal.png' alt='personal' className='w-28 h-20 bg-cover' />
-        <h1 className='sm:text-4xl text-xl py-4'>Личное дело</h1>
+        <img src='./profile-images/personal.png' alt='personal' className='h-20 w-28 bg-cover' />
+        <h1 className='py-4 text-xl sm:text-4xl'>Личное дело</h1>
       </div>
-      <div className='flex lg:flex-row flex-col justify-around sm:gap-6 gap-2 doodle-border text-[--color-text] sm:p-4'>
+      <div className='doodle-border flex flex-col justify-around gap-2 text-[--color-text] sm:gap-6 sm:p-4 lg:flex-row'>
         <div className='flex flex-col items-center'>
-          <img src={image} alt='avatar' className='sm:w-64 sm:h-82 w-36 h-64 rounded-xl' />
+          <img src={image} alt='avatar' className='h-64 w-36 rounded-xl sm:h-82 sm:w-64' />
           <label
             htmlFor='photo-upload'
-            className='cursor-pointer doodle-border lg:w-full w-70 text-center sm:text-2xl'
+            className='doodle-border w-70 cursor-pointer text-center sm:text-2xl lg:w-full'
           >
             Загрузить фото
           </label>
@@ -32,30 +35,26 @@ const UserProfileCard = (): JSX.Element => {
             onChange={handleChange}
           />
         </div>
-        <div className='flex flex-col sm:gap-4 gap-2 py-4 text-2xl '>
-          <h1 className='text-center sm:text-5xl text-3xl'>Никнейм</h1>
-          <div className='flex sm:flex-row flex-col gap-2'>
-            <p className='sm:text-4xl text-xl'>Звание: {ranks.unga.name}</p>
+        <div className='flex flex-col gap-2 py-4 text-2xl sm:gap-4'>
+          <h1 className='text-center text-3xl sm:text-5xl'>{nickname}</h1>
+          <div className='flex flex-col gap-2 sm:flex-row'>
+            <p className='text-xl sm:text-4xl'>Звание: {name}</p>
           </div>
-          <div className='flex items-center sm:gap-4 gap-2'>
-            <p className='sm:text-4xl text-xl'>Ранг:</p>
-            <img
-              src='./profile-images/unga.png'
-              alt='admiral'
-              className='sm:w-20 sm:h-16 w-14 h-12'
-            />
+          <div className='flex items-center gap-2 sm:gap-4'>
+            <p className='text-xl sm:text-4xl'>Ранг:</p>
+            <img src={src} alt={alt} className='h-12 w-14 sm:h-16 sm:w-20' />
           </div>
           <div className='flex items-center'>
-            <p className='sm:text-4xl text-xl'>Клан:</p>
+            <p className='text-xl sm:text-4xl'>Клан:</p>
             <img
               src='./profile-images/сode_сlan.png'
               alt='unga'
-              className='sm:w-22 sm:h-18 w-14 h-12'
+              className='h-12 w-14 sm:h-18 sm:w-22'
             />
           </div>
           <div className='flex items-center gap-4'>
-            <p className='sm:text-4xl text-xl'>До звания</p>
-            <progress className='sm:text-2xl text-sm' value='50' max='100'></progress>
+            <p className='text-xl sm:text-4xl'>До звания</p>
+            <progress className='text-sm sm:text-2xl' value={to_rank} max='100'></progress>
           </div>
         </div>
       </div>
@@ -64,3 +63,5 @@ const UserProfileCard = (): JSX.Element => {
 };
 
 export default UserProfileCard;
+
+/* сделать выбор клана */

@@ -3,23 +3,28 @@ export const defaultAvatar = './profile-images/default-avatar.png';
 export const ranks = {
   unga: {
     name: 'Курсант коммита',
-    image: './profile-images/unga.png',
+    src: './profile-images/unga.png',
+    alt: 'unga',
   },
   mich: {
     name: 'Навигатор багов',
-    image: './profile-images/mich.png',
+    src: './profile-images/mich.png',
+    alt: 'mich',
   },
   leit: {
     name: 'Командор данных',
-    image: './profile-images/leit.png',
+    src: './profile-images/leit.png',
+    alt: 'leit',
   },
   cap: {
     name: 'Капитан системы',
-    image: './profile-images/cap.png',
+    src: './profile-images/cap.png',
+    alt: 'cap',
   },
   admiral: {
     name: 'Адмирал кода',
-    image: './profile-images/admiral.png',
+    src: './profile-images/admiral.png',
+    alt: 'admiral',
   },
 };
 
