@@ -77,8 +77,6 @@ const RegisterForm = () => {
       setErrors(validationErrors);
       return;
     }
-
-    console.log('Форма регистрации:', formData);
   };
 
   return (

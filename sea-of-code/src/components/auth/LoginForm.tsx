@@ -43,8 +43,6 @@ const LoginForm = () => {
       setErrors(validationErrors);
       return;
     }
-
-    console.log('Форма:', formData);
   };
 
   const validate = (formData: FormData): Errors => {
