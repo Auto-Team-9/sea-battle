@@ -1,4 +1,5 @@
 export const defaultAvatar = './profile-images/default-avatar.png';
+export const profileImage = 'profileImage';
 
 export const ranks = {
   unga: {

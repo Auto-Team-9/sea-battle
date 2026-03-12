@@ -1,15 +1,31 @@
 import { useState, type JSX } from 'react';
-import { defaultAvatar, ranks } from '../../../../constants/ranks';
+import { defaultAvatar, profileImage, ranks } from '../../../../constants/constants';
 import type { UserData } from '../../../../types/types';
 
 const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
-  const [image, setImage] = useState<string>(defaultAvatar);
+  const [avatar, setAvatar] = useState(() => {
+    const savedImage = localStorage.getItem(profileImage);
+    return savedImage || defaultAvatar;
+  });
+
   const { nickname, rank, to_rank } = userData;
   const { name, src, alt } = ranks[rank as keyof typeof ranks];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const image = e.target.files?.[0].name;
-    setImage(image || defaultAvatar);
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = event => {
+      if (event.target?.result && typeof event.target.result === 'string') {
+        const image = event.target.result;
+        localStorage.setItem(profileImage, image);
+        setAvatar(image);
+      }
+    };
+
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -20,7 +36,7 @@ const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
       </div>
       <div className='doodle-border flex flex-col justify-around gap-2 text-[--color-text] sm:gap-6 sm:p-4 lg:flex-row'>
         <div className='flex flex-col items-center'>
-          <img src={image} alt='avatar' className='h-64 w-36 rounded-xl sm:h-82 sm:w-64' />
+          <img src={avatar} alt='avatar' className='h-64 w-36 rounded-xl sm:h-82 sm:w-64' />
           <label
             htmlFor='photo-upload'
             className='doodle-border w-70 cursor-pointer text-center sm:text-2xl lg:w-full'
@@ -30,9 +46,9 @@ const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
           <input
             id='photo-upload'
             type='file'
-            accept='image/'
+            accept='image/*'
             className='hidden'
-            onChange={handleChange}
+            onChange={handleImageUpload}
           />
         </div>
         <div className='flex flex-col gap-2 py-4 text-2xl sm:gap-4'>
@@ -63,5 +79,3 @@ const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
 };
 
 export default UserProfileCard;
-
-/* сделать выбор клана */

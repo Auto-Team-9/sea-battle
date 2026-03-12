@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
-import { ranks } from '../constants/ranks';
+import { getFirestore, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { ranks } from '../constants/constants';
+import type { UserData } from '../types/types';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -61,4 +62,12 @@ export const createUser = async (userId: string) => {
   }
 };
 
-// update USER DATA
+export const updateUserData = async (userId: string, data: Partial<UserData>) => {
+  try {
+    const userDocRef = doc(db, 'users', userId);
+    await updateDoc(userDocRef, data);
+  } catch (error) {
+    console.error('Error updating user data:', error);
+    throw error;
+  }
+};
