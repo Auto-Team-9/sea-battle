@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
-import { getDataFromUser } from '../../firebase/config.js';
 
 import Journal from './components/journal/journal';
 import UserProfileCard from './components/user-profile-card/userProfileCard';
@@ -8,6 +7,7 @@ import Progress from './components/progress/progress';
 import type { UserData } from '../../types/types.js';
 import Loading from '../../components/loading/loading.js';
 import CustomError from '../../components/error/custom-error.js';
+import { getDataFromUser } from '../../api/users.js';
 
 const Profile = () => {
   const [userData, setUserData] = useState<UserData>({
