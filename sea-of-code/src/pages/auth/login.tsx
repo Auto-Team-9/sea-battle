@@ -1,19 +1,23 @@
 import LoginForm from '../../components/auth/LoginForm';
-import LoginHeader from '../../components/auth/LoginHeader';
+import AuthHeader from '../../components/auth/AuthHeader';
 import OAuthButtons from '../../components/auth/OAuthButtons';
-import RegisterLink from '../../components/auth/RegisterLink';
+import AuthLink from '../../components/auth/AuthLink';
 
 const Login = () => {
   return (
     <div className='flex min-h-full flex-col justify-center self-center'>
-      <LoginHeader />
+      <AuthHeader title={'Sign in, commander'} />
 
       <div className='doodle doodle-border mt-5 rounded-xl bg-white/50 p-3 sm:mx-auto sm:mt-7 sm:w-full sm:max-w-sm sm:p-6 dark:bg-black/10'>
         <LoginForm />
 
         <OAuthButtons />
 
-        <RegisterLink />
+        <AuthLink
+          text={"Don't have an account?"}
+          linkText={'Create Account'}
+          linkTo={'/auth/register'}
+        />
       </div>
     </div>
   );
