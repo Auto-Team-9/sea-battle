@@ -29,7 +29,9 @@
   min-height: 100vh;
   justify-content: center;
 
-  background: linear-gradient(var(--color-bg-secondary), transparent 2px), linear-gradient(90deg, var(--color-bg-secondary), transparent 2px);
+  background:
+    linear-gradient(var(--color-bg-secondary), transparent 2px),
+    linear-gradient(90deg, var(--color-bg-secondary), transparent 2px);
   background-size: 20px 20px;
   background-position: center center;
 
