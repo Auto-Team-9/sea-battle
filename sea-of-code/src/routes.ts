@@ -4,6 +4,7 @@ import Register from './pages/auth/register';
 import RootLayout from './layouts/rootLayout';
 import HomePage from './pages/home-page/homePage';
 import Profile from './pages/profile/profile';
+import Game from './pages/game/game';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: 'Auto-Team-9-Widget-Trainer/profile',
     Component: Profile,
+  },
+  {
+    path: 'Auto-Team-9-Widget-Trainer/game',
+    Component: Game,
   },
 ]);
 

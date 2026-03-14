@@ -51,6 +51,18 @@
   border-image: url(button.svg) 10 10 10 10 stretch stretch;
 }
 
+.doodle-game-board {
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  border-image: url(checkbox.svg) 3 3 3 3 stretch stretch;
+}
+
+.doodle-cell {
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  border-image: url(checkbox.svg) 11 11 11 11 stretch stretch;
+}
+
 .doodle button,
 .doodle input,
 .doodle select,
@@ -184,6 +196,6 @@
   outline-offset: 3px;
 }
 
-.doodle input[type="checkbox"] {
+.doodle input[type='checkbox'] {
   outline-offset: 3px;
 }
