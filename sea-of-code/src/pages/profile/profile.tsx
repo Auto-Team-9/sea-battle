@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router';
 
 import Journal from './components/journal/journal';
 import UserProfileCard from './components/user-profile-card/userProfileCard';
