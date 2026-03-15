@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-
-import type { ShipsType } from '../../../../types/types';
 import Ship from './ship/ship';
+import type { ShipsType } from '../../../../types/types';
 
-const Ships = ({ handleCheckReady }: ShipsType) => {
+const Ships = ({ handleChangeReady }: ShipsType) => {
   const [selectedShip, setSelectedShip] = useState({
     single: 4,
     double: 3,
@@ -11,22 +10,24 @@ const Ships = ({ handleCheckReady }: ShipsType) => {
     quadruple: 1,
   });
 
-  useEffect(() => {
-    const totalShips =
-      selectedShip.single + selectedShip.double + selectedShip.triple + selectedShip.quadruple;
-    if (totalShips === 0) {
-      handleCheckReady();
-    }
-  }, [selectedShip, handleCheckReady]);
-
   const handleShipClick = (type: string) => {
-    if (selectedShip[type as keyof typeof selectedShip] > 0) {
-      setSelectedShip(prev => ({
+    setSelectedShip(prev => {
+      if (prev[type as keyof typeof prev] === 0) return prev;
+
+      return {
         ...prev,
         [type]: prev[type as keyof typeof prev] - 1,
-      }));
-    }
+      };
+    });
   };
+
+  useEffect(() => {
+    const total = Object.values(selectedShip).reduce((a, b) => a + b, 0);
+
+    if (total === 0) {
+      handleChangeReady();
+    }
+  }, [selectedShip, handleChangeReady]);
 
   return (
     <div className='flex h-20 w-full items-center justify-center gap-4'>

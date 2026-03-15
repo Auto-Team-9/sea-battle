@@ -1,18 +1,32 @@
+import { useCallback, useState } from 'react';
+import type { PlacementPhaseType } from '../../../../types/types';
 import GameBoard from '../game-board/gameBoard';
 import Ships from './ships';
-import type { ShipsType } from '../../../../types/types';
 
-const PlacementPhase = ({ handleCheckReady, isReady }: ShipsType) => {
+const PlacementPhase = ({ board, startGame }: PlacementPhaseType) => {
+  const [isReady, setIsReady] = useState(false);
+
+  const handleChangeReady = useCallback(() => {
+    setIsReady(true);
+  }, []);
+
   return (
     <div className='flex flex-col items-center gap-4'>
-      <h1 className='text-3xl text-[--color-text] transition-colors'>Фаза расстановки</h1>
-      <GameBoard targetId='user' />
+      <h1 className='my-4 text-center text-3xl'>Фаза расстановки</h1>
+
+      <GameBoard board={board} />
+
       {isReady && (
-        <button className='doodle-border cursor-pointer px-6 py-2 text-3xl transition-colors hover:text-amber-500'>
+        <button
+          onClick={startGame}
+          className='doodle-border cursor-pointer px-4 text-3xl transition-colors hover:animate-pulse hover:text-amber-500'
+          disabled={!isReady}
+        >
           Готов
         </button>
       )}
-      <Ships handleCheckReady={handleCheckReady} isReady={isReady} />
+
+      <Ships handleChangeReady={handleChangeReady} />
     </div>
   );
 };

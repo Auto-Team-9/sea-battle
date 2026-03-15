@@ -1,18 +1,24 @@
-import type { Key } from 'react';
-import { CELL_SIZE } from '../../../../constants/constants';
-import type { TargetID } from '../../../../types/types';
+import type { Board, Cell } from '../../../../types/types';
 
-const GameBoard = ({ targetId }: TargetID) => {
-  const board = Array.from({ length: CELL_SIZE * CELL_SIZE }).map((_, i: Key) => (
-    <div
-      key={i}
-      className='doodle-cell hover: h-10 w-10 cursor-pointer transition-colors hover:bg-gray-500'
-    ></div>
-  ));
+const Cell = ({ cell }: { cell: Cell }) => {
+  if (cell.type === 'label') {
+    return (
+      <div className='doodle-cell flex items-center justify-center font-bold'>{cell.label}</div>
+    );
+  }
 
   return (
-    <div className='doodle-game-board m-0 flex w-101 flex-wrap' id={targetId}>
-      {board}
+    <div className='doodle-cell h-10 w-10'>
+      {cell.hasShip && '🚢'}
+      {cell.isHit && '💥'}
+    </div>
+  );
+};
+
+const GameBoard = ({ board }: { board: Board }) => {
+  return (
+    <div className='doodle-game-board grid w-fit grid-cols-11'>
+      {board.map((row, y) => row.map((cell, x) => <Cell key={`${x}-${y}`} cell={cell} />))}
     </div>
   );
 };

@@ -23,10 +23,36 @@ export interface ShipType {
 }
 
 export interface ShipsType {
-  handleCheckReady: () => void;
-  isReady: boolean;
+  handleChangeReady: () => void;
 }
 
-export type TargetID = {
-  targetId: string;
+export interface GamePhaseType {
+  phase: string;
+  playerBoard: Board;
+  enemyBoard: Board;
+  setPhase?: React.Dispatch<React.SetStateAction<string>>;
+  setEnemyBoard?: React.Dispatch<React.SetStateAction<Board>>;
+}
+
+export interface PlacementPhaseType {
+  board: Board;
+  setBoard?: (board: Board) => void;
+  startGame: () => void;
+}
+
+export type Phase = 'placement' | 'playerTurn' | 'enemyTurn';
+
+export type Cell = {
+  hasShip: boolean;
+  isHit: boolean;
+  label?: string;
+  type: 'cell' | 'label';
+};
+
+export type Board = Cell[][];
+
+export type AbilityType = {
+  name: string;
+  count: number;
+  handleAbilityClick: (ability: string) => void;
 };
