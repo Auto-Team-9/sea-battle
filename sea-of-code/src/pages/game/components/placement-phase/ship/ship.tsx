@@ -1,5 +1,5 @@
 import type { JSX } from 'react';
-import type { ShipType } from '../../../../types/types';
+import type { ShipType } from '../../../../../types/types';
 
 const Ship = ({ img, alt, handleShipClick, selectedShip, type, width }: ShipType): JSX.Element => {
   return (
