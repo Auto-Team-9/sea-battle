@@ -2,38 +2,38 @@ export const defaultAvatar = './profile-images/default-avatar.png';
 
 export const ranks = {
   unga: {
-    name: 'Курсант коммита',
+    name: 'Commit Cadet',
     image: './profile-images/unga.png',
   },
   mich: {
-    name: 'Навигатор багов',
+    name: 'Bug Navigator',
     image: './profile-images/mich.png',
   },
   leit: {
-    name: 'Командор данных',
+    name: 'Data Commander',
     image: './profile-images/leit.png',
   },
   cap: {
-    name: 'Капитан системы',
+    name: 'Captain of the system',
     image: './profile-images/cap.png',
   },
   admiral: {
-    name: 'Адмирал кода',
+    name: 'Admiral of the Code',
     image: './profile-images/admiral.png',
   },
 };
 
 export const clans = {
   1: {
-    name: 'Клан Кода',
+    name: 'The Code Clan',
     image: './profile-images/clan-1.png',
   },
   2: {
-    name: 'Братство Багов',
+    name: 'The Brotherhood of Bugs',
     image: './profile-images/brotherhood_bugs.png',
   },
   4: {
-    name: 'Лига Логики',
+    name: 'League of Logic',
     image: './profile-images/league_logic.png',
   },
 };
