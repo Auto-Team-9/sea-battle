@@ -1,7 +1,7 @@
-import LoginForm from '../../components/auth/LoginForm';
-import AuthHeader from '../../components/auth/AuthHeader';
-import OAuthButtons from '../../components/auth/OAuthButtons';
-import AuthLink from '../../components/auth/AuthLink';
+import LoginForm from './components/LoginForm';
+import AuthHeader from './components/AuthHeader';
+import OAuthButtons from './components/OAuthButtons';
+import AuthLink from './components/AuthLink';
 
 const Login = () => {
   return (

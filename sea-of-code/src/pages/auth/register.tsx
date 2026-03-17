@@ -1,7 +1,7 @@
-import AuthHeader from '../../components/auth/AuthHeader';
-import OAuthButtons from '../../components/auth/OAuthButtons';
-import AuthLink from '../../components/auth/AuthLink';
-import RegisterForm from '../../components/auth/RegisterForm';
+import AuthHeader from './components/AuthHeader';
+import AuthLink from './components/AuthLink';
+import OAuthButtons from './components/OAuthButtons';
+import RegisterForm from './components/RegisterForm';
 
 const Register = () => {
   return (
