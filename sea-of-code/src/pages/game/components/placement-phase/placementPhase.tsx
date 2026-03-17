@@ -12,7 +12,7 @@ const PlacementPhase = ({ board, startGame }: PlacementPhaseType) => {
 
   return (
     <div className='flex flex-col items-center gap-4'>
-      <h1 className='my-4 text-center text-3xl'>Фаза расстановки</h1>
+      <h1 className='my-4 text-center text-3xl'>Placement phase</h1>
 
       <GameBoard board={board} />
 
