@@ -12,3 +12,47 @@ export interface UserData {
   to_rank: number;
   victories: number;
 }
+
+export interface ShipType {
+  img: string;
+  alt: string;
+  handleShipClick: (type: string) => void;
+  selectedShip: number;
+  type: string;
+  width: number;
+}
+
+export interface ShipsType {
+  handleChangeReady: () => void;
+}
+
+export interface GamePhaseType {
+  phase: string;
+  playerBoard: Board;
+  enemyBoard: Board;
+  setPhase?: React.Dispatch<React.SetStateAction<string>>;
+  setEnemyBoard?: React.Dispatch<React.SetStateAction<Board>>;
+}
+
+export interface PlacementPhaseType {
+  board: Board;
+  setBoard?: (board: Board) => void;
+  startGame: () => void;
+}
+
+export type Phase = 'placement' | 'playerTurn' | 'enemyTurn';
+
+export type Cell = {
+  hasShip: boolean;
+  isHit: boolean;
+  label?: string;
+  type: 'cell' | 'label';
+};
+
+export type Board = Cell[][];
+
+export type AbilityType = {
+  name: string;
+  count: number;
+  handleAbilityClick: (ability: string) => void;
+};

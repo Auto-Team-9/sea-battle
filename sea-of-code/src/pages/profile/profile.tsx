@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router';
 
 import Journal from './components/journal/journal';
 import UserProfileCard from './components/user-profile-card/userProfileCard';
@@ -8,6 +7,7 @@ import type { UserData } from '../../types/types.js';
 import Loading from '../../components/loading/loading.js';
 import CustomError from '../../components/error/custom-error.js';
 import { getDataFromUser } from '../../api/users.js';
+import DasboardLink from '../../components/links/dashboard-link.js';
 
 const Profile = () => {
   const [userData, setUserData] = useState<UserData>({
@@ -58,12 +58,7 @@ const Profile = () => {
       id='profile'
       className='doodle-border mx-auto my-4 flex min-h-screen w-full flex-col items-center gap-4 bg-center p-4 sm:w-[95%] md:w-[90%] lg:w-[85%] xl:w-240'
     >
-      <Link
-        to={'/Auto-Team-9-Widget-Trainer/'}
-        className='doodle-border mx-auto cursor-pointer rounded-xs border-2 px-8 py-2 text-3xl text-[--color-text] transition-colors hover:animate-pulse hover:text-amber-500'
-      >
-        Dashboard
-      </Link>
+      <DasboardLink />
       <UserProfileCard userData={userData} />
       <Journal userData={userData} />
       <Progress userData={userData} />
