@@ -13,7 +13,11 @@ const Register = () => {
 
         <OAuthButtons />
 
-        <AuthLink text={'Already have an account?'} linkText={'Login'} linkTo={'/auth/login'} />
+        <AuthLink
+          text={'Already have an account?'}
+          linkText={'Login'}
+          linkTo={'/Auto-Team-9-Widget-Trainer/auth/login'}
+        />
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const Login = () => {
         <AuthLink
           text={"Don't have an account?"}
           linkText={'Create Account'}
-          linkTo={'/auth/register'}
+          linkTo={'/Auto-Team-9-Widget-Trainer/auth/register'}
         />
       </div>
     </div>

@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/auth',
+    path: '/Auto-Team-9-Widget-Trainer/auth',
     children: [
       {
         path: 'login',
