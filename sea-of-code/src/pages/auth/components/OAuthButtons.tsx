@@ -1,4 +1,4 @@
-import Button from '../ui/Button';
+import Button from '../../../components/ui/Button';
 import gitHubLogo from '../../assets/gitHub-logo-black.svg';
 import googleLogo from '../../assets/google-logo.svg';
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Button from '../ui/Button';
-import Input from '../ui/Input';
+import Input from '../../../components/ui/Input';
+import Button from '../../../components/ui/Button';
 
 type FormData = {
   email: string;
