@@ -7,3 +7,5 @@ Players roll dice to move across the game board, solving JavaScript, TypeScript,
   - Александра - [Ch-alexandra](https://github.com/Ch-alexandra)
 
 [**Trello**](https://trello.com/b/uKf8wGni/rss-tandem)
+
+[**Deploy**](https://sea-of-code-1zs6uqw9d-ch-alexandras-projects.vercel.app/)
