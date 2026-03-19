@@ -1,26 +1,51 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { QuizQuestion, QuestionModalProps } from '../../../../types/types';
+import { actionAreaStyle } from './questionModal.styles';
+import { ModalShell } from './components/ModalShell';
+import { ActionArea } from './components/ActionArea';
+import { MultipleChoice } from './components/question-types/MultipleChoice';
 
-const QuestionModal = () => {
-  const [isOpen, setIsOpen] = useState(true); //for test
+const SAMPLE_QUESTION: QuizQuestion = {
+  text: 'Which array method creates a new array by applying a function to each element?',
+  options: [
+    { id: 'a', text: 'forEach()' },
+    { id: 'b', text: 'map()' },
+    { id: 'c', text: 'filter()' },
+  ],
+  correct: 'b',
+};
+
+export const QuestionModal = ({ question = SAMPLE_QUESTION, onCorrect, onClose }: QuestionModalProps) => {
+  const [selected, setSelected] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+
+  const isCorrect = submitted && selected === question.correct;
+
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  const handleFire = () => {
+    if (!selected || submitted) return;
+    setSubmitted(true);
+    if (selected === question.correct) onCorrect?.();
+    setTimeout(() => onClose?.(), 1000);
+  };
 
   return (
-    isOpen && (
-      <div className='absolute top-0 left-0 z-10 flex h-full w-full items-center justify-center bg-black/50'>
-        <div className='relative flex h-48 w-80 flex-col items-center justify-center gap-4 rounded-lg bg-gray-600 p-4'>
-          <h2 className='text-xl font-bold text-[--color-text]'>Вы уверены?</h2>
-          <div className='absolute top-2 right-4 cursor-pointer' onClick={() => setIsOpen(false)}>
-            X
-          </div>
-          <p>Вы робот? Это действие нельзя будет отменить.</p>
-          <div className='flex gap-4'>
-            <button className='rounded bg-green-500 px-4 py-2'>Да</button>
-            <button className='rounded bg-red-500 px-4 py-2'>Нет</button>
-            <button className='rounded bg-gray-400 px-4 py-2'>Незнаю</button>
-          </div>
-        </div>
+    <ModalShell question={question}>
+      <MultipleChoice
+        question={question}
+        selected={selected}
+        submitted={submitted}
+        onSelect={setSelected}
+      />
+      <div className='mt-5 flex items-center justify-center' style={actionAreaStyle}>
+        <ActionArea submitted={submitted} selected={selected} isCorrect={isCorrect} onFire={handleFire} />
       </div>
-    )
+    </ModalShell>
   );
 };
 
-export default QuestionModal;
