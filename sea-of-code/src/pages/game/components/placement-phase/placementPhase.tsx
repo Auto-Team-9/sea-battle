@@ -15,7 +15,6 @@ const PlacementPhase = ({ board, setBoard, startGame }: PlacementPhaseType) => {
       if (!ship) return false;
 
       if (!canPlaceShip(board, ship.size, row, col, orientation)) {
-        console.log('Placement failed');
         return false;
       }
 
@@ -73,10 +72,8 @@ const PlacementPhase = ({ board, setBoard, startGame }: PlacementPhaseType) => {
     <div className='flex flex-col items-center gap-4'>
       <h1 className='my-4 text-center text-3xl'>Placement phase</h1>
 
-      <div className='flex gap-8 p-4'>
-        <Ships ships={remainingShips} onPlaceShip={handleShipPlace} />
-        <GameBoard board={board} onShipClick={handleShipRemove} />
-      </div>
+      <GameBoard board={board} onShipClick={handleShipRemove} />
+      <Ships ships={remainingShips} onPlaceShip={handleShipPlace} />
 
       <button
         onClick={startGame}

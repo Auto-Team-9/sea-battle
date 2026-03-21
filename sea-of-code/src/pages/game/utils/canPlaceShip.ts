@@ -35,7 +35,6 @@ export function canPlaceShip(
         const nr = r + dr;
         const nc = c + dc;
         if (!isFree(nr, nc)) {
-          console.log(`❌ Blocked by cell (${nr}, ${nc})`, board[nr]?.[nc]);
           return false;
         }
       }

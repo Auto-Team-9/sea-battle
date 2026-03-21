@@ -96,8 +96,13 @@ const Ship = ({ width, orientation: initialOrientation, onPlace }: ShipProps): J
     draggingOrientationRef.current = orientation;
 
     const rect = el.getBoundingClientRect();
-    shiftX.current = 20;
-    shiftY.current = rect.height / 2;
+    if (orientation === 'horizontal') {
+      shiftY.current = rect.height / 2;
+      shiftX.current = 20;
+    } else {
+      shiftY.current = 20;
+      shiftX.current = rect.width / 2;
+    }
 
     el.style.position = 'fixed';
     el.style.zIndex = '1000';
