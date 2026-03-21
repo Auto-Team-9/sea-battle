@@ -8,7 +8,7 @@ const Cell = ({ cell }: { cell: Cell }) => {
   }
 
   return (
-    <div className='doodle-cell h-10 w-10'>
+    <div className='doodle-cell droppable h-10 w-10'>
       {cell.hasShip && '🚢'}
       {cell.isHit && '💥'}
     </div>

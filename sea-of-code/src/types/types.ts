@@ -14,11 +14,7 @@ export interface UserData {
 }
 
 export interface ShipType {
-  img: string;
-  alt: string;
-  handleShipClick: (type: string) => void;
-  selectedShip: number;
-  type: string;
+  type?: string;
   width: number;
 }
 

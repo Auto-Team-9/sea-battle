@@ -45,3 +45,46 @@ export const clans = {
 };
 
 export const CELL_SIZE = 10;
+
+export const inititalShips = [
+  {
+    width: 40,
+    type: 'single',
+  },
+  {
+    width: 40,
+    type: 'single',
+  },
+  {
+    width: 40,
+    type: 'single',
+  },
+  {
+    width: 40,
+    type: 'single',
+  },
+  {
+    width: 80,
+    type: 'double',
+  },
+  {
+    width: 80,
+    type: 'double',
+  },
+  {
+    width: 80,
+    type: 'double',
+  },
+  {
+    width: 120,
+    type: 'triple',
+  },
+  {
+    width: 120,
+    type: 'triple',
+  },
+  {
+    width: 160,
+    type: 'quadruple',
+  },
+];
