@@ -13,10 +13,15 @@ export interface UserData {
   victories: number;
 }
 
-export interface ShipType {
-  type?: string;
+export type ShipType = {
+  id: number;
+  type: string;
   width: number;
-}
+  size: number;
+  orientation: Orientation;
+};
+
+export type Orientation = 'horizontal' | 'vertical';
 
 export interface ShipsType {
   handleChangeReady: () => void;
@@ -30,11 +35,11 @@ export interface GamePhaseType {
   setEnemyBoard?: React.Dispatch<React.SetStateAction<Board>>;
 }
 
-export interface PlacementPhaseType {
+export type PlacementPhaseType = {
   board: Board;
-  setBoard?: (board: Board) => void;
+  setBoard: React.Dispatch<React.SetStateAction<Board>>;
   startGame: () => void;
-}
+};
 
 export type Phase = 'placement' | 'playerTurn' | 'enemyTurn';
 
@@ -43,6 +48,7 @@ export type Cell = {
   isHit: boolean;
   label?: string;
   type: 'cell' | 'label';
+  shipId?: number;
 };
 
 export type Board = Cell[][];
