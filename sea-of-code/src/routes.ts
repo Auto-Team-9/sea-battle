@@ -6,7 +6,40 @@ import HomePage from './pages/home-page/homePage';
 import Profile from './pages/profile/profile';
 import Game from './pages/game/game';
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      Component: RootLayout,
+      children: [
+        {
+          index: true,
+          Component: HomePage,
+        },
+        {
+          path: 'profile',
+          Component: Profile,
+        },
+        {
+          path: 'game',
+          Component: Game,
+        },
+      ],
+    },
+    {
+      path: '/auth',
+      children: [
+        {
+          path: 'login',
+          Component: Login,
+        },
+        {
+          path: 'register',
+          Component: Register,
+        },
+      ],
+    },
+  ],
   {
     path: '/Auto-Team-9-Widget-Trainer',
     Component: RootLayout,

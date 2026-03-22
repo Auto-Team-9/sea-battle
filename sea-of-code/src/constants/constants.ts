@@ -58,3 +58,6 @@ export const inititalShips: ShipType[] = [
   { id: 9, width: 40, size: 1, orientation: 'horizontal' },
   { id: 10, width: 40, size: 1, orientation: 'horizontal' },
 ];
+
+
+
