@@ -1,5 +1,5 @@
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
-import { ranks } from '../constants/constants';
+import { ranks } from '../constants/images';
 import type { UserData } from '../types/types';
 import { db } from '../firebase/config';
 
