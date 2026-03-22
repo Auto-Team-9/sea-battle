@@ -13,16 +13,19 @@ export interface UserData {
   victories: number;
 }
 
-export interface ShipProps {
+export interface ShipData {
   id: number;
   width: number;
   size: number;
   orientation: Orientation;
+}
+
+export interface ShipProps extends ShipData {
   onPlace: (row: number, col: number, orientation: Orientation) => boolean;
 }
 
 export interface ShipsProps {
-  ships: ShipProps[];
+  ships: ShipData[];
   onPlaceShip: (shipId: number, row: number, col: number, orientation: Orientation) => boolean;
 }
 

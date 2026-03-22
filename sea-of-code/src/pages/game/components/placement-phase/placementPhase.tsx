@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react';
-import type { Orientation, PlacementPhaseType, ShipProps } from '../../../../types/types';
+import type { Orientation, PlacementPhaseType, ShipData } from '../../../../types/types';
 import { inititalShips } from '../../../../constants/constants';
 import GameBoard from '../game-board/gameBoard';
 import Ships from './ships/ships';
 import { canPlaceShip } from '../../utils/canPlaceShip';
 
 const PlacementPhase = ({ board, setBoard, startGame }: PlacementPhaseType) => {
-  const [remainingShips, setRemainingShips] = useState<ShipProps[]>(inititalShips);
+  const [remainingShips, setRemainingShips] = useState<ShipData[]>(inititalShips);
   const [isPlacing, setIsPlacing] = useState(false);
 
   const handleShipPlace = useCallback(

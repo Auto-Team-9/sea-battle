@@ -1,4 +1,4 @@
-import type { ShipType } from '../types/types';
+import type { ShipData } from '../types/types';
 
 export const defaultAvatar = './profile-images/default-avatar.png';
 export const profileImage = 'profileImage';
@@ -46,7 +46,7 @@ export const clans = {
   },
 };
 
-export const inititalShips: ShipType[] = [
+export const inititalShips: ShipData[] = [
   { id: 1, width: 160, size: 4, orientation: 'horizontal' },
   { id: 2, width: 120, size: 3, orientation: 'horizontal' },
   { id: 3, width: 120, size: 3, orientation: 'horizontal' },
