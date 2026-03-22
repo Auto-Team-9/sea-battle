@@ -4,6 +4,8 @@ import Register from './pages/auth/register';
 import RootLayout from './layouts/rootLayout';
 import HomePage from './pages/home-page/homePage';
 import Profile from './pages/profile/profile';
+import ProtectedRoute from './firebase/ProtectedRoute';
+import PublicRoute from './firebase/PublicRoute';
 
 const router = createBrowserRouter(
   [
@@ -17,7 +19,11 @@ const router = createBrowserRouter(
         },
         {
           path: 'profile',
-          Component: Profile,
+          element: (
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          ),
         },
       ],
     },
@@ -26,11 +32,19 @@ const router = createBrowserRouter(
       children: [
         {
           path: 'login',
-          Component: Login,
+          element: (
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          ),
         },
         {
           path: 'register',
-          Component: Register,
+          element: (
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          ),
         },
       ],
     },
