@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Input from '../../../components/ui/Input';
 import Button from '../../../components/ui/Button';
 import { loginUser } from '../../../api/auth';
-import Loading from '../../../components/loading/loading';
+import Loading from '../../../components/ui/loading';
 import { auth } from '../../../firebase/config';
 import {
   browserLocalPersistence,

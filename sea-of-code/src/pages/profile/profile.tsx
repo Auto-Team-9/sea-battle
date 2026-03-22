@@ -5,7 +5,7 @@ import Journal from './components/journal/journal';
 import UserProfileCard from './components/user-profile-card/userProfileCard';
 import Progress from './components/progress/progress';
 import type { UserData } from '../../types/types.js';
-import Loading from '../../components/loading/loading.js';
+import Loading from '../../components/ui/loading.js';
 import { getDataFromUser } from '../../api/users.js';
 import Message from '../../components/ui/Message.js';
 

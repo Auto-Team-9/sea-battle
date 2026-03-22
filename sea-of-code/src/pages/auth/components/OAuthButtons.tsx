@@ -3,7 +3,7 @@ import gitHubLogo from '../../../assets/gitHub-logo-black.svg';
 import googleLogo from '../../../assets/google-logo.svg';
 import { githubSignIn, googleSignIn } from '../../../api/auth';
 import { useState } from 'react';
-import Loading from '../../../components/loading/loading';
+import Loading from '../../../components/ui/loading';
 
 enum OAuthProvider {
   Google,

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { registerUser } from '../../../api/auth';
 import Input from '../../../components/ui/Input';
 import Button from '../../../components/ui/Button';
-import Loading from '../../../components/loading/loading';
+import Loading from '../../../components/ui/loading';
 import Message from '../../../components/ui/Message';
 
 type FormData = {
