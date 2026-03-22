@@ -1,5 +1,3 @@
-import type { ShipType } from '../types/types';
-
 export const defaultAvatar = './profile-images/default-avatar.png';
 export const profileImage = 'profileImage';
 
