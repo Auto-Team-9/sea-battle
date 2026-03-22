@@ -1,7 +1,8 @@
-import { auth } from '../firebase/config';
+import { auth, githubProvider, provider } from '../firebase/config';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
   type AuthError,
@@ -70,6 +71,32 @@ export const logoutUser = async (): Promise<AuthResponse> => {
   try {
     await signOut(auth);
     return { success: true, user: null };
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const googleSignIn = async (): Promise<AuthResponse> => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+
+    return {
+      success: true,
+      user: result.user,
+    };
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const githubSignIn = async (): Promise<AuthResponse> => {
+  try {
+    const result = await signInWithPopup(auth, githubProvider);
+
+    return {
+      success: true,
+      user: result.user,
+    };
   } catch (error) {
     return handleError(error);
   }
