@@ -6,8 +6,8 @@ import UserProfileCard from './components/user-profile-card/userProfileCard';
 import Progress from './components/progress/progress';
 import type { UserData } from '../../types/types.js';
 import Loading from '../../components/loading/loading.js';
-import CustomError from '../../components/error/custom-error.js';
 import { getDataFromUser } from '../../api/users.js';
+import Message from '../../components/ui/Message.js';
 
 const Profile = () => {
   const [userData, setUserData] = useState<UserData>({
@@ -51,7 +51,7 @@ const Profile = () => {
   }, []);
 
   if (loading) return <Loading />;
-  if (error) return <CustomError message={error} />;
+  if (error) return <Message variant='error' message={error} />;
 
   return (
     <section
