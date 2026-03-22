@@ -8,7 +8,7 @@ const PublicRoute = ({ children }: { children: ReactNode }) => {
 
   if (loading) return <Loading />;
 
-  if (!user) {
+  if (user) {
     return <Navigate to='/' replace />;
   }
 
