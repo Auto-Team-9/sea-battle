@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react';
-import type { Orientation, PlacementPhaseType, ShipType } from '../../../../types/types';
+import type { Orientation, PlacementPhaseType, ShipProps } from '../../../../types/types';
 import { inititalShips } from '../../../../constants/constants';
 import GameBoard from '../game-board/gameBoard';
-import Ships from './ships';
+import Ships from './ships/ships';
 import { canPlaceShip } from '../../utils/canPlaceShip';
 
 const PlacementPhase = ({ board, setBoard, startGame }: PlacementPhaseType) => {
-  const [remainingShips, setRemainingShips] = useState<ShipType[]>(inititalShips);
+  const [remainingShips, setRemainingShips] = useState<ShipProps[]>(inititalShips);
   const [isPlacing, setIsPlacing] = useState(false);
 
   const handleShipPlace = useCallback(
@@ -78,7 +78,7 @@ const PlacementPhase = ({ board, setBoard, startGame }: PlacementPhaseType) => {
       <button
         onClick={startGame}
         disabled={remainingShips.length !== 0}
-        className='doodle-border cursor-pointer px-4 text-3xl transition-colors hover:animate-pulse hover:text-amber-500 disabled:cursor-not-allowed disabled:opacity-50'
+        className='doodle-border cursor-pointer px-4 text-3xl transition-colors hover:animate-pulse hover:not-disabled:text-amber-500 disabled:cursor-not-allowed disabled:opacity-50'
       >
         Готов
       </button>

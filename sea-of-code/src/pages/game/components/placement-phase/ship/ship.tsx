@@ -1,13 +1,5 @@
 import { useCallback, useRef, useEffect, useState, type JSX } from 'react';
-import type { Orientation } from '../../../../../types/types';
-
-interface ShipProps {
-  id: number;
-  width: number;
-  size: number;
-  orientation: Orientation;
-  onPlace: (row: number, col: number, orientation: Orientation) => boolean;
-}
+import type { Orientation, ShipProps } from '../../../../../types/types';
 
 const Ship = ({ width, orientation: initialOrientation, onPlace }: ShipProps): JSX.Element => {
   const [orientation, setOrientation] = useState<Orientation>(initialOrientation);

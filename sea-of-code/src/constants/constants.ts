@@ -46,17 +46,15 @@ export const clans = {
   },
 };
 
-export const CELL_SIZE = 10;
-
 export const inititalShips: ShipType[] = [
-  { id: 1, type: '4-deck', width: 160, size: 4, orientation: 'horizontal' },
-  { id: 2, type: '3-deck', width: 120, size: 3, orientation: 'horizontal' },
-  { id: 3, type: '3-deck', width: 120, size: 3, orientation: 'horizontal' },
-  { id: 4, type: '2-deck', width: 80, size: 2, orientation: 'horizontal' },
-  { id: 5, type: '2-deck', width: 80, size: 2, orientation: 'horizontal' },
-  { id: 6, type: '2-deck', width: 80, size: 2, orientation: 'horizontal' },
-  { id: 7, type: '1-deck', width: 40, size: 1, orientation: 'horizontal' },
-  { id: 8, type: '1-deck', width: 40, size: 1, orientation: 'horizontal' },
-  { id: 9, type: '1-deck', width: 40, size: 1, orientation: 'horizontal' },
-  { id: 10, type: '1-deck', width: 40, size: 1, orientation: 'horizontal' },
+  { id: 1, width: 160, size: 4, orientation: 'horizontal' },
+  { id: 2, width: 120, size: 3, orientation: 'horizontal' },
+  { id: 3, width: 120, size: 3, orientation: 'horizontal' },
+  { id: 4, width: 80, size: 2, orientation: 'horizontal' },
+  { id: 5, width: 80, size: 2, orientation: 'horizontal' },
+  { id: 6, width: 80, size: 2, orientation: 'horizontal' },
+  { id: 7, width: 40, size: 1, orientation: 'horizontal' },
+  { id: 8, width: 40, size: 1, orientation: 'horizontal' },
+  { id: 9, width: 40, size: 1, orientation: 'horizontal' },
+  { id: 10, width: 40, size: 1, orientation: 'horizontal' },
 ];

@@ -1,6 +1,4 @@
-import type { Board } from '../../../types/types';
-
-type Orientation = 'horizontal' | 'vertical';
+import type { Board, Orientation } from '../../../types/types';
 
 export function canPlaceShip(
   board: Board,

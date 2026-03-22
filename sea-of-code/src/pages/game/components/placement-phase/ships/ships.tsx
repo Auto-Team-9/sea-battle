@@ -1,10 +1,5 @@
-import type { ShipType, Orientation } from '../../../../types/types';
-import Ship from './ship/ship';
-
-interface ShipsProps {
-  ships: ShipType[];
-  onPlaceShip: (shipId: number, row: number, col: number, orientation: Orientation) => boolean;
-}
+import type { ShipsProps } from '../../../../../types/types';
+import Ship from '../ship/ship';
 
 const Ships = ({ ships, onPlaceShip }: ShipsProps) => {
   return (
