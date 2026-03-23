@@ -1,25 +1,33 @@
 export const defaultAvatar = './profile-images/default-avatar.png';
+export const profileImage = 'profileImage';
 
 export const ranks = {
   unga: {
     name: 'Commit Cadet',
-    image: './profile-images/unga.png',
+    src: './profile-images/unga.png',
+    alt: 'unga',
   },
   mich: {
     name: 'Bug Navigator',
-    image: './profile-images/mich.png',
+    src: './profile-images/mich.png',
+    alt: 'mich',
   },
   leit: {
     name: 'Data Commander',
-    image: './profile-images/leit.png',
+    src: './profile-images/leit.png',
+    alt: 'leit',
   },
   cap: {
     name: 'Captain of the system',
     image: './profile-images/cap.png',
+    src: './profile-images/cap.png',
+    alt: 'cap',
   },
   admiral: {
     name: 'Admiral of the Code',
     image: './profile-images/admiral.png',
+    src: './profile-images/admiral.png',
+    alt: 'admiral',
   },
 };
 

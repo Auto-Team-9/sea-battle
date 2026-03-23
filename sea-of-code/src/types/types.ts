@@ -39,18 +39,24 @@ export type UserStats = {
 export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt'> & {
   createdAt: FieldValue;
 };
-export interface ShipType {
-  img: string;
-  alt: string;
-  handleShipClick: (type: string) => void;
-  selectedShip: number;
-  type: string;
+
+export interface ShipData {
+  id: number;
   width: number;
+  size: number;
+  orientation: Orientation;
 }
 
-export interface ShipsType {
-  handleChangeReady: () => void;
+export interface ShipProps extends ShipData {
+  onPlace: (row: number, col: number, orientation: Orientation) => boolean;
 }
+
+export interface ShipsProps {
+  ships: ShipData[];
+  onPlaceShip: (shipId: number, row: number, col: number, orientation: Orientation) => boolean;
+}
+
+export type Orientation = 'horizontal' | 'vertical';
 
 export interface GamePhaseType {
   phase: string;
@@ -60,19 +66,18 @@ export interface GamePhaseType {
   setEnemyBoard?: React.Dispatch<React.SetStateAction<Board>>;
 }
 
-export interface PlacementPhaseType {
+export type PlacementPhaseType = {
   board: Board;
-  setBoard?: (board: Board) => void;
+  setBoard: React.Dispatch<React.SetStateAction<Board>>;
   startGame: () => void;
-}
-
-export type Phase = 'placement' | 'playerTurn' | 'enemyTurn';
+};
 
 export type Cell = {
   hasShip: boolean;
   isHit: boolean;
   label?: string;
   type: 'cell' | 'label';
+  shipId?: number;
 };
 
 export type Board = Cell[][];

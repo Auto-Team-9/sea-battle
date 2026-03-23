@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type JSX } from 'react';
-import { defaultAvatar, profileImage, ranks } from '../../../../constants/constants';
+import { defaultAvatar, profileImage, ranks } from '../../../../constants/images';
 import type { UserData } from '../../../../types/types';
 import { Pixelit } from '../pixel/pixel';
 
