@@ -39,12 +39,9 @@ export type UserStats = {
 export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt'> & {
   createdAt: FieldValue;
 };
-export interface ShipType {
-  img: string;
-  alt: string;
-  handleShipClick: (type: string) => void;
-  selectedShip: number;
-  type: string;
+
+export interface ShipData {
+  id: number;
   width: number;
   size: number;
   orientation: Orientation;
