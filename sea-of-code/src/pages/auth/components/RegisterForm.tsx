@@ -1,6 +1,9 @@
 import { useState } from 'react';
-import Button from '../ui/Button';
-import Input from '../ui/Input';
+import { registerUser } from '../../../api/auth';
+import Input from '../../../components/ui/Input';
+import Button from '../../../components/ui/Button';
+import Loading from '../../../components/ui/loading';
+import Message from '../../../components/ui/Message';
 
 type FormData = {
   name: string;
@@ -25,6 +28,8 @@ const RegisterForm = () => {
   });
 
   const [errors, setErrors] = useState<Errors>({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [backendError, setBackendError] = useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -38,6 +43,8 @@ const RegisterForm = () => {
       ...errors,
       [name]: undefined,
     });
+
+    if (backendError) setBackendError(null);
   };
 
   const validate = (data: FormData): Errors => {
@@ -49,14 +56,14 @@ const RegisterForm = () => {
 
     if (!data.email.trim()) {
       newErrors.email = 'Enter email';
-    } else if (!data.email.includes('@')) {
+    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
       newErrors.email = 'Incorrect email';
     }
 
     if (!data.password.trim()) {
       newErrors.password = 'Enter password';
     } else if (data.password.length < 6) {
-      newErrors.password = 'Minimum 6 characters';
+      newErrors.password = 'Password should be at least 6 characters';
     }
 
     if (!data.passwordConfirm.trim()) {
@@ -68,8 +75,12 @@ const RegisterForm = () => {
     return newErrors;
   };
 
-  const handleSubmit = (event: React.SubmitEvent) => {
+  const handleSubmit = async (event: React.SubmitEvent) => {
     event.preventDefault();
+
+    if (isLoading) return;
+
+    setBackendError(null);
 
     const validationErrors = validate(formData);
 
@@ -77,15 +88,42 @@ const RegisterForm = () => {
       setErrors(validationErrors);
       return;
     }
+
+    setIsLoading(true);
+
+    try {
+      const result = await registerUser({
+        email: formData.email,
+        password: formData.password,
+        displayName: formData.name,
+      });
+
+      if (result.success) {
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          passwordConfirm: '',
+        });
+      } else {
+        setBackendError(result.error.message);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className='space-y-4' noValidate>
+    <form onSubmit={handleSubmit} className='relative space-y-4' noValidate>
+      {isLoading && <Loading className='fixed' />}
+      {backendError && <Message variant='error' size='small' message={backendError} />}
+
       <Input
         label='Name'
         name='name'
         type='text'
         onChange={handleChange}
+        value={formData.name}
         error={errors.name}
         autoComplete='text'
         required
@@ -96,6 +134,7 @@ const RegisterForm = () => {
         name='email'
         type='email'
         onChange={handleChange}
+        value={formData.email}
         error={errors.email}
         autoComplete='email'
         required
@@ -106,8 +145,9 @@ const RegisterForm = () => {
         name='password'
         type='password'
         onChange={handleChange}
+        value={formData.password}
         error={errors.password}
-        autoComplete='current-password'
+        autoComplete='new-password'
         required
       />
 
@@ -116,6 +156,7 @@ const RegisterForm = () => {
         name='passwordConfirm'
         type='password'
         onChange={handleChange}
+        value={formData.passwordConfirm}
         error={errors.passwordConfirm}
         autoComplete='new-password'
         required

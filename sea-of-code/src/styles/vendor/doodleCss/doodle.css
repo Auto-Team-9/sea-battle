@@ -188,8 +188,14 @@
 .doodle input:focus-visible,
 .doodle a:focus-visible,
 .doodle select:focus-visible {
-  outline-offset: -8px;
   outline: 2px dashed var(--color-accent);
+}
+
+.doodle textarea:focus-visible,
+.doodle input:focus-visible,
+.doodle a:focus-visible,
+.doodle select:focus-visible {
+  outline-offset: -8px;
 }
 
 .doodle a:focus-visible {
