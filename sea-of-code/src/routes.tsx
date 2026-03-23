@@ -15,7 +15,11 @@ const router = createBrowserRouter(
       children: [
         {
           index: true,
-          Component: HomePage,
+          element: (
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          ),
         },
         {
           path: 'profile',
