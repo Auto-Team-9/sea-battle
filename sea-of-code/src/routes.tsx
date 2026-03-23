@@ -4,6 +4,8 @@ import Register from './pages/auth/register';
 import RootLayout from './layouts/rootLayout';
 import HomePage from './pages/home-page/homePage';
 import Profile from './pages/profile/profile';
+import ProtectedRoute from './firebase/ProtectedRoute';
+import PublicRoute from './firebase/PublicRoute';
 import Game from './pages/game/game';
 
 const router = createBrowserRouter(
@@ -14,15 +16,27 @@ const router = createBrowserRouter(
       children: [
         {
           index: true,
-          Component: HomePage,
+          element: (
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          ),
         },
         {
           path: 'profile',
-          Component: Profile,
+          element: (
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          ),
         },
         {
           path: 'game',
-          Component: Game,
+          element: (
+            <ProtectedRoute>
+              <Game />
+            </ProtectedRoute>
+          ),
         },
       ],
     },
@@ -31,11 +45,19 @@ const router = createBrowserRouter(
       children: [
         {
           path: 'login',
-          Component: Login,
+          element: (
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          ),
         },
         {
           path: 'register',
-          Component: Register,
+          element: (
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          ),
         },
       ],
     },

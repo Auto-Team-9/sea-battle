@@ -4,9 +4,9 @@ import Journal from './components/journal/journal';
 import UserProfileCard from './components/user-profile-card/userProfileCard';
 import Progress from './components/progress/progress';
 import type { UserData } from '../../types/types.js';
-import Loading from '../../components/loading/loading.js';
-import CustomError from '../../components/error/custom-error.js';
+import Loading from '../../components/ui/loading.js';
 import { getDataFromUser } from '../../api/users.js';
+import Message from '../../components/ui/Message.js';
 import DasboardLink from '../../components/links/dashboard-link.js';
 
 const Profile = () => {
@@ -51,7 +51,7 @@ const Profile = () => {
   }, []);
 
   if (loading) return <Loading />;
-  if (error) return <CustomError message={error} />;
+  if (error) return <Message variant='error' message={error} />;
 
   return (
     <section

@@ -1,4 +1,4 @@
-import logo from '../../assets/battleship-alt.svg';
+import logo from '../../../assets/battleship-alt.svg';
 
 interface AuthHeaderProps {
   title: string;
