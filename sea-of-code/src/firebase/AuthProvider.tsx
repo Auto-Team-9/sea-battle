@@ -1,10 +1,11 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState, type ReactNode } from 'react';
-import { auth } from './config';
+import { auth, db } from './config';
 import { AuthContext } from './AuthContext';
 import { type User } from 'firebase/auth';
 import { getOrCreateUser } from '../api/users';
 import type { FirestoreUser } from '../types/types';
+import { doc, onSnapshot } from 'firebase/firestore';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -12,13 +13,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async firebaseUser => {
+    let unsubscribeSnapshot: (() => void) | null = null;
+
+    const unsubscribeAuth = onAuthStateChanged(auth, async firebaseUser => {
+      if (unsubscribeSnapshot) {
+        unsubscribeSnapshot();
+        unsubscribeSnapshot = null;
+      }
+
       if (firebaseUser) {
         try {
-          const data = await getOrCreateUser(firebaseUser);
-          setUserData(data);
+          await getOrCreateUser(firebaseUser);
+
+          const userRef = doc(db, 'users', firebaseUser.uid);
+
+          unsubscribeSnapshot = onSnapshot(userRef, snapshot => {
+            if (snapshot.exists()) {
+              setUserData(snapshot.data() as FirestoreUser);
+            }
+          });
         } catch (error) {
-          console.error('User init error:', error);
+          console.error('User error:', error);
+          setUserData(null);
         }
       } else {
         setUserData(null);
@@ -28,7 +44,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setLoading(false);
     });
 
-    return unsubscribe;
+    return () => {
+      unsubscribeAuth();
+      if (unsubscribeSnapshot) unsubscribeSnapshot();
+    };
   }, []);
 
   return (
