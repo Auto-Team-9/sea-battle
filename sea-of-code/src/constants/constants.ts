@@ -43,3 +43,5 @@ export const clans = {
     image: './profile-images/league_logic.png',
   },
 };
+
+export const CELL_SIZE = 10;
