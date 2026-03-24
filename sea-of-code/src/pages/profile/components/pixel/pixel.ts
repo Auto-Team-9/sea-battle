@@ -1,8 +1,4 @@
-interface PixelitConfig {
-  to: HTMLCanvasElement;
-  from: HTMLImageElement;
-  scale?: number;
-}
+import type { PixelitConfig } from '../../../../types/types';
 
 export class Pixelit {
   drawto: HTMLCanvasElement;

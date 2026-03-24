@@ -1,30 +1,53 @@
+import type { FieldValue, Timestamp } from 'firebase/firestore';
+
 export interface UserData {
-  nickname: string;
+  displayName: string;
+  stats: UserStats;
+}
+
+export type FirestoreUser = {
+  uid: string;
+  email: string | null;
+  displayName: string;
+  createdAt: Timestamp;
+  stats: UserStats;
+};
+
+export type UserStats = {
   rank: string;
-  clan: string;
+  victories: number;
   defeats: number;
-  fighting: number;
+  battles: number;
   first_battle: boolean;
   fleet_storm: number;
   miles_at_sea: number;
   sea_wolf: number;
   sniper: number;
   to_rank: number;
-  victories: number;
-}
+  clan: string | null;
+};
 
-export interface ShipType {
-  img: string;
-  alt: string;
-  handleShipClick: (type: string) => void;
-  selectedShip: number;
-  type: string;
+export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt'> & {
+  createdAt: FieldValue;
+};
+
+export interface ShipData {
+  id: number;
   width: number;
+  size: number;
+  orientation: Orientation;
 }
 
-export interface ShipsType {
-  handleChangeReady: () => void;
+export interface ShipProps extends ShipData {
+  onPlace: (row: number, col: number, orientation: Orientation) => boolean;
 }
+
+export interface ShipsProps {
+  ships: ShipData[];
+  onPlaceShip: (shipId: number, row: number, col: number, orientation: Orientation) => boolean;
+}
+
+export type Orientation = 'horizontal' | 'vertical';
 
 export interface GamePhaseType {
   phase: string;
@@ -34,19 +57,18 @@ export interface GamePhaseType {
   setEnemyBoard?: React.Dispatch<React.SetStateAction<Board>>;
 }
 
-export interface PlacementPhaseType {
+export type PlacementPhaseType = {
   board: Board;
-  setBoard?: (board: Board) => void;
+  setBoard: React.Dispatch<React.SetStateAction<Board>>;
   startGame: () => void;
-}
-
-export type Phase = 'placement' | 'playerTurn' | 'enemyTurn';
+};
 
 export type Cell = {
   hasShip: boolean;
   isHit: boolean;
   label?: string;
   type: 'cell' | 'label';
+  shipId?: number;
 };
 
 export type Board = Cell[][];
@@ -88,4 +110,19 @@ export interface ActionAreaProps {
   selected: string | null;
   isCorrect: boolean;
   onFire: () => void;
+}
+
+export interface AchievementCardProps {
+  icon: string;
+  title: string;
+  description: string;
+  progress?: number;
+  max?: number;
+  done: boolean;
+}
+
+export interface PixelitConfig {
+  to: HTMLCanvasElement;
+  from: HTMLImageElement;
+  scale?: number;
 }

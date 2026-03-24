@@ -55,12 +55,19 @@
   border-style: solid;
   border-width: 2px 2px 2px 2px;
   border-image: url(checkbox.svg) 3 3 3 3 stretch stretch;
+  background-color: var(--color-bg-secondary);
 }
 
 .doodle-cell {
   border-style: solid;
-  border-width: 4px 4px 4px 4px;
+  border-width: 0px 4px 4px 0px;
   border-image: url(checkbox.svg) 13 13 13 13 stretch stretch;
+}
+
+.doodle-ship {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  border-image: url(ship.svg) 13 13 13 13 stretch stretch;
 }
 
 .doodle button,
@@ -188,8 +195,14 @@
 .doodle input:focus-visible,
 .doodle a:focus-visible,
 .doodle select:focus-visible {
-  outline-offset: -8px;
   outline: 2px dashed var(--color-accent);
+}
+
+.doodle textarea:focus-visible,
+.doodle input:focus-visible,
+.doodle a:focus-visible,
+.doodle select:focus-visible {
+  outline-offset: -8px;
 }
 
 .doodle a:focus-visible {

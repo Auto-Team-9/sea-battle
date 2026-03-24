@@ -16,12 +16,12 @@ export default defineConfig([
       ...tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
-      prettier
+      prettier,
     ],
 
     languageOptions: {
       ecmaVersion: 2022,
-      globals: globals.browser
-    }
-  }
+      globals: globals.browser,
+    },
+  },
 ]);
