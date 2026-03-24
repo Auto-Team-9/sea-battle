@@ -7,6 +7,7 @@ import Profile from './pages/profile/profile';
 import ProtectedRoute from './firebase/ProtectedRoute';
 import PublicRoute from './firebase/PublicRoute';
 import Game from './pages/game/game';
+import NotFoundPage from './pages/not-found/notFoundPage';
 
 const router = createBrowserRouter(
   [
@@ -37,6 +38,10 @@ const router = createBrowserRouter(
               <Game />
             </ProtectedRoute>
           ),
+        },
+        {
+          path: '*',
+          element: <NotFoundPage />,
         },
       ],
     },
