@@ -1,6 +1,5 @@
-import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
-import { ranks } from '../constants/images';
-import type { FirestoreUser, FirestoreUserCreate, UserData } from '../types/types';
+import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import type { FirestoreUser, FirestoreUserCreate } from '../types/types';
 import { db } from '../firebase/config';
 import type { User } from 'firebase/auth';
 
@@ -18,7 +17,7 @@ export const getOrCreateUser = async (user: User): Promise<FirestoreUser> => {
     displayName: user.displayName ?? 'Player',
     createdAt: serverTimestamp(),
     stats: {
-      rank: ranks.unga.name,
+      rank: 'unga',
       victories: 0,
       defeats: 0,
       battles: 0,
@@ -49,16 +48,6 @@ export const getDataFromUser = async (userId: string) => {
     }
   } catch (error) {
     console.error('Error fetching user data:', error);
-    throw error;
-  }
-};
-
-export const updateUserData = async (userId: string, data: Partial<UserData>) => {
-  try {
-    const userDocRef = doc(db, 'users', userId);
-    await updateDoc(userDocRef, data);
-  } catch (error) {
-    console.error('Error updating user data:', error);
     throw error;
   }
 };

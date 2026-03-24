@@ -23,10 +23,20 @@ const AchievementCard = ({
           <img src='./profile-images/done.png' alt='done' className='h-12 w-12 sm:h-16 sm:w-16' />
         ) : (
           <div>
-            <p>
-              {progress} / {max}
-            </p>
-            <progress value={progress} max={max}></progress>
+            {title !== 'First battle' ? (
+              <>
+                <p>
+                  {progress} / {max}
+                </p>
+                <progress value={progress} max={max}></progress>
+              </>
+            ) : (
+              <img
+                src='./profile-images/not-done.png'
+                alt='not-done'
+                className='h-12 w-12 sm:h-16 sm:w-16'
+              />
+            )}
           </div>
         )}
       </div>

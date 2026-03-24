@@ -9,7 +9,11 @@ const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
     return savedImage || defaultAvatar;
   });
 
-  const { nickname, rank, to_rank } = userData;
+  const {
+    displayName,
+    stats: { rank, to_rank },
+  } = userData;
+
   const { name, src, alt } = ranks[rank as keyof typeof ranks];
 
   const imgRef = useRef<HTMLImageElement>(null);
@@ -85,7 +89,7 @@ const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
         </div>
 
         <div className='flex flex-col gap-2 py-4 text-2xl sm:gap-4'>
-          <h1 className='text-center text-3xl sm:text-5xl'>{nickname}</h1>
+          <h1 className='text-center text-3xl sm:text-5xl'>{displayName}</h1>
 
           <div className='flex flex-col gap-2 sm:flex-row'>
             <p className='text-xl sm:text-4xl'>Rank: {name}</p>

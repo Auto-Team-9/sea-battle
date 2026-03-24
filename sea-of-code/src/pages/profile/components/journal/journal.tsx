@@ -2,7 +2,9 @@ import type { JSX } from 'react';
 import type { UserData } from '../../../../types/types';
 
 const Journal = ({ userData }: { userData: UserData }): JSX.Element => {
-  const { victories, defeats, fighting, sniper, miles_at_sea } = userData;
+  const {
+    stats: { victories, defeats, battles, sniper, miles_at_sea },
+  } = userData;
 
   return (
     <div className='doodle-border flex w-full flex-col'>
@@ -35,8 +37,8 @@ const Journal = ({ userData }: { userData: UserData }): JSX.Element => {
             alt='battles'
             className='h-16 w-20 sm:h-24 sm:w-28'
           />
-          <p>Fights</p>
-          <p>{fighting}</p>
+          <p>Battles</p>
+          <p>{battles}</p>
         </div>
         <div className='flex flex-col items-center text-sm sm:text-2xl md:gap-2'>
           <img

@@ -3,7 +3,9 @@ import type { UserData } from '../../../../types/types';
 import AchievementCard from './achievementCard';
 
 const Progress = ({ userData }: { userData: UserData }): JSX.Element => {
-  const { first_battle, sea_wolf, sniper, fleet_storm } = userData;
+  const {
+    stats: { first_battle, sea_wolf, sniper, fleet_storm },
+  } = userData;
 
   return (
     <div className='doodle-border w-full'>
