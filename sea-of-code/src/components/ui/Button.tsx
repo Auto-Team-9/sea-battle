@@ -19,7 +19,7 @@ const variantStyles: Record<ButtonVariant, string> = {
 const Button = ({ variant = 'primary', icon, className = '', children, ...props }: ButtonProps) => {
   return (
     <button
-      className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-semibold shadow-xs focus-visible:outline-2 ${variantStyles[variant]} ${className}`}
+      className={`doodle-border flex w-full cursor-pointer items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-semibold shadow-xs focus-visible:outline-2 ${variantStyles[variant]} ${className}`}
       {...props}
     >
       {icon}

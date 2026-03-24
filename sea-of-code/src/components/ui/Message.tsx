@@ -17,7 +17,7 @@ const variantStyles: Record<MessageVariant, string> = {
   error: 'text-red-500',
   success: 'text-green-500',
   warning: 'text-yellow-500',
-  info: 'text-blue-500',
+  info: '',
 };
 
 const Message = ({
