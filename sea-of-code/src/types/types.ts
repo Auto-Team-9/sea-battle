@@ -87,3 +87,18 @@ export type AbilityType = {
   count: number;
   handleAbilityClick: (ability: string) => void;
 };
+
+export interface AchievementCardProps {
+  icon: string;
+  title: string;
+  description: string;
+  progress?: number;
+  max?: number;
+  done: boolean;
+}
+
+export interface PixelitConfig {
+  to: HTMLCanvasElement;
+  from: HTMLImageElement;
+  scale?: number;
+}

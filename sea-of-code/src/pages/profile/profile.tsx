@@ -7,7 +7,6 @@ import type { UserData } from '../../types/types.js';
 import Loading from '../../components/ui/loading.js';
 import { getDataFromUser } from '../../api/users.js';
 import Message from '../../components/ui/Message.js';
-import DasboardLink from '../../components/links/dashboard-link.js';
 
 const Profile = () => {
   const [userData, setUserData] = useState<UserData>({
@@ -36,12 +35,12 @@ const Profile = () => {
         if (data) {
           setUserData(prev => ({ ...prev, ...data }));
         } else {
-          setError('Пользователь не найден');
+          setError('The user was not found');
         }
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         setError(errorMessage);
-        console.error('Ошибка при загрузке данных пользователя:', error);
+        console.error('Error when uploading user data:', error);
       } finally {
         setLoading(false);
       }
@@ -58,7 +57,6 @@ const Profile = () => {
       id='profile'
       className='doodle-border mx-auto my-4 flex min-h-screen w-full flex-col items-center gap-4 bg-center p-4 sm:w-[95%] md:w-[90%] lg:w-[85%] xl:w-240'
     >
-      <DasboardLink />
       <UserProfileCard userData={userData} />
       <Journal userData={userData} />
       <Progress userData={userData} />

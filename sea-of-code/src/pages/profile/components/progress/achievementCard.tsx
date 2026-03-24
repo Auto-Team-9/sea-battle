@@ -1,11 +1,4 @@
-interface AchievementCardProps {
-  icon: string;
-  title: string;
-  description: string;
-  progress?: number;
-  max?: number;
-  done: boolean;
-}
+import type { AchievementCardProps } from '../../../../types/types';
 
 const AchievementCard = ({
   icon,
