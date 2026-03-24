@@ -32,15 +32,15 @@ export const ranks = {
 };
 
 export const clans = {
-  1: {
+  сode_сlan: {
     name: 'The Code Clan',
     image: './profile-images/clan-1.png',
   },
-  2: {
+  brotherhood_bugs: {
     name: 'The Brotherhood of Bugs',
     image: './profile-images/brotherhood_bugs.png',
   },
-  4: {
+  league_logic: {
     name: 'League of Logic',
     image: './profile-images/league_logic.png',
   },

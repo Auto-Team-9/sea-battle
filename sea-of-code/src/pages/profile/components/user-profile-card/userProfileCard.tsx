@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type JSX } from 'react';
 import { defaultAvatar, profileImage, ranks } from '../../../../constants/images';
 import type { UserData } from '../../../../types/types';
 import { Pixelit } from '../pixel/pixel';
+import { Link } from 'react-router';
 
 const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
   const [avatar, setAvatar] = useState(() => {
@@ -11,7 +12,7 @@ const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
 
   const {
     displayName,
-    stats: { rank, to_rank },
+    stats: { rank, to_rank, clan },
   } = userData;
 
   const { name, src, alt } = ranks[rank as keyof typeof ranks];
@@ -102,15 +103,23 @@ const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
 
           <div className='flex items-center'>
             <p className='text-xl sm:text-4xl'>Clan:</p>
-            <img
-              src='./profile-images/сode_сlan.png'
-              alt='Clan'
-              className='h-12 w-14 sm:h-18 sm:w-22'
-            />
+            <Link to='/clans'>
+              {clan ? (
+                <img
+                  src={`./profile-images/${clan}.png`}
+                  alt='Clan'
+                  className='h-12 w-14 sm:h-18 sm:w-22'
+                />
+              ) : (
+                <p className='px-4 text-xl transition-colors hover:text-emerald-400 sm:text-4xl'>
+                  Join
+                </p>
+              )}
+            </Link>
           </div>
 
           <div className='flex items-center gap-4'>
-            <p className='text-xl sm:text-4xl'>To rank</p>
+            <p className='text-xl sm:text-4xl'>To rank:</p>
             <progress className='text-sm sm:text-2xl' value={to_rank} max='100'></progress>
           </div>
         </div>

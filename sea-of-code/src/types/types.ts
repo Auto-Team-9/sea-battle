@@ -24,6 +24,7 @@ export type UserStats = {
   sea_wolf: number;
   sniper: number;
   to_rank: number;
+  clan: string | null;
 };
 
 export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt'> & {
