@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-
 import Journal from './components/journal/journal';
 import UserProfileCard from './components/user-profile-card/userProfileCard';
 import Progress from './components/progress/progress';
@@ -7,58 +6,56 @@ import type { UserData } from '../../types/types.js';
 import Loading from '../../components/ui/loading.js';
 import { getDataFromUser } from '../../api/users.js';
 import Message from '../../components/ui/Message.js';
-import DasboardLink from '../../components/links/dashboard-link.js';
+import { useAuth } from '../../firebase/useAuth.js';
 
 const Profile = () => {
-  const [userData, setUserData] = useState<UserData>({
-    nickname: '',
-    rank: '',
-    clan: '',
-    defeats: 0,
-    fighting: 0,
-    first_battle: false,
-    fleet_storm: 0,
-    miles_at_sea: 0,
-    sea_wolf: 0,
-    sniper: 0,
-    to_rank: 0,
-    victories: 0,
-  });
-
-  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [error, setError] = useState('');
+  const { user, loading } = useAuth();
 
   useEffect(() => {
+    let isMounted = true;
+
     const getUserdata = async () => {
+      if (!user) return;
+
       try {
-        setLoading(true);
-        const data = await getDataFromUser('current');
+        const data = await getDataFromUser(user.uid);
+        if (!isMounted) return;
+
         if (data) {
-          setUserData(prev => ({ ...prev, ...data }));
+          const { displayName, stats } = data;
+          setUserData({ displayName, stats });
         } else {
-          setError('Пользователь не найден');
+          setError('The user was not found');
+          setUserData(null);
         }
       } catch (error) {
+        if (!isMounted) return;
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         setError(errorMessage);
-        console.error('Ошибка при загрузке данных пользователя:', error);
-      } finally {
-        setLoading(false);
+        setUserData(null);
+        console.error('Error when uploading user data:', error);
       }
     };
 
     getUserdata();
-  }, []);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [user]);
 
   if (loading) return <Loading />;
   if (error) return <Message variant='error' message={error} />;
+  if (!user) return <Message variant='error' message='Please log in' />;
+  if (!userData) return <Loading />;
 
   return (
     <section
       id='profile'
       className='doodle-border mx-auto my-4 flex min-h-screen w-full flex-col items-center gap-4 bg-center p-4 sm:w-[95%] md:w-[90%] lg:w-[85%] xl:w-240'
     >
-      <DasboardLink />
       <UserProfileCard userData={userData} />
       <Journal userData={userData} />
       <Progress userData={userData} />

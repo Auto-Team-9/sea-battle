@@ -7,6 +7,7 @@ import Profile from './pages/profile/profile';
 import ProtectedRoute from './firebase/ProtectedRoute';
 import PublicRoute from './firebase/PublicRoute';
 import Game from './pages/game/game';
+import Clans from './pages/clans/clans';
 
 const router = createBrowserRouter(
   [
@@ -35,6 +36,14 @@ const router = createBrowserRouter(
           element: (
             <ProtectedRoute>
               <Game />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: 'clans',
+          element: (
+            <ProtectedRoute>
+              <Clans />
             </ProtectedRoute>
           ),
         },

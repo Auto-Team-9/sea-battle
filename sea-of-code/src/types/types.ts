@@ -1,18 +1,8 @@
 import type { FieldValue, Timestamp } from 'firebase/firestore';
 
 export interface UserData {
-  nickname: string;
-  rank: string;
-  clan: string;
-  defeats: number;
-  fighting: number;
-  first_battle: boolean;
-  fleet_storm: number;
-  miles_at_sea: number;
-  sea_wolf: number;
-  sniper: number;
-  to_rank: number;
-  victories: number;
+  displayName: string;
+  stats: UserStats;
 }
 
 export type FirestoreUser = {
@@ -34,6 +24,7 @@ export type UserStats = {
   sea_wolf: number;
   sniper: number;
   to_rank: number;
+  clan: string | null;
 };
 
 export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt'> & {
@@ -87,3 +78,18 @@ export type AbilityType = {
   count: number;
   handleAbilityClick: (ability: string) => void;
 };
+
+export interface AchievementCardProps {
+  icon: string;
+  title: string;
+  description: string;
+  progress?: number;
+  max?: number;
+  done: boolean;
+}
+
+export interface PixelitConfig {
+  to: HTMLCanvasElement;
+  from: HTMLImageElement;
+  scale?: number;
+}
