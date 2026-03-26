@@ -1,26 +1,76 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { QuizQuestion, QuestionModalProps } from '../../../../types/quiz';
+import { getRandomQuestion } from '../../../../api/questions';
+import { actionAreaStyle, cardStyle } from './questionModal.styles';
+import Message from '../../../../components/ui/Message';
+import { ModalShell } from './components/ModalShell';
+import { ActionArea } from './components/ActionArea';
+import { MultipleChoice } from './components/question-types/MultipleChoice';
 
-const QuestionModal = () => {
-  const [isOpen, setIsOpen] = useState(true); //for test
+export const QuestionModal = ({
+  topic = 'fundamentals',
+  difficulty = 'Beginner',
+  onCorrect,
+  onClose,
+}: QuestionModalProps) => {
+  const [question, setQuestion] = useState<QuizQuestion | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  return (
-    isOpen && (
-      <div className='absolute top-0 left-0 z-10 flex h-full w-full items-center justify-center bg-black/50'>
-        <div className='relative flex h-48 w-80 flex-col items-center justify-center gap-4 rounded-lg bg-gray-600 p-4'>
-          <h2 className='text-xl font-bold text-[--color-text]'>Вы уверены?</h2>
-          <div className='absolute top-2 right-4 cursor-pointer' onClick={() => setIsOpen(false)}>
-            X
-          </div>
-          <p>Вы робот? Это действие нельзя будет отменить.</p>
-          <div className='flex gap-4'>
-            <button className='rounded bg-green-500 px-4 py-2'>Да</button>
-            <button className='rounded bg-red-500 px-4 py-2'>Нет</button>
-            <button className='rounded bg-gray-400 px-4 py-2'>Незнаю</button>
-          </div>
+  const isCorrect = isSubmitted && selectedAnswer === question?.correct;
+
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prevOverflow; };
+  }, []);
+
+  useEffect(() => {
+    getRandomQuestion(topic, difficulty)
+      .then((q) => {
+        setQuestion(q);
+      })
+      .catch(() => setErrorMessage('Failed to load question'))
+      .finally(() => setIsLoading(false));
+  }, [topic, difficulty]);
+
+  const handleSubmit = () => {
+    if (!selectedAnswer || isSubmitted || !question) return;
+    setIsSubmitted(true);
+    if (selectedAnswer === question.correct) onCorrect?.();
+    setTimeout(() => onClose?.(), 1000);
+  };
+
+  if (isLoading || !question) {
+    return (
+      <div className='fixed inset-0 z-50 flex items-center justify-center'>
+        <div className='absolute inset-0 bg-black/50' />
+        <div className='doodle relative z-10 w-[min(92vw,460px)]'>
+          <fieldset className='flex items-center justify-center px-5 py-10' style={cardStyle}>
+            {errorMessage
+              ? <Message message={errorMessage} variant='error' size='small' />
+              : <p className='text-sm text-[--color-text]'>Loading question…</p>
+            }
+          </fieldset>
         </div>
       </div>
-    )
+    );
+  }
+
+  return (
+    <ModalShell question={question}>
+      <MultipleChoice
+        question={question}
+        selected={selectedAnswer}
+        submitted={isSubmitted}
+        onSelect={setSelectedAnswer}
+      />
+      <div className='mt-5 flex items-center justify-center' style={actionAreaStyle}>
+        <ActionArea submitted={isSubmitted} selected={selectedAnswer} isCorrect={isCorrect} onFire={handleSubmit} />
+      </div>
+    </ModalShell>
   );
 };
 
-export default QuestionModal;

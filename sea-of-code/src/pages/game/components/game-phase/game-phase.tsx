@@ -1,7 +1,7 @@
 import type { GamePhaseType } from '../../../../types/types';
 import Abilities from '../abilities/abilities';
 import GameBoard from '../game-board/gameBoard';
-import QuestionModal from '../question-modal/questionModal';
+import { QuestionModal } from '../question-modal/questionModal';
 
 const GamePhase = ({ phase, playerBoard, enemyBoard }: GamePhaseType) => {
   const mainBoard = phase === 'playerTurn' ? enemyBoard : playerBoard;
