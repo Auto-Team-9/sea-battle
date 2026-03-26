@@ -23,7 +23,12 @@ const Game = () => {
       </button>
 
       {showModal && (
-        <QuestionModal onClose={() => setShowModal(false)} />
+        <QuestionModal
+          topic={'fundamentals'}
+          difficulty={'Beginner'}
+          onCorrect={() => {}}
+          onClose={() => setShowModal(false)}
+        />
       )}
 
       {phase === 'placement' && (
