@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { QuizQuestion } from '../../../../../types/types';
+import type { QuizQuestion } from '../../../../../types/quiz';
 import { cardStyle } from '../questionModal.styles';
 
 interface ModalShellProps {

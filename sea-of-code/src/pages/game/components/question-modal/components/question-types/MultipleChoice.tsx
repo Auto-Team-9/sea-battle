@@ -1,4 +1,4 @@
-import type { QuizQuestion } from '../../../../../../types/types';
+import type { QuizQuestion } from '../../../../../../types/quiz';
 import { OptionItem } from './OptionItem';
 
 interface MultipleChoiceProps {
@@ -10,10 +10,10 @@ interface MultipleChoiceProps {
 
 export const MultipleChoice = ({ question, selected, submitted, onSelect }: MultipleChoiceProps) => (
   <div className='flex flex-col gap-4 flex-1'>
-    {question.options.map((opt) => (
+    {question.options.map((option) => (
       <OptionItem
-        key={opt.id}
-        opt={opt}
+        key={option.id}
+        opt={option}
         correct={question.correct}
         selected={selected}
         submitted={submitted}

@@ -1,4 +1,4 @@
-import type { ActionAreaProps } from '../../../../../types/types';
+import type { ActionAreaProps } from '../../../../../types/quiz';
 
 export const ActionArea = ({ submitted, selected, isCorrect, onFire }: ActionAreaProps) => {
   if (!submitted) {

@@ -1,7 +1,7 @@
-import type { OptionItemProps } from '../../../../../../types/types';
+import type { OptionItemProps } from '../../../../../../types/quiz';
 import { optionLabelStyle } from '../../questionModal.styles';
 
-function getOptionBg(id: string, correct: string, selected: string | null, submitted: boolean): string {
+function getOptionClass(id: string, correct: string, selected: string | null, submitted: boolean): string {
   if (!submitted) return '';
   if (id === correct) return 'bg-green-100 dark:bg-green-900/30';
   if (id === selected) return 'bg-red-100 dark:bg-red-900/30';
@@ -11,7 +11,7 @@ function getOptionBg(id: string, correct: string, selected: string | null, submi
 export const OptionItem = ({ opt, correct, selected, submitted, onSelect }: OptionItemProps) => (
   <label
     style={optionLabelStyle(submitted)}
-    className={`doodle-border px-4 py-1.5 transition-colors ${getOptionBg(opt.id, correct, selected, submitted)}`}
+    className={`doodle-border px-4 py-1.5 transition-colors ${getOptionClass(opt.id, correct, selected, submitted)}`}
   >
     <input
       type='radio'
