@@ -25,7 +25,7 @@ const Cell = ({
 
   return (
     <div
-      className={`doodle-cell droppable h-10 w-10 ${cell.hasShip ? 'has-ship' : ''}`}
+      className={`doodle-cell droppable h-10 w-10 ${cell.hasShip ? 'has-ship' : ''} cursor-pointer`}
       data-row={row}
       data-col={col}
       onClick={handleClick}

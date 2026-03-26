@@ -1,14 +1,13 @@
-import type { Board } from '../../types/types';
-
-const letters = ['', 'A', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К'];
+import type { Board } from '../../../types/types';
+import { COL_LABELS, BOARD_SIZE } from '../../../constants/constants';
 
 export const createBoard = (): Board => {
-  return Array.from({ length: 11 }, (_, y) =>
-    Array.from({ length: 11 }, (_, x) => {
+  return Array.from({ length: BOARD_SIZE }, (_, y) =>
+    Array.from({ length: BOARD_SIZE }, (_, x) => {
       if (y === 0 && x !== 0) {
         return {
           type: 'label',
-          label: letters[x],
+          label: COL_LABELS[x],
           hasShip: false,
           isHit: false,
         };
