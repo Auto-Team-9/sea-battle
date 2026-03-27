@@ -55,6 +55,7 @@ export interface GamePhaseType {
   enemyBoard: Board;
   setPhase?: React.Dispatch<React.SetStateAction<string>>;
   setEnemyBoard?: React.Dispatch<React.SetStateAction<Board>>;
+  handleCheckShip?: (row: number, col: number) => void;
 }
 
 export type PlacementPhaseType = {

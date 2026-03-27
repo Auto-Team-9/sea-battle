@@ -1,9 +1,8 @@
 import type { GamePhaseType } from '../../../../types/types';
-import Abilities from '../abilities/abilities';
 import GameBoard from '../game-board/gameBoard';
 import QuestionModal from '../question-modal/questionModal';
 
-const GamePhase = ({ phase, playerBoard, enemyBoard }: GamePhaseType) => {
+const GamePhase = ({ phase, playerBoard, enemyBoard, handleCheckShip }: GamePhaseType) => {
   const mainBoard = phase === 'playerTurn' ? enemyBoard : playerBoard;
 
   const miniBoard = phase === 'playerTurn' ? playerBoard : enemyBoard;
@@ -14,8 +13,7 @@ const GamePhase = ({ phase, playerBoard, enemyBoard }: GamePhaseType) => {
         <GameBoard board={miniBoard} />
       </div>
       <div className='-mt-36 flex gap-8'>
-        <Abilities />
-        <GameBoard board={mainBoard} />
+        <GameBoard board={mainBoard} onShipClick={handleCheckShip} />
         <QuestionModal />
       </div>
     </div>
