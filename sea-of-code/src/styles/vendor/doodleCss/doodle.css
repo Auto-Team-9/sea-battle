@@ -94,6 +94,12 @@
   border-image: url(hr.svg) 0 3 6 3 stretch stretch;
 }
 
+.doodle-vr {
+  border-style: solid;
+  border-width: 3px 0 3px 6px;
+  border-image: url('vr.svg') 3 0 3 6 stretch stretch;
+}
+
 .doodle blockquote {
   border-left-style: solid;
   border-width: 0px 6px 3px 6px;
