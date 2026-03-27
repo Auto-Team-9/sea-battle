@@ -109,10 +109,6 @@
   border-image: none;
 }
 
-.doodle-round-button+.doodle-round-button {
-  background-image: url('./radio-alt.svg');
-}
-
 .doodle blockquote {
   border-left-style: solid;
   border-width: 0px 6px 3px 6px;
