@@ -19,7 +19,7 @@ const Loading = ({ className = '' }: LoadingProps) => {
     <div
       className={`pointer-events-auto absolute inset-0 z-50 flex items-center justify-center bg-[var(--color-bg-primary)]/20 ${className}`}
     >
-      <div className='doodle-border m-auto w-40 bg-[var(--color-bg-primary)] p-4 text-center text-5xl'>
+      <div className='doodle-border m-auto w-40 !bg-[var(--color-bg-primary)] p-4 text-center text-5xl'>
         <p className='text-lg'>Loading{dots}</p>
       </div>
     </div>

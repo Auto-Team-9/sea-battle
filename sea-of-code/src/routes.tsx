@@ -42,7 +42,11 @@ const router = createBrowserRouter(
         },
         {
           path: '*',
-          element: <NotFoundPage />,
+          element: (
+            <ProtectedRoute>
+              <NotFoundPage />
+            </ProtectedRoute>
+          ),
         },
         {
           path: 'clans',

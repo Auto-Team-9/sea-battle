@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-type ButtonVariant = 'primary' | 'secondary' | 'link';
+type ButtonVariant = 'primary' | 'secondary' | 'link' | 'round';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -10,16 +10,17 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-indigo-400 hover:bg-indigo-500 dark:bg-indigo-900/50 dark:hover:bg-indigo-500 focus-visible:outline-offset-[-8px]',
+    'bg-[var(--color-btn-primary)] hover:bg-[var(--color-btn-primary-hover)] focus-visible:outline-offset-[-8px]',
   secondary:
-    'bg-slate-300 hover:bg-slate-400 dark:bg-slate-900/50 dark:hover:bg-slate-800 focus-visible:outline-offset-[-8px]',
-  link: 'bg-none border-none text-end text-sm font-medium text-indigo-400 hover:text-indigo-500 !border-0 inline !p-0 focus-visible:outline-offset-0 rounded-none',
+    'bg-[var(--color-btn-secondary)] hover:bg-[var(--color-btn-secondary-hover)] focus-visible:outline-offset-[-8px]',
+  link: 'bg-none border-none text-end text-sm font-medium text-[var(--color-accent)] hover:opacity-80 !border-0 inline !p-0 focus-visible:outline-offset-0 rounded-none',
+  round: `hover:bg-[var(--color-btn-primary-hover)] !p-0 doodle-round-button w-fit h-fit !rounded-2xl`,
 };
 
 const Button = ({ variant = 'primary', icon, className = '', children, ...props }: ButtonProps) => {
   return (
     <button
-      className={`doodle-border flex w-full cursor-pointer items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-semibold shadow-xs focus-visible:outline-2 ${variantStyles[variant]} ${className}`}
+      className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-1.5 text-sm font-semibold shadow-xs transition duration-300 ease-in-out focus-visible:outline-2 ${variantStyles[variant]} ${className}`}
       {...props}
     >
       {icon}
