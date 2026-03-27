@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const QuestionModal = () => {
-  const [isOpen, setIsOpen] = useState(false); //for test
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     isOpen && (

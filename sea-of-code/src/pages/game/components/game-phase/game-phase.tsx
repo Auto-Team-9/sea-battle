@@ -13,7 +13,7 @@ const GamePhase = ({ phase, playerBoard, enemyBoard, handleCheckShip }: GamePhas
         <GameBoard board={miniBoard} />
       </div>
       <div className='-mt-36 flex gap-8'>
-        <GameBoard board={mainBoard} onShipClick={handleCheckShip} />
+        <GameBoard board={mainBoard} onShipClick={handleCheckShip} enemy={true} />
         <QuestionModal />
       </div>
     </div>
