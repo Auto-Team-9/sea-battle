@@ -6,8 +6,12 @@
   --color-text: #3c3c3c;
   --color-bg-primary: #ffffff;
   --color-bg-secondary: #bbdbe7;
-  --color-bg-surface: rgba(255, 255, 255, 0.5);
-  --color-accent: var(--color-indigo-500);
+  --color-bg-surface: rgba(255, 255, 255, 0.4);
+  --color-accent: #6366f1;
+  --color-btn-primary: #7f81ff;
+  --color-btn-primary-hover: #686bff;
+  --color-btn-secondary: #cbd5f5;
+  --color-btn-secondary-hover: #94a3b8;
 
   font-family: 'Short Stack', cursive;
   line-height: 1.5;
@@ -58,12 +62,13 @@ progress::-webkit-progress-value {
   background-color: var(--color-bg-surface);
 }
 
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text: #ffffff;
-    --color-bg-primary: #242424;
-    --color-bg-secondary: #2d2d2d;
-    --color-bg-surface: rgba(0, 0, 0, 0.1);
-  }
+[data-theme="dark"] {
+  --color-text: #ffffff;
+  --color-bg-primary: #242424;
+  --color-bg-secondary: #2d2d2d;
+  --color-bg-surface: rgba(0, 0, 0, 0.1);
+  --color-btn-primary: rgba(49, 44, 133, 0.5);
+  --color-btn-primary-hover: #6366f1;
+  --color-btn-secondary: #0f172a;
+  --color-btn-secondary-hover: #1e293b;
 }
