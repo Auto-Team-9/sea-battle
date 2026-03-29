@@ -2,11 +2,12 @@ import { NavLink } from 'react-router';
 import logo from '../../assets/battleship-alt.svg';
 import { useAuth } from '../../firebase/useAuth';
 import { logoutUser } from '../../api/auth';
-import { defaultAvatar, profileImage } from '../../constants/images';
+import { defaultAvatar, profileImage, ranks } from '../../constants/images';
 import { useRef } from 'react';
 import Button from '../ui/Button';
 import logoutIcon from '../../assets/logout-icon.svg';
 import ThemeButton from '../ui/ThemeButton';
+import ProgressBar from '../progress/ProgressBar';
 
 const Header = () => {
   const { loading, userData } = useAuth();
@@ -21,7 +22,7 @@ const Header = () => {
     `ease-in-out hover:text-indigo-500 transition duration-300 ${isActive ? 'text-indigo-500 cursor-default' : ''}`;
 
   return (
-    <header className='doodle-border m-4 flex items-center justify-between p-2 px-5'>
+    <header className='doodle-border my-4 flex items-center justify-between p-2 px-5'>
       <NavLink
         to='/'
         className='flex w-fit cursor-pointer items-center gap-3 transition-transform hover:text-indigo-500'
@@ -42,6 +43,9 @@ const Header = () => {
             <NavLink to={'/Profile'} className={linkClass}>
               Profile
             </NavLink>
+            <NavLink to={'/'} className={linkClass}>
+              Headquarters
+            </NavLink>
           </ul>
         </nav>
 
@@ -60,7 +64,7 @@ const Header = () => {
 
         <div className='doodle-vr h-15' />
 
-        <div className='flex items-center gap-5'>
+        <div className='group flex items-center gap-3'>
           <div className='relative h-15 w-15'>
             <img
               ref={imgRef}
@@ -71,7 +75,17 @@ const Header = () => {
             <div className='doodle-border pointer-events-none absolute inset-0 !bg-transparent'></div>
           </div>
 
-          <span className='text-center text-3xl sm:text-3xl'>{displayName}</span>
+          <div className='flex flex-col'>
+            <div className='flex items-center gap-3'>
+              <span className='text-center text-3xl sm:text-3xl'>{displayName}</span>
+              <img
+                className='w-5'
+                src={ranks[userData.stats.rank]?.src || ranks.unga.src}
+                alt={ranks[userData.stats.rank]?.alt || ''}
+              />
+            </div>
+            <ProgressBar value={userData.stats.to_rank} showValue={true} />
+          </div>
         </div>
       </div>
     </header>
