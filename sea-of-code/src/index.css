@@ -29,10 +29,17 @@
 }
 
 #root {
+  max-width: 1440px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   justify-content: center;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
 
   background:
     linear-gradient(var(--color-bg-secondary), transparent 2px),
