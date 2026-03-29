@@ -9,6 +9,8 @@ import logoutIcon from '../../assets/logout-icon.svg';
 import ThemeButton from '../ui/ThemeButton';
 import ProgressBar from '../progress/ProgressBar';
 
+type RankKey = keyof typeof ranks;
+
 const Header = () => {
   const { loading, userData } = useAuth();
   const imgRef = useRef<HTMLImageElement>(null);
@@ -17,6 +19,8 @@ const Header = () => {
 
   const avatar = localStorage.getItem(profileImage) || defaultAvatar;
   const displayName = userData.displayName || 'player';
+
+  const rankKey = userData.stats.rank as RankKey;
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `ease-in-out hover:text-indigo-500 transition duration-300 ${isActive ? 'text-indigo-500 cursor-default' : ''}`;
@@ -64,29 +68,31 @@ const Header = () => {
 
         <div className='doodle-vr h-15' />
 
-        <div className='group flex items-center gap-3'>
-          <div className='relative h-15 w-15'>
-            <img
-              ref={imgRef}
-              src={avatar}
-              alt='avatar'
-              className='h-full w-full scale-90 object-cover'
-            />
-            <div className='doodle-border pointer-events-none absolute inset-0 !bg-transparent'></div>
-          </div>
-
-          <div className='flex flex-col'>
-            <div className='flex items-center gap-3'>
-              <span className='text-center text-3xl sm:text-3xl'>{displayName}</span>
+        <NavLink to={'/Profile'} className={''}>
+          <div className='group flex items-center gap-3'>
+            <div className='relative h-15 w-15'>
               <img
-                className='w-5'
-                src={ranks[userData.stats.rank]?.src || ranks.unga.src}
-                alt={ranks[userData.stats.rank]?.alt || ''}
+                ref={imgRef}
+                src={avatar}
+                alt='avatar'
+                className='h-full w-full scale-90 object-cover'
               />
+              <div className='doodle-border pointer-events-none absolute inset-0 !bg-transparent'></div>
             </div>
-            <ProgressBar value={userData.stats.to_rank} showValue={true} />
+
+            <div className='flex flex-col'>
+              <div className='flex items-center gap-3'>
+                <span className='text-center text-3xl sm:text-3xl'>{displayName}</span>
+                <img
+                  className='w-5'
+                  src={ranks[rankKey]?.src || ranks.unga.src}
+                  alt={ranks[rankKey]?.alt || ''}
+                />
+              </div>
+              <ProgressBar value={userData.stats.to_rank} showValue={true} />
+            </div>
           </div>
-        </div>
+        </NavLink>
       </div>
     </header>
   );
