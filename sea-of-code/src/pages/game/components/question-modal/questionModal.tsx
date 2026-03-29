@@ -5,10 +5,12 @@ import Message from '../../../../components/ui/Message';
 import { ModalShell } from './components/ModalShell';
 import { ActionArea } from './components/ActionArea';
 import { MultipleChoice } from './components/question-types/MultipleChoice';
+import { DragDropOrder } from './components/question-types/DragDropOrder';
 
 export const QuestionModal = ({
   topic = 'fundamentals',
   difficulty = 'Beginner',
+  questionType,
   onCorrect,
   onClose,
 }: QuestionModalProps) => {
@@ -27,13 +29,17 @@ export const QuestionModal = ({
   }, []);
 
   useEffect(() => {
-    getRandomQuestion(topic, difficulty)
+    getRandomQuestion(topic, difficulty, questionType)
       .then((q) => {
         setQuestion(q);
+        if (q.type === 'order') {
+          const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+          setSelectedAnswer(shuffled.map((o) => o.id).join(','));
+        }
       })
       .catch(() => setErrorMessage('Failed to load question'))
       .finally(() => setIsLoading(false));
-  }, [topic, difficulty]);
+  }, [topic, difficulty, questionType]);
 
   const handleSubmit = () => {
     if (!selectedAnswer || isSubmitted || !question) return;
@@ -67,12 +73,21 @@ export const QuestionModal = ({
 
   return (
     <ModalShell question={question}>
-      <MultipleChoice
-        question={question}
-        selected={selectedAnswer}
-        submitted={isSubmitted}
-        onSelect={setSelectedAnswer}
-      />
+      {question.type === 'order' ? (
+        <DragDropOrder
+          question={question}
+          order={selectedAnswer ?? question.options.map((o) => o.id).join(',')}
+          submitted={isSubmitted}
+          onReorder={setSelectedAnswer}
+        />
+      ) : (
+        <MultipleChoice
+          question={question}
+          selected={selectedAnswer}
+          submitted={isSubmitted}
+          onSelect={setSelectedAnswer}
+        />
+      )}
       <div className='mt-5 flex items-center justify-center h-[42px] flex-shrink-0'>
         <ActionArea submitted={isSubmitted} selected={selectedAnswer} isCorrect={isCorrect} onFire={handleSubmit} />
       </div>

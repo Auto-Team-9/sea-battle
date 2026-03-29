@@ -26,6 +26,7 @@ const Game = () => {
         <QuestionModal
           topic={'fundamentals'}
           difficulty={'Beginner'}
+          questionType={'order'}
           onCorrect={() => {}}
           onClose={() => setShowModal(false)}
         />

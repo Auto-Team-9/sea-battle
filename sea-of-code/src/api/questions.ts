@@ -7,10 +7,12 @@ const COLLECTION = 'questions';
 export const getRandomQuestion = async (
   topic?: string,
   difficulty?: string,
+  questionType?: string,
 ): Promise<QuizQuestion> => {
   const queryFilters = [
     ...(topic ? [where('topic', '==', topic)] : []),
     ...(difficulty ? [where('difficulty', '==', difficulty)] : []),
+    ...(questionType ? [where('type', '==', questionType)] : []),
   ];
 
   const questionsRef = collection(db, COLLECTION);
