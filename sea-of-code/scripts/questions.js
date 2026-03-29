@@ -743,4 +743,72 @@ export const questions = [
     ],
     correct: 'a',
   },
+
+  //drag-and-drop questions
+
+  {
+    topic: 'fundamentals',
+    difficulty: 'Beginner',
+    type: 'order',
+    text: 'Put the steps of a JS event loop tick in the correct order:',
+    options: [
+      { id: 'a', text: 'Run a task from the task queue' },
+      { id: 'b', text: 'Run all microtasks (Promise callbacks)' },
+      { id: 'c', text: 'Render / paint (if needed)' },
+      { id: 'd', text: 'Wait for the next task' },
+    ],
+    correct: 'a,b,c,d',
+  },
+  {
+    topic: 'fundamentals',
+    difficulty: 'Beginner',
+    type: 'order',
+    text: 'Order the steps of declaring and calling a function:',
+    options: [
+      { id: 'a', text: 'Write the function keyword' },
+      { id: 'b', text: 'Give the function a name' },
+      { id: 'c', text: 'Define the function body in {}' },
+      { id: 'd', text: 'Call the function by name with ()' },
+    ],
+    correct: 'a,b,c,d',
+  },
+  {
+    topic: 'fundamentals',
+    difficulty: 'Junior',
+    type: 'order',
+    text: 'Put these Promise chain steps in the correct order:',
+    options: [
+      { id: 'a', text: 'Create a Promise with new Promise(...)' },
+      { id: 'b', text: 'Chain .then() to handle resolved value' },
+      { id: 'c', text: 'Chain .catch() to handle rejection' },
+      { id: 'd', text: 'Chain .finally() to run cleanup' },
+    ],
+    correct: 'a,b,c,d',
+  },
+  {
+    topic: 'fundamentals',
+    difficulty: 'Junior',
+    type: 'order',
+    text: 'Order the steps of making a fetch() request correctly:',
+    options: [
+      { id: 'a', text: 'Call fetch(url)' },
+      { id: 'b', text: 'Await / .then() to get the Response' },
+      { id: 'c', text: 'Call response.json() to parse body' },
+      { id: 'd', text: 'Use the resulting data' },
+    ],
+    correct: 'a,b,c,d',
+  },
+  {
+    topic: 'fundamentals',
+    difficulty: '',
+    type: 'order',
+    text: 'Order the JavaScript scope chain lookup steps:',
+    options: [
+      { id: 'a', text: 'Look in the local function scope' },
+      { id: 'b', text: 'Look in any outer (closure) scopes' },
+      { id: 'c', text: 'Look in the module scope' },
+      { id: 'd', text: 'Look in the global scope' },
+    ],
+    correct: 'a,b,c,d',
+  },
 ];
