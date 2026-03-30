@@ -53,3 +53,28 @@ export const tips = [
   'Patience and curiosity are your most reliable navigation tools.',
   'A calm mind writes the cleanest code.',
 ];
+
+export const seaPhrases = [
+  'The tide is with us',
+  'Keep your sails trimmed',
+  'Smooth seas never made a skilled sailor',
+  'Eyes on the horizon, captain',
+  'Prepare your compass and charts; knowledge is your wind',
+  'A steady hand and a sharp mind will guide you through any storm',
+];
+
+export const topicOperations = {
+  [Topics.Fundamentals]: 'First Light',
+  [Topics.FunctionsAndContext]: 'Silent Scope',
+  [Topics.DataHandling]: 'Data Tide',
+  [Topics.AsyncJavaScript]: 'Async Spearhead',
+  [Topics.BrowserJavaScript]: 'DOM Vanguard',
+};
+
+export const topicLocations = {
+  [Topics.Fundamentals]: 'JavaScript Basics Island',
+  [Topics.FunctionsAndContext]: 'Functions & Context Waters',
+  [Topics.DataHandling]: 'Data Handling Archipelago',
+  [Topics.AsyncJavaScript]: 'Async JS Bay',
+  [Topics.BrowserJavaScript]: 'Browser JavaScript Harbor',
+};
