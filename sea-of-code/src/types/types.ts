@@ -29,26 +29,9 @@ export type UserStats = {
   lastLoginDate: Timestamp | null;
 };
 
-export type FirestoreUserCreate = {
-  uid: string;
-  email: string | null;
-  displayName: string;
+export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt' | 'stats'> & {
   createdAt: FieldValue;
-  stats: {
-    rank: string;
-    victories: number;
-    defeats: number;
-    battles: number;
-    first_battle: boolean;
-    fleet_storm: number;
-    miles_at_sea: number;
-    sea_wolf: number;
-    sniper: number;
-    to_rank: number;
-    clan: string | null;
-    streak: number;
-    lastLoginDate: FieldValue;
-  };
+  stats: Omit<UserStats, 'lastLoginDate'> & { lastLoginDate: FieldValue };
 };
 
 export interface ShipData {
