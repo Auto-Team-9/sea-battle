@@ -8,24 +8,27 @@ export enum Topics {
   BrowserJavaScript = 'Browser JavaScript',
 }
 
+export type QuestionType = 'multiple-choice' | 'order';
+
 export interface QuizOption {
   id: string;
   text: string;
 }
 
 export interface QuizQuestion {
-  id?: string;
+  id: string;
   text: string;
   options: QuizOption[];
   correct: string;
+  type?: QuestionType;
 }
 
 export interface QuestionModalProps {
-  question?: QuizQuestion;
-  topic?: string;
-  difficulty?: string;
-  onCorrect?: () => void;
-  onClose?: () => void;
+  topic: string;
+  difficulty: Difficulty;
+  questionType?: QuestionType;
+  onCorrect: () => void;
+  onClose: () => void;
 }
 
 export interface OptionItemProps {
@@ -41,4 +44,11 @@ export interface ActionAreaProps {
   selected: string | null;
   isCorrect: boolean;
   onFire: () => void;
+}
+
+export interface DragDropOrderProps {
+  question: QuizQuestion;
+  order: string;
+  submitted: boolean;
+  onReorder: (order: string) => void;
 }

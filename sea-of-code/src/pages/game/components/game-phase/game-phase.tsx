@@ -16,7 +16,12 @@ const GamePhase = ({ phase, playerBoard, enemyBoard }: GamePhaseType) => {
       <div className='-mt-36 flex gap-8'>
         <Abilities />
         <GameBoard board={mainBoard} />
-        <QuestionModal />
+        <QuestionModal
+          topic={'fundamentals'}
+          difficulty={'Beginner'}
+          onCorrect={() => {}}
+          onClose={() => {}}
+        />
       </div>
     </div>
   );
