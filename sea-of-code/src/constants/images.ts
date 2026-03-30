@@ -38,6 +38,8 @@ export const clans = {
     tagline: 'Masters of clean architecture and elegant solutions',
     description:
       'Born from the wreckage of a thousand failed deploys, the Code Clan believes that beauty in structure is the highest form of power. They sail not to destroy — they sail to refactor the seas themselves.',
+    color: '#22c55e',
+    colorMuted: 'rgba(34, 197, 94, 0.12)',
   },
   brotherhood_bugs: {
     name: 'The Brotherhood of Bugs',
@@ -45,6 +47,8 @@ export const clans = {
     tagline: 'We hunt what others fear to face',
     description:
       'Where others see errors, the Brotherhood sees opportunity. This rogue fraction embraces chaos, turning every crash and edge case into a weapon against the unprepared.',
+    color: '#3b82f6',
+    colorMuted: 'rgba(59, 130, 246, 0.12)',
   },
   league_logic: {
     name: 'League of Logic',
@@ -52,5 +56,7 @@ export const clans = {
     tagline: 'Reason and precision guide every battle',
     description:
       'Cold, calculated, and relentless — the League of Logic does not fight on instinct. Every move is a theorem, every battle a proof, and defeat is simply an unsolved equation.',
+    color: '#eab308',
+    colorMuted: 'rgba(234, 179, 8, 0.12)',
   },
 };

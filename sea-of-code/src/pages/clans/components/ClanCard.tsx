@@ -15,16 +15,24 @@ const ClanCard = ({ clanKey, isCurrent, onJoin, onDetails, disabled, stats }: Cl
   const clan = clans[clanKey];
   return (
     <div
-      className={`doodle doodle-border flex flex-col items-center gap-3 p-4 transition-all ${isCurrent ? 'bg-indigo-100 dark:bg-indigo-900/30 scale-[1.02] shadow-lg' : 'opacity-80 hover:opacity-100'}`}
+      className={`clan-card doodle doodle-border flex flex-col items-center gap-3 p-4 ${isCurrent ? 'clan-card--active' : 'opacity-80 hover:opacity-100'}`}
+      style={{
+        '--clan-color': clan.color,
+        backgroundColor: isCurrent ? clan.colorMuted : undefined,
+      } as React.CSSProperties}
     >
       <img
         src={clan.image}
         alt={clan.name}
         className={`h-24 w-24 object-contain transition-all ${isCurrent ? 'scale-110' : ''}`}
+        style={isCurrent ? { filter: `drop-shadow(0 0 10px ${clan.color}90)` } : undefined}
       />
       <h2 className='text-center text-lg font-semibold'>{clan.name}</h2>
       {isCurrent && (
-        <span className='text-xs font-semibold text-indigo-500 uppercase tracking-widest'>
+        <span
+          className='text-xs font-semibold uppercase tracking-widest'
+          style={{ color: clan.color }}
+        >
           Your clan
         </span>
       )}
@@ -45,11 +53,22 @@ const ClanCard = ({ clanKey, isCurrent, onJoin, onDetails, disabled, stats }: Cl
       </div>
 
       <div className='mt-auto flex w-full flex-col gap-2'>
-        <Button variant='secondary' onClick={() => onDetails(clanKey)} className='w-full'>
+        <Button
+          variant='secondary'
+          onClick={() => onDetails(clanKey)}
+          className='w-full'
+          style={{ backgroundColor: clan.colorMuted, color: clan.color }}
+        >
           About
         </Button>
         {!isCurrent && (
-          <Button onClick={() => onJoin(clanKey)} disabled={disabled} variant='primary' className='w-full'>
+          <Button
+            onClick={() => onJoin(clanKey)}
+            disabled={disabled}
+            variant='primary'
+            className='w-full'
+            style={{ backgroundColor: clan.color, color: '#fff' }}
+          >
             Join
           </Button>
         )}

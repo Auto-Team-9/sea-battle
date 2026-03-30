@@ -3,9 +3,10 @@ import type { LeaderboardEntry } from '../../../types/clans.type';
 
 interface ClanLeaderboardProps {
   topPlayers: LeaderboardEntry[];
+  clanColor?: string;
 }
 
-const ClanLeaderboard = ({ topPlayers }: ClanLeaderboardProps) => {
+const ClanLeaderboard = ({ topPlayers, clanColor }: ClanLeaderboardProps) => {
   if (topPlayers.length === 0) {
     return (
       <div className='doodle-border w-full p-4 text-center text-sm opacity-60'>
@@ -20,12 +21,17 @@ const ClanLeaderboard = ({ topPlayers }: ClanLeaderboardProps) => {
       <ol className='flex flex-col gap-2'>
         {topPlayers.map((player, i) => {
           const rankLabel = ranks[player.rank as keyof typeof ranks]?.name ?? player.rank;
+          const isFirst = i === 0;
           return (
             <li
               key={i}
-              className={`flex items-center gap-3 rounded px-3 py-2 ${i === 0 ? 'bg-yellow-100 dark:bg-yellow-900/20 font-semibold' : 'opacity-80'}`}
+              className={`flex items-center gap-3 rounded px-3 py-2 ${isFirst ? 'font-semibold' : 'opacity-80'}`}
+              style={isFirst && clanColor ? { backgroundColor: `${clanColor}20` } : undefined}
             >
-              <span className='w-6 text-center text-sm font-bold opacity-60'>
+              <span
+                className='w-6 text-center text-sm font-bold'
+                style={isFirst && clanColor ? { color: clanColor } : { opacity: 0.6 }}
+              >
                 {i + 1}.
               </span>
               <span className='flex-1 truncate'>{player.displayName}</span>

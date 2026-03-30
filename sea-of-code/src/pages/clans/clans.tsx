@@ -10,6 +10,7 @@ import { db } from '../../firebase/config';
 import ClanCard from './components/ClanCard';
 import ClanDetailView from './components/ClanDetailView';
 import type { ClanKey, ClanStatsMap } from '../../types/clans.type';
+import './clans.css';
 
 const Clans = () => {
   const { user, userData, loading } = useAuth();
