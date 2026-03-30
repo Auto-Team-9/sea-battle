@@ -1,5 +1,5 @@
 import { Topics } from '../types/quiz';
-import type { ShipData } from '../types/types';
+import type { Level, ShipData } from '../types/types';
 
 export const inititalShips: ShipData[] = [
   { id: 1, width: 160, size: 4, orientation: 'horizontal' },
@@ -93,4 +93,46 @@ export const topicObjectives: Record<Topics, string> = {
 
   [Topics.BrowserJavaScript]:
     'Learn how to interact with the DOM, handle events, and control browser behavior.',
+};
+
+export const levelsByTopic: Record<Topics, Level[]> = {
+  [Topics.Fundamentals]: [
+    { number: 1, difficulty: 'Beginner', modifier: null },
+    { number: 2, difficulty: 'Junior', modifier: null },
+    { number: 3, difficulty: 'Middle', modifier: null },
+    { number: 4, difficulty: 'Senior', modifier: null },
+    { number: 5, difficulty: 'Expert', modifier: null },
+  ],
+
+  [Topics.FunctionsAndContext]: [
+    { number: 1, difficulty: 'Beginner', modifier: null },
+    { number: 2, difficulty: 'Junior', modifier: null },
+    { number: 3, difficulty: 'Middle', modifier: null },
+    { number: 4, difficulty: 'Senior', modifier: null },
+    { number: 5, difficulty: 'Expert', modifier: null },
+  ],
+
+  [Topics.DataHandling]: [
+    { number: 1, difficulty: 'Beginner', modifier: null },
+    { number: 2, difficulty: 'Junior', modifier: null },
+    { number: 3, difficulty: 'Middle', modifier: null },
+    { number: 4, difficulty: 'Senior', modifier: null },
+    { number: 5, difficulty: 'Expert', modifier: null },
+  ],
+
+  [Topics.AsyncJavaScript]: [
+    { number: 1, difficulty: 'Beginner', modifier: null },
+    { number: 2, difficulty: 'Junior', modifier: null },
+    { number: 3, difficulty: 'Middle', modifier: null },
+    { number: 4, difficulty: 'Senior', modifier: null },
+    { number: 5, difficulty: 'Expert', modifier: null },
+  ],
+
+  [Topics.BrowserJavaScript]: [
+    { number: 1, difficulty: 'Beginner', modifier: null },
+    { number: 2, difficulty: 'Junior', modifier: null },
+    { number: 3, difficulty: 'Middle', modifier: null },
+    { number: 4, difficulty: 'Senior', modifier: null },
+    { number: 5, difficulty: 'Expert', modifier: null },
+  ],
 };

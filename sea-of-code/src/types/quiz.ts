@@ -1,5 +1,7 @@
 export type Difficulty = 'Beginner' | 'Junior' | 'Middle' | 'Senior' | 'Expert';
 
+export type Modifier = null;
+
 export enum Topics {
   Fundamentals = 'Fundamentals JavaScript',
   FunctionsAndContext = 'Functions & Context',

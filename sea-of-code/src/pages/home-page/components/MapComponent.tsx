@@ -7,7 +7,8 @@ import {
   topicOperations,
 } from '../../../constants/constants';
 import Button from '../../../components/ui/Button';
-
+import LvlSelector from './LvlSelector';
+import { useNavigate } from 'react-router';
 interface MapProps {
   currentTopic: Topics;
   onNext: () => void;
@@ -15,6 +16,9 @@ interface MapProps {
 }
 
 const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
+  const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
+  const navigate = useNavigate();
+
   const operation = topicOperations[currentTopic];
   const location = topicLocations[currentTopic];
   const objective = topicObjectives[currentTopic];
@@ -24,8 +28,16 @@ const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
     return seaPhrases[index];
   });
 
+  const startBattle = () => {
+    if (!selectedLevel) return;
+
+    navigate('/game', {
+      state: { topic: currentTopic, level: selectedLevel },
+    });
+  };
+
   return (
-    <div className='doodle-border relative flex h-full flex-col p-4'>
+    <div className='doodle-border relative z-10 flex h-full flex-col justify-between p-4'>
       <div className='flex w-fit max-w-136 flex-col gap-1'>
         <div className='flex items-center gap-4'>
           <hr className='doodle-hr w-full flex-grow' />
@@ -45,21 +57,36 @@ const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
         </div>
       </div>
 
-      <div className='flex-1'></div>
+      <div className='flex w-full flex-col items-center gap-5 self-end'>
+        <Button
+          variant='primary'
+          className='z-20 !w-fit'
+          disabled={!selectedLevel}
+          onClick={startBattle}
+        >
+          Battle!
+        </Button>
+
+        <p className='self-center self-end text-center text-sm italic opacity-70'>{randomPhrase}</p>
+      </div>
 
       <Button
         variant='arrow'
         onClick={onPrev}
-        className='absolute top-1/2 left-0 ml-4 -translate-y-1/2 rotate-180'
+        className='absolute top-1/2 left-0 z-20 ml-4 -translate-y-1/2 rotate-180'
       ></Button>
 
       <Button
         variant='arrow'
         onClick={onNext}
-        className='absolute top-1/2 right-0 mr-4 -translate-y-1/2'
+        className='absolute top-1/2 right-0 z-20 mr-4 -translate-y-1/2'
       ></Button>
 
-      <p className='self-center self-end text-center text-sm italic opacity-70'>{randomPhrase}</p>
+      <LvlSelector
+        currentTopic={currentTopic}
+        selectedLevel={selectedLevel}
+        onSelectLevel={setSelectedLevel}
+      />
     </div>
   );
 };

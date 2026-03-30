@@ -35,7 +35,12 @@ const HomePage = () => {
         />
         <Sitrep currentTopic={currentTopic} />
       </div>
-      <MapComponent currentTopic={currentTopic} onNext={handleNextTopic} onPrev={handlePrevTopic} />
+      <MapComponent
+        key={currentTopic}
+        currentTopic={currentTopic}
+        onNext={handleNextTopic}
+        onPrev={handlePrevTopic}
+      />
     </section>
   );
 };
