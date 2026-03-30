@@ -1,5 +1,4 @@
 import type { OptionItemProps } from '../../../../../../types/quiz';
-import { optionLabelStyle } from '../../questionModal.styles';
 
 function getOptionClass(id: string, correct: string, selected: string | null, submitted: boolean): string {
   if (!submitted) return '';
@@ -10,8 +9,7 @@ function getOptionClass(id: string, correct: string, selected: string | null, su
 
 export const OptionItem = ({ opt, correct, selected, submitted, onSelect }: OptionItemProps) => (
   <label
-    style={optionLabelStyle(submitted)}
-    className={`doodle-border px-4 py-1.5 transition-colors ${getOptionClass(opt.id, correct, selected, submitted)}`}
+    className={`doodle-border px-4 py-1.5 flex items-center gap-3 transition-colors ${submitted ? 'cursor-default' : 'cursor-pointer'} ${getOptionClass(opt.id, correct, selected, submitted)}`}
   >
     <input
       type='radio'
