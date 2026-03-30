@@ -44,7 +44,7 @@ export const clans = {
     image: './profile-images/brotherhood_bugs.png',
     tagline: 'We hunt what others fear to face',
     description:
-      'Where others see errors, the Brotherhood sees opportunity. This rogue faction embraces chaos, turning every crash and edge case into a weapon against the unprepared.',
+      'Where others see errors, the Brotherhood sees opportunity. This rogue fraction embraces chaos, turning every crash and edge case into a weapon against the unprepared.',
   },
   league_logic: {
     name: 'League of Logic',
