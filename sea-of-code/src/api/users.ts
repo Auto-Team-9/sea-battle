@@ -26,8 +26,10 @@ export const getOrCreateUser = async (user: User): Promise<FirestoreUser> => {
       miles_at_sea: 0,
       sea_wolf: 0,
       sniper: 0,
-      to_rank: 0,
+      to_rank: 100,
       clan: null,
+      streak: 1,
+      lastLoginDate: serverTimestamp(),
     },
   };
 

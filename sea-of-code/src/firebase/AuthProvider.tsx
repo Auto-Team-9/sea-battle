@@ -6,6 +6,7 @@ import { type User } from 'firebase/auth';
 import { getOrCreateUser } from '../api/users';
 import type { FirestoreUser } from '../types/types';
 import { doc, onSnapshot } from 'firebase/firestore';
+import { tryUpdateLoginStreak } from './tryUpdateLoginStreak';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -24,6 +25,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (firebaseUser) {
         try {
           await getOrCreateUser(firebaseUser);
+
+          await tryUpdateLoginStreak(firebaseUser.uid);
 
           const userRef = doc(db, 'users', firebaseUser.uid);
 
@@ -49,6 +52,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (unsubscribeSnapshot) unsubscribeSnapshot();
     };
   }, []);
+
+  useEffect(() => {
+    const handleFocus = () => {
+      if (user) {
+        tryUpdateLoginStreak(user.uid);
+      }
+    };
+
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, [user]);
 
   return (
     <AuthContext.Provider value={{ user, userData, loading }}>{children}</AuthContext.Provider>
