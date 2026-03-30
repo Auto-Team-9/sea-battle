@@ -24,7 +24,7 @@ export const GreetingCard = ({ displayName, rank, streakDays, to_rank }: Greetin
           main:
             streakDays > 1
               ? `${streakDays} days at sea — you are getting the hang of it`
-              : 'Time to make your first move, Cadet',
+              : 'Time to make your first move',
         };
 
       case 'mich':
@@ -74,7 +74,7 @@ export const GreetingCard = ({ displayName, rank, streakDays, to_rank }: Greetin
   const { intro, main } = getRankText();
 
   return (
-    <div className='doodle doodle-border flex w-fit gap-5 p-4'>
+    <div className='doodle doodle-border flex w-fit shrink-0 gap-5 p-4'>
       <RandomSailor />
 
       <div className='relative flex flex-col'>
