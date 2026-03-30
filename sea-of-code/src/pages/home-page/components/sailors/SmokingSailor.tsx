@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import smokeIcon from '../../../assets/smoke.svg';
-import smokeAltIcon from '../../../assets/smoke-alt.svg';
-import smokingIcon from '../../../assets/smoking.svg';
+import smokeIcon from '../../../../assets/smoke.svg';
+import smokeAltIcon from '../../../../assets/smoke-alt.svg';
+import smokingIcon from '../../../../assets/smoking.svg';
 
 export function SmokingSailor() {
   const [frame, setFrame] = useState(0);

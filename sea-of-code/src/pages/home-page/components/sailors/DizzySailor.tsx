@@ -1,4 +1,4 @@
-import dizzyIcon from '../../../assets/dizzy.svg';
+import dizzyIcon from '../../../../assets/dizzy.svg';
 
 export function DizzySailor() {
   return (

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import thinkerIcon from '../../../assets/thinker.svg';
+import thinkerIcon from '../../../../assets/thinker.svg';
 
 export function ThinkingSailor() {
   const [frame, setFrame] = useState(0);

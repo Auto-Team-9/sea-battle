@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import sick1Icon from '../../../assets/sick-1.svg';
-import sick2Icon from '../../../assets/sick-2.svg';
-import sick3Icon from '../../../assets/sick-3.svg';
-import sick4Icon from '../../../assets/sick-4.svg';
+import sick1Icon from '../../../../assets/sick-1.svg';
+import sick2Icon from '../../../../assets/sick-2.svg';
+import sick3Icon from '../../../../assets/sick-3.svg';
+import sick4Icon from '../../../../assets/sick-4.svg';
 
 export function SickSailor() {
   const [frame, setFrame] = useState(0);
