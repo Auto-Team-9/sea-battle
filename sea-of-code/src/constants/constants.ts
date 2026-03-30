@@ -78,3 +78,19 @@ export const topicLocations = {
   [Topics.AsyncJavaScript]: 'Async JS Bay',
   [Topics.BrowserJavaScript]: 'Browser JavaScript Harbor',
 };
+
+export const topicObjectives: Record<Topics, string> = {
+  [Topics.Fundamentals]:
+    'Master variables, primitive types, operators, and the core building blocks of JavaScript.',
+
+  [Topics.FunctionsAndContext]:
+    'Understand functions, scope, closures, and how the "this" context behaves in different situations.',
+
+  [Topics.DataHandling]:
+    'Work confidently with arrays, objects, and common data manipulation techniques.',
+
+  [Topics.AsyncJavaScript]: 'Master promises, async/await, and the JavaScript event loop.',
+
+  [Topics.BrowserJavaScript]:
+    'Learn how to interact with the DOM, handle events, and control browser behavior.',
+};
