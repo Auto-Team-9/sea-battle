@@ -36,7 +36,7 @@ const GreetingMessage = ({
       </div>
 
       <div
-        className='gap- flex h-full w-full flex-col justify-center transition-opacity duration-700'
+        className='flex h-full w-full flex-col justify-center transition-opacity duration-700'
         style={{ opacity: showMain ? 1 : 0 }}
       >
         <p>{intro}</p>

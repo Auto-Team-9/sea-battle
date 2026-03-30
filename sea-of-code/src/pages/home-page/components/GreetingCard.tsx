@@ -80,7 +80,7 @@ export const GreetingCard = ({ displayName, rank, streakDays, to_rank }: Greetin
       <div className='relative flex flex-col'>
         <div className='flex items-center gap-4'>
           <hr className='w-full flex-grow' />
-          <p className='text-sm whitespace-nowrap'>Assistant</p>
+          <p className='text-sm tracking-wide whitespace-nowrap uppercase opacity-70'>Assistant</p>
           <hr className='w-full flex-grow rotate-180 transform' />
         </div>
 

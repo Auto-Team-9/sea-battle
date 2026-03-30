@@ -14,7 +14,9 @@ const Sitrep = ({ currentTopic }: SitrepProps) => {
   return (
     <div className='doodle-border flex items-center gap-5 p-4'>
       <div className='flex h-full items-center'>
-        <h3 className='rotate-180 text-2xl [writing-mode:vertical-rl]'>SITREP</h3>
+        <h3 className='rotate-180 text-2xl tracking-wide whitespace-nowrap uppercase opacity-70 [writing-mode:vertical-rl]'>
+          SITREP
+        </h3>
         <div className='doodle-vr h-full' />
       </div>
 
@@ -22,7 +24,7 @@ const Sitrep = ({ currentTopic }: SitrepProps) => {
         <p className='text-'>{description}</p>
 
         <div className='flex flex-col gap-1 text-sm text-[--color-text] opacity-70'>
-          <p>Tip: {randomTip}</p>
+          <p>TIP: {randomTip}</p>
         </div>
       </div>
     </div>
