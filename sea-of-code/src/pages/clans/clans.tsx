@@ -9,7 +9,7 @@ import Message from '../../components/ui/Message';
 import { db } from '../../firebase/config';
 import ClanCard from './components/ClanCard';
 import ClanDetailView from './components/ClanDetailView';
-import type { ClanKey, ClanStatsMap } from './types';
+import type { ClanKey, ClanStatsMap } from '../../types/clans.type';
 
 const Clans = () => {
   const { user, userData, loading } = useAuth();
@@ -27,10 +27,22 @@ const Clans = () => {
         const data = doc.data();
         const clan = data.stats?.clan as ClanKey | null;
         if (!clan || !(clan in clans)) return;
-        if (!stats[clan]) stats[clan] = { members: 0, victories: 0, battles: 0 };
+        if (!stats[clan]) stats[clan] = { members: 0, victories: 0, battles: 0, topPlayers: [] };
         stats[clan]!.members += 1;
         stats[clan]!.victories += data.stats?.victories ?? 0;
         stats[clan]!.battles += data.stats?.battles ?? 0;
+        stats[clan]!.topPlayers.push({
+          displayName: data.displayName ?? 'Unknown',
+          victories: data.stats?.victories ?? 0,
+          rank: data.stats?.rank ?? 'unga',
+        });
+      });
+      Object.values(stats).forEach(clanStat => {
+        if (clanStat) {
+          clanStat.topPlayers = clanStat.topPlayers
+            .sort((a, b) => b.victories - a.victories)
+            .slice(0, 5);
+        }
       });
       setClanStats(stats);
     });

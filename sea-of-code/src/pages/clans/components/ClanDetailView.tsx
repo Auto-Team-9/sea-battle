@@ -1,6 +1,7 @@
 import { clans } from '../../../constants/images';
 import Button from '../../../components/ui/Button';
-import type { ClanKey, ClanStats } from '../types';
+import ClanLeaderboard from './ClanLeaderboard';
+import type { ClanKey, ClanStats } from '../../../types/clans.type';
 
 interface ClanDetailViewProps {
   clanKey: ClanKey;
@@ -41,6 +42,8 @@ const ClanDetailView = ({ clanKey, onBack, stats }: ClanDetailViewProps) => {
           <div className='text-xs opacity-60'>total battles</div>
         </div>
       </div>
+
+      <ClanLeaderboard topPlayers={stats?.topPlayers ?? []} />
     </section>
   );
 };

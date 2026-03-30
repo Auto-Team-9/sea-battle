@@ -1,6 +1,6 @@
 import { clans } from '../../../constants/images';
 import Button from '../../../components/ui/Button';
-import type { ClanKey, ClanStats } from '../types';
+import type { ClanKey, ClanStats } from '../../../types/clans.type';
 
 interface ClanCardProps {
   clanKey: ClanKey;
