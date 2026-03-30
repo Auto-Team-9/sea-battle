@@ -1,12 +1,5 @@
-export type Difficulty = 'Beginner' | 'Junior' | 'Middle' | 'Senior' | 'Expert';
 
-export enum Topics {
-  Fundamentals = 'Fundamentals JavaScript',
-  FunctionsAndContext = 'Functions & Context',
-  DataHandling = 'Data Handling',
-  AsyncJavaScript = 'Async JavaScript',
-  BrowserJavaScript = 'Browser JavaScript',
-}
+export type Difficulty = 'Beginner' | 'Junior' | 'Middle' | 'Senior' | 'Expert';
 
 export type QuestionType = 'multiple-choice' | 'order';
 
