@@ -34,14 +34,23 @@ export const ranks = {
 export const clans = {
   сode_сlan: {
     name: 'The Code Clan',
-    image: './profile-images/clan-1.png',
+    image: './profile-images/сode_сlan.png',
+    tagline: 'Masters of clean architecture and elegant solutions',
+    description:
+      'Born from the wreckage of a thousand failed deploys, the Code Clan believes that beauty in structure is the highest form of power. They sail not to destroy — they sail to refactor the seas themselves.',
   },
   brotherhood_bugs: {
     name: 'The Brotherhood of Bugs',
     image: './profile-images/brotherhood_bugs.png',
+    tagline: 'We hunt what others fear to face',
+    description:
+      'Where others see errors, the Brotherhood sees opportunity. This rogue faction embraces chaos, turning every crash and edge case into a weapon against the unprepared.',
   },
   league_logic: {
     name: 'League of Logic',
     image: './profile-images/league_logic.png',
+    tagline: 'Reason and precision guide every battle',
+    description:
+      'Cold, calculated, and relentless — the League of Logic does not fight on instinct. Every move is a theorem, every battle a proof, and defeat is simply an unsolved equation.',
   },
 };
