@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { DizzySailor } from './DizzySailor';
 import { SickSailor } from './SickSailor';
-import { SmokingSailor } from './Smoker';
-import { ThinkingSailor } from './Thinkier';
+import { SmokingSailor } from './SmokingSailor';
+import { ThinkingSailor } from './ThinkingSailor';
 
 const RandomSailor = () => {
   const sailors = [SmokingSailor, ThinkingSailor, DizzySailor, SickSailor];

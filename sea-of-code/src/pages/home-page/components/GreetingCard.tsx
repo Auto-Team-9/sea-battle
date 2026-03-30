@@ -1,5 +1,5 @@
 import GreetingMessage from './GreetingMessage';
-import RandomSailor from './RandomSailor';
+import RandomSailor from './sailors/RandomSailor';
 
 type GreetingCardProps = {
   displayName: string;
