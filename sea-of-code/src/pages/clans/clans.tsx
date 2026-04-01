@@ -9,6 +9,7 @@ import { db } from '../../firebase/config';
 import ClanCard from './components/ClanCard';
 import ClanDetailView from './components/ClanDetailView';
 import ChangeClanModal from './components/ChangeClanModal';
+import JoinSuccessModal from './components/JoinSuccessModal';
 import type { ClanKey, ClanStatsMap } from '../../types/clans.type';
 import './clans.css';
 
@@ -18,6 +19,8 @@ const Clans = () => {
   const [error, setError] = useState('');
   const [confirmClan, setConfirmClan] = useState<ClanKey | null>(null);
   const [detailsClan, setDetailsClan] = useState<ClanKey | null>(null);
+  const [joinedClan, setJoinedClan] = useState<ClanKey | null>(null);
+  const [highlightedClan, setHighlightedClan] = useState<ClanKey | null>(null);
   const [clanStats, setClanStats] = useState<ClanStatsMap>({});
 
   useEffect(() => {
@@ -75,6 +78,7 @@ const Clans = () => {
     setError('');
     try {
       await joinClan(user.uid, clanKey, isChange);
+      setJoinedClan(clanKey);
     } catch {
       setError('Failed to join clan. Please try again.');
     } finally {
@@ -101,6 +105,16 @@ const Clans = () => {
           disabled={actionLoading}
         />
       )}
+      {joinedClan && (
+        <JoinSuccessModal
+          clanKey={joinedClan}
+          onClose={() => {
+            setHighlightedClan(joinedClan);
+            setJoinedClan(null);
+            setTimeout(() => setHighlightedClan(null), 600);
+          }}
+        />
+      )}
       <section className='doodle doodle-border mx-auto my-4 flex w-full flex-col items-center gap-6 p-6 sm:w-[95%] md:w-[90%] lg:w-[85%] xl:w-240'>
         <div className='flex flex-col items-center gap-2'>
           <h1 className='text-3xl font-bold'>Choose Your Clan</h1>
@@ -121,6 +135,7 @@ const Clans = () => {
               key={key}
               clanKey={key}
               isCurrent={currentClanKey === key}
+              highlight={highlightedClan === key}
               onJoin={handleJoin}
               onDetails={setDetailsClan}
               disabled={actionLoading}

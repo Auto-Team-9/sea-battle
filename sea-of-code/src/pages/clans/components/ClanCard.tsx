@@ -5,17 +5,18 @@ import type { ClanKey, ClanStats } from '../../../types/clans.type';
 interface ClanCardProps {
   clanKey: ClanKey;
   isCurrent: boolean;
+  highlight?: boolean;
   onJoin: (key: ClanKey) => void;
   onDetails: (key: ClanKey) => void;
   disabled: boolean;
   stats?: ClanStats;
 }
 
-const ClanCard = ({ clanKey, isCurrent, onJoin, onDetails, disabled, stats }: ClanCardProps) => {
+const ClanCard = ({ clanKey, isCurrent, highlight, onJoin, onDetails, disabled, stats }: ClanCardProps) => {
   const clan = clans[clanKey];
   return (
     <div
-      className={`clan-card doodle doodle-border flex flex-col items-center gap-3 p-4 ${isCurrent ? 'clan-card--active' : 'opacity-80 hover:opacity-100'}`}
+      className={`clan-card doodle doodle-border flex flex-col items-center gap-3 p-4 ${isCurrent ? 'clan-card--active' : 'opacity-80 hover:opacity-100'} ${highlight ? 'clan-card--just-joined' : ''}`}
       style={{
         '--clan-color': clan.color,
         backgroundColor: isCurrent ? clan.colorMuted : undefined,
