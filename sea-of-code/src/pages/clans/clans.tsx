@@ -8,6 +8,7 @@ import Message from '../../components/ui/Message';
 import { db } from '../../firebase/config';
 import ClanCard from './components/ClanCard';
 import ClanDetailView from './components/ClanDetailView';
+import ChangeClanModal from './components/ChangeClanModal';
 import type { ClanKey, ClanStatsMap } from '../../types/clans.type';
 import './clans.css';
 
@@ -15,6 +16,7 @@ const Clans = () => {
   const { user, userData, loading } = useAuth();
   const [actionLoading, setActionLoading] = useState(false);
   const [error, setError] = useState('');
+  const [confirmClan, setConfirmClan] = useState<ClanKey | null>(null);
   const [detailsClan, setDetailsClan] = useState<ClanKey | null>(null);
   const [clanStats, setClanStats] = useState<ClanStatsMap>({});
 
@@ -54,10 +56,24 @@ const Clans = () => {
 
   const handleJoin = async (clanKey: ClanKey) => {
     if (!user) return;
+    if (currentClanKey) {
+      setConfirmClan(clanKey);
+      return;
+    }
+    await doJoin(clanKey, false);
+  };
+
+  const handleConfirmChange = async () => {
+    if (!confirmClan) return;
+    setConfirmClan(null);
+    await doJoin(confirmClan, true);
+  };
+
+  const doJoin = async (clanKey: ClanKey, isChange: boolean) => {
+    if (!user) return;
     setActionLoading(true);
     setError('');
     try {
-      const isChange = !!currentClanKey;
       await joinClan(user.uid, clanKey, isChange);
     } catch {
       setError('Failed to join clan. Please try again.');
@@ -77,6 +93,14 @@ const Clans = () => {
   }
 
   return (
+    <>
+      {confirmClan && (
+        <ChangeClanModal
+          onConfirm={handleConfirmChange}
+          onCancel={() => setConfirmClan(null)}
+          disabled={actionLoading}
+        />
+      )}
       <section className='doodle doodle-border mx-auto my-4 flex w-full flex-col items-center gap-6 p-6 sm:w-[95%] md:w-[90%] lg:w-[85%] xl:w-240'>
         <div className='flex flex-col items-center gap-2'>
           <h1 className='text-3xl font-bold'>Choose Your Clan</h1>
@@ -106,7 +130,8 @@ const Clans = () => {
         </div>
 
       </section>
-    );
+    </>
+  );
 };
 
 export default Clans;
