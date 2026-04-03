@@ -10,6 +10,7 @@ import ClanCard from './components/ClanCard';
 import ClanDetailView from './components/ClanDetailView';
 import ChangeClanModal from './components/ChangeClanModal';
 import JoinSuccessModal from './components/JoinSuccessModal';
+import ClanRankingBoard from './components/ClanRankingBoard';
 import type { ClanKey, ClanStatsMap } from '../../types/clans.type';
 import './clans.css';
 
@@ -32,11 +33,11 @@ const Clans = () => {
         if (!clan || !(clan in clans)) return;
         if (!stats[clan]) stats[clan] = { members: 0, victories: 0, battles: 0, topPlayers: [] };
         stats[clan]!.members += 1;
-        stats[clan]!.victories += data.stats?.victories ?? 0;
-        stats[clan]!.battles += data.stats?.battles ?? 0;
+        stats[clan]!.victories += data.stats?.clanStats?.victories ?? 0;
+        stats[clan]!.battles += data.stats?.clanStats?.battles ?? 0;
         stats[clan]!.topPlayers.push({
           displayName: data.displayName ?? 'Unknown',
-          victories: data.stats?.victories ?? 0,
+          victories: data.stats?.clanStats?.victories ?? 0,
           rank: data.stats?.rank ?? 'unga',
         });
       });
@@ -143,6 +144,8 @@ const Clans = () => {
             />
           ))}
         </div>
+
+        <ClanRankingBoard clanStats={clanStats} />
 
       </section>
     </>

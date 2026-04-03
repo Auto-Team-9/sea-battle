@@ -31,6 +31,11 @@ export const getOrCreateUser = async (user: User): Promise<FirestoreUser> => {
       streak: 1,
       lastLoginDate: serverTimestamp(),
       clanJoinedAt: null,
+      clanStats: {
+        victories: 0,
+        defeats: 0,
+        battles: 0,
+      },
     },
   };
 
@@ -64,14 +69,9 @@ export const joinClan = async (userId: string, clanKey: string, isChange = false
   };
 
   if (isChange) {
-    updates['stats.victories'] = 0;
-    updates['stats.defeats'] = 0;
-    updates['stats.battles'] = 0;
-    updates['stats.fleet_storm'] = 0;
-    updates['stats.miles_at_sea'] = 0;
-    updates['stats.sea_wolf'] = 0;
-    updates['stats.sniper'] = 0;
-    updates['stats.to_rank'] = 0;
+    updates['stats.clanStats.victories'] = 0;
+    updates['stats.clanStats.defeats'] = 0;
+    updates['stats.clanStats.battles'] = 0;
   }
 
   await updateDoc(ref, updates);

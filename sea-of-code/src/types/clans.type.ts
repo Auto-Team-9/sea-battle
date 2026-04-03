@@ -1,5 +1,9 @@
 import type { clans } from '../constants/images';
 
+export type ClanRankingBoardProps = {
+  clanStats: ClanStatsMap;
+};
+
 export type ClanKey = keyof typeof clans;
 
 export type LeaderboardEntry = {
