@@ -35,6 +35,7 @@ export type UserStats = {
   lastLoginDate: Timestamp | null;
   clanJoinedAt: Timestamp | null;
   clanStats: ClanStats;
+  answeredQuestions: string[];
 };
 
 export type FirestoreUserCreate = {
@@ -84,11 +85,18 @@ export interface ShipsProps {
 export type Orientation = 'horizontal' | 'vertical';
 
 export interface GamePhaseType {
-  phase: string;
   playerBoard: Board;
   enemyBoard: Board;
   setPhase?: React.Dispatch<React.SetStateAction<string>>;
   setEnemyBoard?: React.Dispatch<React.SetStateAction<Board>>;
+  handleCheckShip?: (row: number, col: number) => void;
+  isPlayerTurn?: boolean;
+  gameResult?: 'win' | 'lose' | null;
+  onRestart?: () => void;
+  showModal?: boolean;
+  onModalClose?: () => void;
+  onModalCorrect?: (questionId: string) => void;
+  answeredIds?: string[];
 }
 
 export type PlacementPhaseType = {

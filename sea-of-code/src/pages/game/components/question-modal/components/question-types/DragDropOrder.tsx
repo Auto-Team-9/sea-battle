@@ -38,8 +38,8 @@ export const DragDropOrder = ({ question, order, submitted, onReorder }: DragDro
 
   const getItemClass = (id: string, index: number): string => {
     if (!submitted) return '';
-    if (id === correctIds[index]) return 'bg-green-100 dark:bg-green-900/30';
-    return 'bg-red-100 dark:bg-red-900/30';
+    if (id === correctIds[index]) return '!bg-green-100 dark:!bg-green-900/30';
+    return '!bg-red-100 dark:!bg-red-900/30';
   };
 
   return (
