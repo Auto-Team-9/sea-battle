@@ -36,9 +36,12 @@ export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt' | 'stats'> & {
 };
 
 export interface Level {
-  number: number;
+  id: number;
   difficulty: Difficulty;
   modifier: Modifier;
+  x: number;
+  y: number;
+  connections: number[];
 }
 
 export interface ShipData {
