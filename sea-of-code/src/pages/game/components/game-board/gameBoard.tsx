@@ -27,13 +27,13 @@ const Cell = ({
 
   return (
     <div
-      className={`doodle-cell droppable flex h-10 w-10 items-center justify-center ${cell.hasShip && !enemy ? 'has-ship' : ''} cursor-pointer`}
+      className={`doodle-cell droppable flex h-10 w-10 items-center justify-center ${cell.hasShip && !enemy ? 'has-ship' : ''} ${onShipClick && !cell.isHit ? 'cursor-pointer' : 'cursor-default'}`}
       data-row={row}
       data-col={col}
       onClick={handleClick}
     >
-      {cell.isHit && cell.hasShip && '💥'}
-      {cell.isHit && !cell.hasShip && '❌'}
+      {cell.isHit && cell.hasShip && '❌'}
+      {cell.isHit && !cell.hasShip && '•'}
     </div>
   );
 };

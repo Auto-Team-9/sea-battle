@@ -41,8 +41,8 @@ const GamePhase = ({
           topic={'fundamentals'}
           difficulty={'Beginner'}
           answeredIds={answeredIds}
-          onCorrect={onModalCorrect}
-          onClose={onModalClose}
+          onCorrect={onModalCorrect ?? (() => {})}
+          onClose={onModalClose ?? (() => {})}
         />
       )}
 
