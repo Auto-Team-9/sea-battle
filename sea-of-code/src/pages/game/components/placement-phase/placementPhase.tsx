@@ -1,9 +1,10 @@
 import { useCallback, useState } from 'react';
 import type { Orientation, PlacementPhaseType, ShipData } from '../../../../types/types';
-import { inititalShips } from '../../../../constants/constants';
+import { inititalShips, BOARD_SIZE } from '../../../../constants/constants';
 import GameBoard from '../game-board/gameBoard';
 import Ships from './ships/ships';
 import { canPlaceShip } from '../../utils/canPlaceShip';
+import { createBoard } from '../../utils/createBoard';
 
 const PlacementPhase = ({ board, setBoard, startGame }: PlacementPhaseType) => {
   const [remainingShips, setRemainingShips] = useState<ShipData[]>(inititalShips);
@@ -68,6 +69,38 @@ const PlacementPhase = ({ board, setBoard, startGame }: PlacementPhaseType) => {
     [board, setBoard, isPlacing]
   );
 
+  const handleAutoPlace = useCallback(() => {
+    const orientations: Orientation[] = ['horizontal', 'vertical'];
+    let newBoard = createBoard();
+
+    for (const ship of inititalShips) {
+      let placed = false;
+      let attempts = 0;
+      while (!placed && attempts < 200) {
+        attempts++;
+        const orientation = orientations[Math.floor(Math.random() * 2)];
+        const row = Math.floor(Math.random() * (BOARD_SIZE - 1)) + 1;
+        const col = Math.floor(Math.random() * (BOARD_SIZE - 1)) + 1;
+        if (canPlaceShip(newBoard, ship.size, row, col, orientation)) {
+          for (let i = 0; i < ship.size; i++) {
+            const r = orientation === 'horizontal' ? row : row + i;
+            const c = orientation === 'horizontal' ? col + i : col;
+            newBoard[r][c] = { ...newBoard[r][c], hasShip: true, shipId: ship.id };
+          }
+          placed = true;
+        }
+      }
+    }
+
+    setBoard(newBoard);
+    setRemainingShips([]);
+  }, [setBoard]);
+
+  const handleClear = useCallback(() => {
+    setBoard(createBoard());
+    setRemainingShips(inititalShips);
+  }, [setBoard]);
+
   return (
     <div className='flex flex-col items-center gap-4'>
       <h1 className='my-4 text-center text-3xl'>Placement phase</h1>
@@ -75,13 +108,30 @@ const PlacementPhase = ({ board, setBoard, startGame }: PlacementPhaseType) => {
       <GameBoard board={board} onShipClick={handleShipRemove} />
       <Ships ships={remainingShips} onPlaceShip={handleShipPlace} />
 
-      <button
-        onClick={startGame}
-        disabled={remainingShips.length !== 0}
-        className='doodle-border cursor-pointer px-4 text-3xl transition-colors hover:animate-pulse hover:not-disabled:text-amber-500 disabled:cursor-not-allowed disabled:opacity-50'
-      >
-        Готов
-      </button>
+      <div className='flex gap-4'>
+        <button
+          onClick={handleClear}
+          disabled={remainingShips.length === inititalShips.length}
+          className='doodle-border cursor-pointer px-6 py-2 text-xl transition-colors hover:animate-pulse hover:not-disabled:text-amber-500 disabled:cursor-not-allowed disabled:opacity-50'
+        >
+          Clear
+        </button>
+
+        <button
+          onClick={handleAutoPlace}
+          className='doodle-border cursor-pointer px-6 py-2 text-xl transition-colors hover:animate-pulse hover:text-amber-500'
+        >
+          Auto Place
+        </button>
+
+        <button
+          onClick={startGame}
+          disabled={remainingShips.length !== 0}
+          className='doodle-border cursor-pointer px-6 py-2 text-xl transition-colors hover:animate-pulse hover:not-disabled:text-amber-500 disabled:cursor-not-allowed disabled:opacity-50'
+        >
+          Let's Go!
+        </button>
+      </div>
     </div>
   );
 };
