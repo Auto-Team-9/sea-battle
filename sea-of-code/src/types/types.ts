@@ -13,6 +13,12 @@ export type FirestoreUser = {
   stats: UserStats;
 };
 
+export type ClanStats = {
+  victories: number;
+  defeats: number;
+  battles: number;
+};
+
 export type UserStats = {
   rank: string;
   victories: number;
@@ -27,6 +33,8 @@ export type UserStats = {
   clan: string | null;
   streak: number;
   lastLoginDate: Timestamp | null;
+  clanJoinedAt: Timestamp | null;
+  clanStats: ClanStats;
 };
 
 export type FirestoreUserCreate = {
@@ -48,6 +56,12 @@ export type FirestoreUserCreate = {
     clan: string | null;
     streak: number;
     lastLoginDate: FieldValue;
+    clanJoinedAt: FieldValue | null;
+    clanStats: {
+      victories: number;
+      defeats: number;
+      battles: number;
+    };
   };
 };
 
