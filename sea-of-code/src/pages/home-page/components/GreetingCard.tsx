@@ -23,7 +23,7 @@ export const GreetingCard = ({ displayName, rank, streakDays, to_rank }: Greetin
           intro: `Welcome aboard, Cadet`,
           main:
             streakDays > 1
-              ? `${streakDays} days at sea — you are getting the hang of it`
+              ? `${streakDays} days at sea - keep it up!`
               : 'Time to make your first move',
         };
 
@@ -32,7 +32,7 @@ export const GreetingCard = ({ displayName, rank, streakDays, to_rank }: Greetin
           intro: `Bug Navigator, chart the course`,
           main:
             streakDays > 1
-              ? `${streakDays} days navigating bugs — steady sailing`
+              ? `${streakDays} days navigating bugs - steady sailing`
               : 'Bugs are waiting on the horizon',
         };
 
@@ -41,7 +41,7 @@ export const GreetingCard = ({ displayName, rank, streakDays, to_rank }: Greetin
           intro: `Commander, systems are under control`,
           main:
             streakDays > 1
-              ? `${streakDays} days in command — precise and efficient`
+              ? `${streakDays} days in command - precise and efficient`
               : 'All systems ready. Awaiting your command',
         };
 
@@ -80,7 +80,7 @@ export const GreetingCard = ({ displayName, rank, streakDays, to_rank }: Greetin
       <div className='relative flex flex-col'>
         <div className='flex items-center gap-4'>
           <hr className='w-full flex-grow' />
-          <p className='text-sm tracking-wide whitespace-nowrap uppercase opacity-70'>Assistant</p>
+          <p className='tracking-wide whitespace-nowrap uppercase opacity-70'>Assistant</p>
           <hr className='w-full flex-grow rotate-180 transform' />
         </div>
 

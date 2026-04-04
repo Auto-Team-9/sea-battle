@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Topics } from '../../../types/quiz';
-import { tips, topicDescriptions } from '../../../constants/constants';
+import { tips } from '../../../constants/constants';
+import { topicDescriptions } from '../../../constants/topics';
 
 interface SitrepProps {
   currentTopic: Topics;

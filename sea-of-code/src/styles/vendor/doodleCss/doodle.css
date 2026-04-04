@@ -101,15 +101,6 @@
   border-image: url('vr.svg') 3 0 3 6 stretch stretch;
 }
 
-.doodle-round-button {
-  background-image: url('./radio.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  border: none;
-  border-image: none;
-}
-
 .doodle blockquote {
   border-left-style: solid;
   border-width: 0px 6px 3px 6px;

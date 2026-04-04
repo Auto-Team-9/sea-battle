@@ -1,11 +1,26 @@
+import { useState } from 'react';
 import Loading from '../../components/ui/loading';
 import { useAuth } from '../../firebase/useAuth';
 import { Topics } from '../../types/quiz';
 import { GreetingCard } from './components/GreetingCard';
+import MapComponent from './components/MapComponent';
 import Sitrep from './components/Sitrep';
+
+const topicList = Object.values(Topics);
 
 const HomePage = () => {
   const { userData, loading } = useAuth();
+  const [topicIndex, setTopicIndex] = useState(0);
+
+  const currentTopic = topicList[topicIndex];
+
+  const handleNextTopic = () => {
+    setTopicIndex(prev => (prev + 1) % topicList.length);
+  };
+
+  const handlePrevTopic = () => {
+    setTopicIndex(prev => (prev - 1 + topicList.length) % topicList.length);
+  };
 
   if (loading) return <Loading />;
 
@@ -18,19 +33,14 @@ const HomePage = () => {
           streakDays={userData?.stats.streak ?? 0}
           to_rank={userData?.stats.to_rank ?? 0}
         />
-        <Sitrep currentTopic={Topics.Fundamentals} />
+        <Sitrep currentTopic={currentTopic} />
       </div>
-
-      <div className='doodle-border h-full'>
-        <div className='flex items-center gap-4'>
-          <hr className='doodle-hr w-full flex-grow' />
-          <p className='text-lg font-semibold text-blue-900'>
-            Current mission: <span className='font-semibold'>{'currentTopic'}</span>
-          </p>
-          <hr className='doodle-hr w-full flex-grow rotate-180 transform' />
-        </div>
-      </div>
-      <div></div>
+      <MapComponent
+        key={currentTopic}
+        currentTopic={currentTopic}
+        onNext={handleNextTopic}
+        onPrev={handlePrevTopic}
+      />
     </section>
   );
 };

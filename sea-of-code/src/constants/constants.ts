@@ -1,4 +1,3 @@
-import { Topics } from '../types/quiz';
 import type { ShipData } from '../types/types';
 
 export const inititalShips: ShipData[] = [
@@ -13,19 +12,6 @@ export const inititalShips: ShipData[] = [
   { id: 9, width: 40, size: 1, orientation: 'horizontal' },
   { id: 10, width: 40, size: 1, orientation: 'horizontal' },
 ];
-
-export const topicDescriptions: Record<Topics, string> = {
-  [Topics.Fundamentals]:
-    'The basics of JavaScript: variables, types, and operators. Every sailor needs a solid deck to navigate! Master these fundamentals to keep your code steady and avoid running aground.',
-  [Topics.FunctionsAndContext]:
-    'Dive into functions, scope, and execution context. Mastering this keeps your ship steady in stormy seas. Remember: understanding how “this” behaves is like reading the winds - crucial for smooth sailing.',
-  [Topics.DataHandling]:
-    'Manipulate arrays, objects, and data structures like a true navigator plotting coordinates on a map. Sorting, filtering, and mapping your data is like charting a course through treacherous waters - precision is key.',
-  [Topics.AsyncJavaScript]:
-    'Promises, async/await, and event loops - sail through asynchronous waters with confidence. Timing and coordination are everything: a misstep can leave your ship stuck in a whirlpool of callbacks.',
-  [Topics.BrowserJavaScript]:
-    'Control the DOM, handle events, and steer your web pages like a captain commanding a fleet. Interacting with the browser requires vigilance and dexterity, as every element responds like a crew member following orders.',
-};
 
 export const tips = [
   'Take your time understanding the concepts before engaging the next challenge.',
@@ -52,4 +38,13 @@ export const tips = [
   'Read other people’s code - it’s like studying other captains’ routes.',
   'Patience and curiosity are your most reliable navigation tools.',
   'A calm mind writes the cleanest code.',
+];
+
+export const seaPhrases = [
+  'The tide is with us',
+  'Keep your sails trimmed',
+  'Smooth seas never made a skilled sailor',
+  'Eyes on the horizon, captain',
+  'Prepare your compass and charts; knowledge is your wind',
+  'A steady hand and a sharp mind will guide you through any storm',
 ];

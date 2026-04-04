@@ -1,4 +1,5 @@
 import type { FieldValue, Timestamp } from 'firebase/firestore';
+import type { Difficulty, Modifier } from './quiz';
 
 export interface UserData {
   displayName: string;
@@ -29,27 +30,19 @@ export type UserStats = {
   lastLoginDate: Timestamp | null;
 };
 
-export type FirestoreUserCreate = {
-  uid: string;
-  email: string | null;
-  displayName: string;
+export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt' | 'stats'> & {
   createdAt: FieldValue;
-  stats: {
-    rank: string;
-    victories: number;
-    defeats: number;
-    battles: number;
-    first_battle: boolean;
-    fleet_storm: number;
-    miles_at_sea: number;
-    sea_wolf: number;
-    sniper: number;
-    to_rank: number;
-    clan: string | null;
-    streak: number;
-    lastLoginDate: FieldValue;
-  };
+  stats: Omit<UserStats, 'lastLoginDate'> & { lastLoginDate: FieldValue };
 };
+
+export interface Level {
+  id: number;
+  difficulty: Difficulty;
+  modifier: Modifier;
+  x: number;
+  y: number;
+  connections: number[];
+}
 
 export interface ShipData {
   id: number;
