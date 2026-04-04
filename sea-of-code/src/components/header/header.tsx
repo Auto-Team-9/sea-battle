@@ -62,7 +62,7 @@ const Header = () => {
             variant='round'
             onClick={logoutUser}
             icon={<img src={logoutIcon} alt='logout icon' className='h-9 w-9' />}
-            className='bg-red-400 hover:bg-red-500'
+            className='bg-red-400 stroke-red-400 text-[#3c3c3c] hover:bg-red-500'
           ></Button>
         </div>
 
