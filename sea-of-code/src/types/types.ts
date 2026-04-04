@@ -13,6 +13,12 @@ export type FirestoreUser = {
   stats: UserStats;
 };
 
+export type ClanStats = {
+  victories: number;
+  defeats: number;
+  battles: number;
+};
+
 export type UserStats = {
   rank: string;
   victories: number;
@@ -25,10 +31,38 @@ export type UserStats = {
   sniper: number;
   to_rank: number;
   clan: string | null;
+  streak: number;
+  lastLoginDate: Timestamp | null;
+  clanJoinedAt: Timestamp | null;
+  clanStats: ClanStats;
 };
 
-export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt'> & {
+export type FirestoreUserCreate = {
+  uid: string;
+  email: string | null;
+  displayName: string;
   createdAt: FieldValue;
+  stats: {
+    rank: string;
+    victories: number;
+    defeats: number;
+    battles: number;
+    first_battle: boolean;
+    fleet_storm: number;
+    miles_at_sea: number;
+    sea_wolf: number;
+    sniper: number;
+    to_rank: number;
+    clan: string | null;
+    streak: number;
+    lastLoginDate: FieldValue;
+    clanJoinedAt: FieldValue | null;
+    clanStats: {
+      victories: number;
+      defeats: number;
+      battles: number;
+    };
+  };
 };
 
 export interface ShipData {

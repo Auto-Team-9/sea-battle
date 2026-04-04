@@ -49,6 +49,7 @@
   border-style: solid;
   border-width: 10px 10px 10px 10px;
   border-image: url(button.svg) 10 10 10 10 stretch stretch;
+  border-radius: 1rem;
 }
 
 .doodle-game-board {
@@ -92,6 +93,21 @@
   border-style: solid;
   border-width: 0px 3px 6px 3px;
   border-image: url(hr.svg) 0 3 6 3 stretch stretch;
+}
+
+.doodle-vr {
+  border-style: solid;
+  border-width: 3px 0 3px 6px;
+  border-image: url('vr.svg') 3 0 3 6 stretch stretch;
+}
+
+.doodle-round-button {
+  background-image: url('./radio.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: none;
+  border-image: none;
 }
 
 .doodle blockquote {

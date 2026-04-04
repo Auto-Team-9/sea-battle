@@ -17,7 +17,7 @@ const Input = ({ label, name, error, ...props }: InputProps) => {
         <input
           id={name}
           name={name}
-          className={`block w-full rounded-md bg-white/50 px-3 py-1.5 text-base outline-0 sm:text-sm dark:bg-black/10 ${error ? 'outline-2 -outline-offset-8 outline-rose-500 outline-dashed' : ''}`}
+          className={`block w-full rounded-md bg-[var(--color-bg-surface)] px-3 py-1.5 text-base outline-0 sm:text-sm ${error ? 'outline-2 -outline-offset-8 outline-rose-500 outline-dashed' : ''}`}
           {...props}
         />
       </div>

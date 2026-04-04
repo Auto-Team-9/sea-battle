@@ -1,4 +1,4 @@
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import type { FirestoreUser, FirestoreUserCreate } from '../types/types';
 import { db } from '../firebase/config';
 import type { User } from 'firebase/auth';
@@ -26,8 +26,16 @@ export const getOrCreateUser = async (user: User): Promise<FirestoreUser> => {
       miles_at_sea: 0,
       sea_wolf: 0,
       sniper: 0,
-      to_rank: 0,
+      to_rank: 100,
       clan: null,
+      streak: 1,
+      lastLoginDate: serverTimestamp(),
+      clanJoinedAt: null,
+      clanStats: {
+        victories: 0,
+        defeats: 0,
+        battles: 0,
+      },
     },
   };
 
@@ -51,4 +59,20 @@ export const getDataFromUser = async (userId: string) => {
     console.error('Error fetching user data:', error);
     throw error;
   }
+};
+
+export const joinClan = async (userId: string, clanKey: string, isChange = false) => {
+  const ref = doc(db, 'users', userId);
+  const updates: Record<string, unknown> = {
+    'stats.clan': clanKey,
+    'stats.clanJoinedAt': serverTimestamp(),
+  };
+
+  if (isChange) {
+    updates['stats.clanStats.victories'] = 0;
+    updates['stats.clanStats.defeats'] = 0;
+    updates['stats.clanStats.battles'] = 0;
+  }
+
+  await updateDoc(ref, updates);
 };
