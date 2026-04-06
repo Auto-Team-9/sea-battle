@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import Loading from '../../components/ui/loading';
 import { useAuth } from '../../firebase/useAuth';
-import { Topics } from '../../types/quiz';
+import { type TopicId } from '../../types/topic';
 import { GreetingCard } from './components/GreetingCard';
 import MapComponent from './components/MapComponent';
 import Sitrep from './components/Sitrep';
+import { topics } from '../../constants/topics';
 
-const topicList = Object.values(Topics);
+const topicList = Object.keys(topics) as TopicId[];
 
 const HomePage = () => {
   const { userData, loading } = useAuth();
   const [topicIndex, setTopicIndex] = useState(0);
 
-  const currentTopic = topicList[topicIndex];
+  const currentTopicId = topicList[topicIndex];
+  const currentTopic = topics[currentTopicId];
 
   const handleNextTopic = () => {
     setTopicIndex(prev => (prev + 1) % topicList.length);
@@ -25,7 +27,7 @@ const HomePage = () => {
   if (loading) return <Loading />;
 
   return (
-    <section className='doodle-border flex flex-1 flex-col gap-3 p-1.5'>
+    <section className='doodle-border mb-4 flex max-h-[840px] flex-1 flex-col gap-3 p-1.5'>
       <div className='flex gap-3'>
         <GreetingCard
           displayName={userData?.displayName || 'Sailor'}
@@ -36,7 +38,7 @@ const HomePage = () => {
         <Sitrep currentTopic={currentTopic} />
       </div>
       <MapComponent
-        key={currentTopic}
+        key={currentTopic.id}
         currentTopic={currentTopic}
         onNext={handleNextTopic}
         onPrev={handlePrevTopic}

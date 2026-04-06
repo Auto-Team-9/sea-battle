@@ -1,41 +1,47 @@
-import { useState } from 'react';
-import { Topics } from '../../../types/quiz';
+import { useEffect, useState } from 'react';
+import { type Topic } from '../../../types/topic';
 import { seaPhrases } from '../../../constants/constants';
 import Button from '../../../components/ui/Button';
 import LvlSelector from './LvlSelector';
 import { useNavigate } from 'react-router';
-import {
-  topicLocations,
-  topicObjectives,
-  topicOperations,
-  topicPatterns,
-} from '../../../constants/topics';
+import type { Level } from '../../../types/level';
+import { getLevelsByTopic } from '../../../api/levels';
 
 interface MapProps {
-  currentTopic: Topics;
+  currentTopic: Topic;
   onNext: () => void;
   onPrev: () => void;
 }
 
 const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
-  const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
   const navigate = useNavigate();
+  const [selectedLevelId, setSelectedLevel] = useState<string | null>(null);
+  const [levels, setLevels] = useState<Level[]>([]);
 
-  const operation = topicOperations[currentTopic];
-  const location = topicLocations[currentTopic];
-  const objective = topicObjectives[currentTopic];
-  const patterns = topicPatterns[currentTopic];
+  useEffect(() => {
+    const loadLevels = async () => {
+      const data = await getLevelsByTopic(currentTopic.id);
+      setLevels(data);
+    };
+
+    loadLevels();
+  }, [currentTopic]);
 
   const [randomPhrase] = useState(() => {
     const index = Math.floor(Math.random() * seaPhrases.length);
     return seaPhrases[index];
   });
 
+  const operation = currentTopic.operationName;
+  const location = currentTopic.location;
+  const objective = currentTopic.objective;
+  const background = currentTopic.background;
+
   const startBattle = () => {
-    if (!selectedLevel) return;
+    if (!selectedLevelId) return;
 
     navigate('/game', {
-      state: { topic: currentTopic, level: selectedLevel },
+      state: { levelId: selectedLevelId },
     });
   };
 
@@ -43,7 +49,7 @@ const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
     <div
       className={`doodle-border relative z-10 flex h-full flex-col justify-between overflow-hidden p-4`}
     >
-      {patterns}
+      {background}
 
       <div className='flex w-fit max-w-136 flex-col gap-1'>
         <div className='flex items-center gap-4'>
@@ -66,8 +72,8 @@ const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
       <div className={`doodle flex w-fit flex-col items-end gap-5 self-end !bg-transparent`}>
         <Button
           variant='primary'
-          className={`z-20 !w-fit ${selectedLevel ? 'opacity-100' : 'opacity-0'}`}
-          disabled={!selectedLevel}
+          className={`z-20 !w-fit ${selectedLevelId ? 'opacity-100' : 'opacity-0'}`}
+          disabled={!selectedLevelId}
           onClick={startBattle}
         >
           To Battle!
@@ -86,8 +92,8 @@ const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
         className='absolute top-1/2 right-0 z-20 mr-4 -translate-y-1/2'
       ></Button>
       <LvlSelector
-        currentTopic={currentTopic}
-        selectedLevel={selectedLevel}
+        levels={levels}
+        selectedLevel={selectedLevelId}
         onSelectLevel={setSelectedLevel}
       />
     </div>

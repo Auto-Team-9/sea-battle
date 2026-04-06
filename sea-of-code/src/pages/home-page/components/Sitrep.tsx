@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { Topics } from '../../../types/quiz';
+import { type Topic } from '../../../types/topic';
 import { tips } from '../../../constants/constants';
-import { topicDescriptions } from '../../../constants/topics';
 
 interface SitrepProps {
-  currentTopic: Topics;
+  currentTopic: Topic;
 }
 
 const Sitrep = ({ currentTopic }: SitrepProps) => {
-  const description = topicDescriptions[currentTopic];
+  const description = currentTopic.description;
 
   const [randomTip] = useState(() => tips[Math.floor(Math.random() * tips.length)]);
 

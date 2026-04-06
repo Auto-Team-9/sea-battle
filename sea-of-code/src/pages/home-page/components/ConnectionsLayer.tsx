@@ -1,4 +1,4 @@
-import type { Level } from '../../../types/types';
+import type { Level } from '../../../types/level';
 
 interface ConnectionsLayerProps {
   levels: Level[];
@@ -13,7 +13,7 @@ const ConnectionsLayer = ({ levels }: ConnectionsLayerProps) => {
     level.connections?.forEach(targetNum => {
       const target = levelMap.get(targetNum);
       if (target) {
-        const d = `M ${level.x} ${level.y} L ${target.x} ${target.y}`;
+        const d = `M ${level.position.x} ${level.position.y} L ${target.position.x} ${target.position.y}`;
         paths.push({ id: `${level.id}-${targetNum}`, d });
       }
     });
