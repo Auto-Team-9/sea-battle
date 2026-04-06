@@ -1,5 +1,4 @@
 import type { FieldValue, Timestamp } from 'firebase/firestore';
-import type { Difficulty, Modifier } from './quiz';
 
 export interface UserData {
   displayName: string;
@@ -34,15 +33,6 @@ export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt' | 'stats'> & {
   createdAt: FieldValue;
   stats: Omit<UserStats, 'lastLoginDate'> & { lastLoginDate: FieldValue };
 };
-
-export interface Level {
-  id: number;
-  difficulty: Difficulty;
-  modifier: Modifier;
-  x: number;
-  y: number;
-  connections: number[];
-}
 
 export interface ShipData {
   id: number;
