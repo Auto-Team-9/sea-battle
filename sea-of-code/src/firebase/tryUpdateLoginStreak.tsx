@@ -2,7 +2,15 @@ import { doc, runTransaction, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import type { FirestoreUser } from '../types/types';
 
+let lastCheckTime = 0;
+
 export const tryUpdateLoginStreak = async (uid: string) => {
+  const nowTime = Date.now();
+
+  if (nowTime - lastCheckTime < 10000) return;
+
+  lastCheckTime = nowTime;
+
   const userRef = doc(db, 'users', uid);
 
   await runTransaction(db, async transaction => {
@@ -13,32 +21,31 @@ export const tryUpdateLoginStreak = async (uid: string) => {
     const stats = data.stats;
 
     const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    const last = stats.lastLoginDate?.toDate();
+    const getUTCDay = (date: Date) =>
+      Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
 
-    if (last) {
-      const lastDay = new Date(last.getFullYear(), last.getMonth(), last.getDate());
+    const today = getUTCDay(now);
+    const lastLogin = stats.lastLoginDate?.toDate();
+    const lastDay = lastLogin ? getUTCDay(lastLogin) : null;
 
-      const diffDays = (today.getTime() - lastDay.getTime()) / (1000 * 60 * 60 * 24);
+    let newStreak = 1;
 
-      if (diffDays === 0) {
-        return;
-      }
+    if (lastDay !== null) {
+      const diffDays = (today - lastDay) / 86400000;
+
+      if (diffDays === 0) return;
 
       if (diffDays === 1) {
-        stats.streak += 1;
+        newStreak = stats.streak + 1;
       } else {
-        stats.streak = 1;
+        newStreak = 1;
       }
-    } else {
-      stats.streak = 1;
     }
 
-    stats.lastLoginDate = Timestamp.fromDate(now);
-
     transaction.update(userRef, {
-      stats,
+      'stats.streak': newStreak,
+      'stats.lastLoginDate': Timestamp.fromDate(now),
     });
   });
 };

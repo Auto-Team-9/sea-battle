@@ -16,7 +16,7 @@ const ThemeButton = () => {
     <Button
       variant='round'
       onClick={toggleTheme}
-      className={`${theme === 'light' ? 'bg-[#3c3c3c]' : 'bg-white'}`}
+      className={`${theme === 'light' ? 'bg-[#3c3c3c]' : 'bg-[#ffffff]'}`}
       icon={
         <img
           src={theme === 'light' ? halfMoonIcon : sunIcon}

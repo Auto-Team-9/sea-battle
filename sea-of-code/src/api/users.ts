@@ -1,4 +1,12 @@
-import { arrayUnion, doc, getDoc, increment, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  increment,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore';
 import type { FirestoreUser, FirestoreUserCreate } from '../types/types';
 import { db } from '../firebase/config';
 import type { User } from 'firebase/auth';
@@ -30,12 +38,14 @@ export const getOrCreateUser = async (user: User): Promise<FirestoreUser> => {
       clan: null,
       streak: 1,
       lastLoginDate: serverTimestamp(),
+      completedLevels: [],
       clanJoinedAt: null,
       clanStats: {
         victories: 0,
         defeats: 0,
         battles: 0,
       },
+      answeredQuestions: [],
     },
   };
 
@@ -64,7 +74,7 @@ export const getDataFromUser = async (userId: string) => {
 export const updateMatchStats = async (
   userId: string,
   result: 'win' | 'lose',
-  hasClan: boolean,
+  hasClan: boolean
 ) => {
   const ref = doc(db, 'users', userId);
   const updates: Record<string, unknown> = {
