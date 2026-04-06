@@ -32,7 +32,7 @@ const LevelComponent = ({
     <div
       onClick={() => onSelectLevel(id)}
       style={{ left: `${position.x}%`, top: `${position.y}%` }}
-      className={`group absolute z-0 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-center justify-center !rounded-full bg-[var(--color-bg-primary)] !p-0 text-sm transition duration-300 ease-in-out hover:scale-110 focus-visible:outline-2 active:scale-90 ${
+      className={`group absolute z-0 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-center justify-center !rounded-full bg-[var(--color-bg-primary)] !p-0 text-sm transition duration-300 ease-in-out hover:scale-110 focus-visible:outline-2 active:scale-90 ${styles.hover} ${
         selectedStyle
       } ${completedStyle} ${disabledStyle} `}
     >
