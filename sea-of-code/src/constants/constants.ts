@@ -13,6 +13,17 @@ export const inititalShips: ShipData[] = [
   { id: 10, width: 40, size: 1, orientation: 'horizontal' },
 ];
 
+export const BOARD_SIZE = 11;
+
+export const SHIPS: [number, number][] = [
+  [1, 4],
+  [2, 3],
+  [3, 2],
+  [4, 1],
+];
+
+export const COL_LABELS = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+
 export const tips = [
   'Take your time understanding the concepts before engaging the next challenge.',
   'Practice makes perfect - even seasoned captains check their maps twice.',

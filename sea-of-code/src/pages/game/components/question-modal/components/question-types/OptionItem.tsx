@@ -2,8 +2,8 @@ import type { OptionItemProps } from '../../../../../../types/quiz';
 
 function getOptionClass(id: string, correct: string, selected: string | null, submitted: boolean): string {
   if (!submitted) return '';
-  if (id === correct) return 'bg-green-100 dark:bg-green-900/30';
-  if (id === selected) return 'bg-red-100 dark:bg-red-900/30';
+  if (id === correct) return '!bg-green-100 dark:!bg-green-900/30';
+  if (id === selected) return '!bg-red-100 dark:!bg-red-900/30';
   return '';
 }
 

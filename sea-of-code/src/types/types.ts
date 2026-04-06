@@ -13,6 +13,12 @@ export type FirestoreUser = {
   stats: UserStats;
 };
 
+export type ClanStats = {
+  victories: number;
+  defeats: number;
+  battles: number;
+};
+
 export type UserStats = {
   rank: string;
   victories: number;
@@ -28,11 +34,17 @@ export type UserStats = {
   streak: number;
   lastLoginDate: Timestamp | null;
   completedLevels: string[];
+  clanJoinedAt: Timestamp | null;
+  clanStats: ClanStats;
+  answeredQuestions: string[];
 };
 
-export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt' | 'stats'> & {
+export type FirestoreUserCreate = {
   createdAt: FieldValue;
-  stats: Omit<UserStats, 'lastLoginDate'> & { lastLoginDate: FieldValue };
+  stats: Omit<UserStats, 'lastLoginDate' | 'clanJoinedAt'> & {
+    lastLoginDate: FieldValue;
+    clanJoinedAt: FieldValue;
+  };
 };
 
 export interface ShipData {
@@ -54,11 +66,18 @@ export interface ShipsProps {
 export type Orientation = 'horizontal' | 'vertical';
 
 export interface GamePhaseType {
-  phase: string;
   playerBoard: Board;
   enemyBoard: Board;
   setPhase?: React.Dispatch<React.SetStateAction<string>>;
   setEnemyBoard?: React.Dispatch<React.SetStateAction<Board>>;
+  handleCheckShip?: (row: number, col: number) => void;
+  isPlayerTurn?: boolean;
+  gameResult?: 'win' | 'lose' | null;
+  onRestart?: () => void;
+  showModal?: boolean;
+  onModalClose?: () => void;
+  onModalCorrect?: (questionId: string) => void;
+  answeredIds?: string[];
 }
 
 export type PlacementPhaseType = {

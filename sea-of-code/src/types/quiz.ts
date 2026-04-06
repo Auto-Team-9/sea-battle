@@ -19,7 +19,8 @@ export interface QuestionModalProps {
   topic: string;
   difficulty: Difficulty;
   questionType?: QuestionType;
-  onCorrect: () => void;
+  answeredIds?: string[];
+  onCorrect: (questionId: string) => void;
   onClose: () => void;
 }
 
@@ -36,6 +37,7 @@ export interface ActionAreaProps {
   selected: string | null;
   isCorrect: boolean;
   onFire: () => void;
+  isDragDrop?: boolean;
 }
 
 export interface DragDropOrderProps {

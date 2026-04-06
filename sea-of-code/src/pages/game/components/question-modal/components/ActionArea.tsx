@@ -6,7 +6,7 @@ export const ActionArea = ({ submitted, selected, isCorrect, onFire }: ActionAre
       <button
         disabled={!selected}
         onClick={onFire}
-        className='w-full cursor-pointer py-1.5 text-sm font-bold text-[--color-text] transition-opacity disabled:cursor-not-allowed disabled:opacity-40'
+        className='doodle-border w-full mt-2 px-6 py-2 text-xl font-bold !bg-amber-500 text-white cursor-pointer transition-colors hover:animate-pulse disabled:cursor-not-allowed disabled:opacity-40'
       >
         Fire!
       </button>

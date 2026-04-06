@@ -11,6 +11,7 @@ export const QuestionModal = ({
   topic = 'fundamentals',
   difficulty = 'Beginner',
   questionType,
+  answeredIds,
   onCorrect,
   onClose,
 }: QuestionModalProps) => {
@@ -29,7 +30,7 @@ export const QuestionModal = ({
   }, []);
 
   useEffect(() => {
-    getRandomQuestion(topic, difficulty, questionType)
+    getRandomQuestion(topic, difficulty, questionType, answeredIds)
       .then((q) => {
         setQuestion(q);
         if (q.type === 'order') {
@@ -44,7 +45,7 @@ export const QuestionModal = ({
   const handleSubmit = () => {
     if (!selectedAnswer || isSubmitted || !question) return;
     setIsSubmitted(true);
-    if (selectedAnswer === question.correct) onCorrect?.();
+    if (selectedAnswer === question.correct) onCorrect?.(question.id);
     setTimeout(() => onClose?.(), 1000);
   };
 
@@ -89,7 +90,7 @@ export const QuestionModal = ({
         />
       )}
       <div className='mt-5 flex items-center justify-center h-[42px] flex-shrink-0'>
-        <ActionArea submitted={isSubmitted} selected={selectedAnswer} isCorrect={isCorrect} onFire={handleSubmit} />
+        <ActionArea submitted={isSubmitted} selected={selectedAnswer} isCorrect={isCorrect} onFire={handleSubmit} isDragDrop={question.type === 'order'} />
       </div>
     </ModalShell>
   );
