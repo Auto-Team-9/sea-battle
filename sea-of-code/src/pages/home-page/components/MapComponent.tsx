@@ -6,6 +6,7 @@ import LvlSelector from './LvlSelector';
 import { useNavigate } from 'react-router';
 import type { Level } from '../../../types/level';
 import { getLevelsByTopic } from '../../../api/levels';
+import { useAuth } from '../../../firebase/useAuth';
 
 interface MapProps {
   currentTopic: Topic;
@@ -14,6 +15,7 @@ interface MapProps {
 }
 
 const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
+  const { userData } = useAuth();
   const navigate = useNavigate();
   const [selectedLevelId, setSelectedLevel] = useState<string | null>(null);
   const [levels, setLevels] = useState<Level[]>([]);
@@ -21,6 +23,7 @@ const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
   useEffect(() => {
     const loadLevels = async () => {
       const data = await getLevelsByTopic(currentTopic.id);
+      data.sort((a, b) => a.number - b.number);
       setLevels(data);
     };
 
@@ -93,6 +96,7 @@ const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
       ></Button>
       <LvlSelector
         levels={levels}
+        completedLevels={userData?.stats.completedLevels ?? []}
         selectedLevel={selectedLevelId}
         onSelectLevel={setSelectedLevel}
       />

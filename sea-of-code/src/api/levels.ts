@@ -1,4 +1,13 @@
-import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
 import type { Level } from '../types/level';
 import type { TopicId } from '../types/topic';
 import { db } from '../firebase/config';
@@ -19,4 +28,12 @@ export const getLevelById = async (levelId: string): Promise<Level | null> => {
   if (!snapshot.exists()) return null;
 
   return snapshot.data() as Level;
+};
+
+export const completeLevel = async (userId: string, levelId: string) => {
+  const ref = doc(db, 'users', userId);
+
+  await updateDoc(ref, {
+    'stats.completedLevels': arrayUnion(levelId),
+  });
 };

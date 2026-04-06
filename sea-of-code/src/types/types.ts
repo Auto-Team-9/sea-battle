@@ -27,6 +27,7 @@ export type UserStats = {
   clan: string | null;
   streak: number;
   lastLoginDate: Timestamp | null;
+  completedLevels: string[];
 };
 
 export type FirestoreUserCreate = Omit<FirestoreUser, 'createdAt' | 'stats'> & {

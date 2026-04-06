@@ -30,6 +30,7 @@ export const getOrCreateUser = async (user: User): Promise<FirestoreUser> => {
       clan: null,
       streak: 1,
       lastLoginDate: serverTimestamp(),
+      completedLevels: [],
     },
   };
 
