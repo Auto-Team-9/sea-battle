@@ -40,10 +40,13 @@ export type UserStats = {
 };
 
 export type FirestoreUserCreate = {
+  uid: string;
+  email: string | null;
+  displayName: string;
   createdAt: FieldValue;
   stats: Omit<UserStats, 'lastLoginDate' | 'clanJoinedAt'> & {
     lastLoginDate: FieldValue;
-    clanJoinedAt: FieldValue;
+    clanJoinedAt: FieldValue | null;
   };
 };
 
