@@ -1,4 +1,4 @@
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { arrayUnion, doc, getDoc, increment, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import type { FirestoreUser, FirestoreUserCreate } from '../types/types';
 import { db } from '../firebase/config';
 import type { User } from 'firebase/auth';
@@ -31,6 +31,12 @@ export const getOrCreateUser = async (user: User): Promise<FirestoreUser> => {
       streak: 1,
       lastLoginDate: serverTimestamp(),
       completedLevels: [],
+      clanJoinedAt: null,
+      clanStats: {
+        victories: 0,
+        defeats: 0,
+        battles: 0,
+      },
     },
   };
 
@@ -54,4 +60,42 @@ export const getDataFromUser = async (userId: string) => {
     console.error('Error fetching user data:', error);
     throw error;
   }
+};
+
+export const updateMatchStats = async (
+  userId: string,
+  result: 'win' | 'lose',
+  hasClan: boolean,
+) => {
+  const ref = doc(db, 'users', userId);
+  const updates: Record<string, unknown> = {
+    'stats.battles': increment(1),
+    ...(hasClan && { 'stats.clanStats.battles': increment(1) }),
+  };
+  if (result === 'win') {
+    updates['stats.victories'] = increment(1);
+    if (hasClan) updates['stats.clanStats.victories'] = increment(1);
+  }
+  await updateDoc(ref, updates);
+};
+
+export const addAnsweredQuestion = async (userId: string, questionId: string) => {
+  const ref = doc(db, 'users', userId);
+  await updateDoc(ref, { 'stats.answeredQuestions': arrayUnion(questionId) });
+};
+
+export const joinClan = async (userId: string, clanKey: string, isChange = false) => {
+  const ref = doc(db, 'users', userId);
+  const updates: Record<string, unknown> = {
+    'stats.clan': clanKey,
+    'stats.clanJoinedAt': serverTimestamp(),
+  };
+
+  if (isChange) {
+    updates['stats.clanStats.victories'] = 0;
+    updates['stats.clanStats.defeats'] = 0;
+    updates['stats.clanStats.battles'] = 0;
+  }
+
+  await updateDoc(ref, updates);
 };
