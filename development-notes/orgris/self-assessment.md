@@ -1,4 +1,4 @@
-# Pull Request – add self-assessment for Orgris
+# Pull Request – Self-assessment Orgris
 
 ### Maxim Zhidkov (Orgris)
 
@@ -6,7 +6,7 @@ Project name: Sea of Code
 Sources: [GitHub link](https://github.com/Auto-Team-9/sea-battle/tree/main)
 Telegram: [@orgris4](https://t.me/orgris4)
 
-Link to PR for questions: Open PR Link
+Link to PR for questions: [Open PR Link](https://github.com/Auto-Team-9/sea-battle/pull/35)
 
 ## Features Table
 
