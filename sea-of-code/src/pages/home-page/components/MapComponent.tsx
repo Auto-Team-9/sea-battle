@@ -19,7 +19,7 @@ interface MapProps {
 const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
   const { userData } = useAuth();
   const navigate = useNavigate();
-  const [selectedLevelId, setSelectedLevel] = useState<string | null>(null);
+  const [selectedLevelId, setSelectedLeveId] = useState<string | null>(null);
   const [levels, setLevels] = useState<Level[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -57,6 +57,16 @@ const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
     });
   };
 
+  const handleNext = () => {
+    setSelectedLeveId(null);
+    onNext();
+  };
+
+  const handlePrev = () => {
+    setSelectedLeveId(null);
+    onPrev();
+  };
+
   const textCustomAnimation = (key: string, component: ReactElement) => {
     return (
       <AnimatePresence mode='wait'>
@@ -84,7 +94,7 @@ const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
             levels={levels}
             completedLevels={userData?.stats.completedLevels ?? []}
             selectedLevel={selectedLevelId}
-            onSelectLevel={setSelectedLevel}
+            onSelectLevel={setSelectedLeveId}
           />
         ) : (
           <Loading className='t-1/2 l-1-2 absolute bg-transparent' />
@@ -140,12 +150,12 @@ const MapComponent = ({ currentTopic, onNext, onPrev }: MapProps) => {
         </div>
         <Button
           variant='arrow'
-          onClick={onPrev}
+          onClick={handleNext}
           className='absolute top-1/2 left-0 z-20 ml-4 -translate-y-1/2 rotate-180'
         ></Button>
         <Button
           variant='arrow'
-          onClick={onNext}
+          onClick={handlePrev}
           className='absolute top-1/2 right-0 z-20 mr-4 -translate-y-1/2'
         ></Button>
       </div>
