@@ -17,13 +17,13 @@ const variantStyles: Record<ButtonVariant, string> = {
     'bg-[var(--color-btn-secondary)] hover:bg-[var(--color-btn-secondary-hover)] focus-visible:outline-offset-[-8px]',
   link: 'bg-none border-none text-end text-sm font-medium text-[var(--color-accent)] hover:opacity-80 !border-0 inline !p-0 focus-visible:outline-offset-0 rounded-none',
   round: `relative hover:bg-[var(--color-btn-primary-hover)] !p-0 doodle-round-button w-fit h-fit !rounded-2xl`,
-  arrow: `!p-0 !h-fit !w-fit border-none text-[var(--color-text)] hover:text-[var(--color-btn-primary-hover)] hover:scale-110 `,
+  arrow: `!p-0 !h-fit !w-fit border-none text-[var(--color-text)] hover:text-[var(--color-btn-primary-hover)] `,
 };
 
 const Button = ({ variant = 'primary', icon, className = '', children, ...props }: ButtonProps) => {
   return (
     <button
-      className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-1.5 text-sm transition duration-300 ease-in-out focus-visible:outline-2 active:scale-95 ${variantStyles[variant]} ${className}`}
+      className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-1.5 text-sm transition duration-300 ease-in-out hover:scale-110 focus-visible:outline-2 active:scale-95 ${variantStyles[variant]} ${className}`}
       {...props}
     >
       {variant === 'arrow' ? (
