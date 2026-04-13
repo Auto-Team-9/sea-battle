@@ -1,8 +1,9 @@
+import { motion } from 'motion/react';
 import type { Level } from '../../../types/level';
 import ConnectionsLayer from './ConnectionsLayer';
-import LevelComponent from './LvlComponent';
+import LevelComponent from './LevelComponent';
 
-interface LvlSelectorProps {
+interface LevelSelectorProps {
   levels: Level[];
   completedLevels: string[];
   selectedLevel: string | null;
@@ -14,7 +15,7 @@ const LevelSelector = ({
   completedLevels,
   selectedLevel,
   onSelectLevel,
-}: LvlSelectorProps) => {
+}: LevelSelectorProps) => {
   const completedSet = new Set(completedLevels);
   const availableSet = new Set<string>();
 
@@ -33,13 +34,20 @@ const LevelSelector = ({
   }
 
   return (
-    <div className='absolute top-0 left-0 z-0 h-full w-full items-center justify-center px-25 py-15'>
+    <motion.div
+      key={'operation'}
+      initial={{ opacity: 0, filter: 'blur(3px)' }}
+      animate={{ opacity: 1, filter: 'blur(0px)' }}
+      exit={{ opacity: 0, filter: 'blur(3px)' }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+      className={'absolute top-0 left-0 z-0 h-full w-full items-center justify-center px-25 py-15'}
+    >
       <div className='relative h-full w-full'>
         <ConnectionsLayer levels={levels} availableSet={availableSet} completedSet={completedSet} />
 
         {levels.map(lvl => {
           const isSelected = selectedLevel === lvl.id;
-          const isCompleted = completedLevels.includes(lvl.id);
+          const isCompleted = completedSet.has(lvl.id);
 
           const isAvailable = availableSet.has(lvl.id) || isCompleted;
           const isDisabled = !isAvailable;
@@ -59,7 +67,7 @@ const LevelSelector = ({
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
