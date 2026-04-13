@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { type Topic } from '../../../types/topic';
 import { tips } from '../../../constants/constants';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface SitrepProps {
   currentTopic: Topic;
@@ -20,12 +21,21 @@ const Sitrep = ({ currentTopic }: SitrepProps) => {
         <div className='doodle-vr h-full' />
       </div>
 
-      <div className='flex flex-col gap-2'>
-        <p className='text-'>{description}</p>
-
-        <div className='flex flex-col gap-1 text-sm text-[--color-text] opacity-70'>
-          <p>TIP: {randomTip}</p>
+      <div className='flex w-full flex-col gap-2'>
+        <div className='flex h-[72px] w-full flex-col justify-center'>
+          <AnimatePresence mode='wait'>
+            <motion.p
+              key={description}
+              initial={{ opacity: 0, filter: 'blur(3px)' }}
+              animate={{ opacity: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, filter: 'blur(3px)' }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+            >
+              {description}
+            </motion.p>
+          </AnimatePresence>
         </div>
+        <p className='text-sm text-[--color-text] opacity-70'>TIP: {randomTip}</p>
       </div>
     </div>
   );
