@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getInitialTheme, setTheme, type Theme } from '../header/theme';
 import Button from './Button';
 import sunIcon from '../../assets/sun-icon.svg';
 import halfMoonIcon from '../../assets/half-moon-icon.svg';
 
 const ThemeButton = () => {
-  const [theme, setThemeState] = useState<Theme>(getInitialTheme());
+  const [theme, setThemeState] = useState<Theme>(() => getInitialTheme());
 
-  useEffect(() => {
-    setTheme(theme);
-  }, [theme]);
-  const toggleTheme = () => setThemeState(theme === 'light' ? 'dark' : 'light');
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setThemeState(newTheme);
+    setTheme(newTheme);
+  };
 
   return (
     <Button

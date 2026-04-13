@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { AuthProvider } from './firebase/AuthProvider.tsx';
+import { getInitialTheme, setTheme } from './components/header/theme.tsx';
+
+setTheme(getInitialTheme());
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
