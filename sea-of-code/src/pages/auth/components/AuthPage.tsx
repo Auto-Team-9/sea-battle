@@ -1,3 +1,4 @@
+import { motion } from 'motion/react';
 import AuthHeader from './AuthHeader';
 import AuthLink from './AuthLink';
 import OAuthButtons from './OAuthButtons';
@@ -12,17 +13,27 @@ type AuthPageProps = {
 
 const AuthPage = ({ title, form, linkText, linkLabel, linkTo }: AuthPageProps) => {
   return (
-    <div className='flex min-h-full flex-col justify-center self-center'>
+    <motion.div
+      className='flex min-h-full flex-col justify-center self-center'
+      initial={{ opacity: 0, filter: 'blur(3px)' }}
+      animate={{ opacity: 1, filter: 'blur(0px)' }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+    >
       <AuthHeader title={title} />
 
-      <div className='doodle doodle-border mt-5 rounded-xl bg-white/50 p-3 sm:mx-auto sm:mt-7 sm:w-full sm:max-w-sm sm:p-6 dark:bg-black/10'>
+      <motion.div
+        className='doodle doodle-border mt-5 rounded-xl bg-white/50 p-3 sm:mx-auto sm:mt-7 sm:w-full sm:max-w-sm sm:p-6 dark:bg-black/10'
+        initial={{ opacity: 0, filter: 'blur(3px)' }}
+        animate={{ opacity: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+      >
         {form}
 
         <OAuthButtons />
 
         <AuthLink text={linkText} linkText={linkLabel} linkTo={linkTo} />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
