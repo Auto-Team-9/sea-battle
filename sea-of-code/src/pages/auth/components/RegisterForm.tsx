@@ -4,30 +4,18 @@ import Input from '../../../components/ui/Input';
 import Button from '../../../components/ui/Button';
 import Loading from '../../../components/ui/loading';
 import Message from '../../../components/ui/Message';
-
-type FormData = {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
-};
-
-type Errors = {
-  name?: string;
-  email?: string;
-  password?: string;
-  passwordConfirm?: string;
-};
+import { validateRegisterForm, type FormErrors, type RegisterFormData } from './formValidation';
+import { FirebaseError } from 'firebase/app';
 
 const RegisterForm = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<RegisterFormData>({
     name: '',
     email: '',
     password: '',
     passwordConfirm: '',
   });
 
-  const [errors, setErrors] = useState<Errors>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [backendError, setBackendError] = useState<string | null>(null);
 
@@ -47,34 +35,6 @@ const RegisterForm = () => {
     if (backendError) setBackendError(null);
   };
 
-  const validate = (data: FormData): Errors => {
-    const newErrors: Errors = {};
-
-    if (!data.name.trim()) {
-      newErrors.name = 'Enter your name';
-    }
-
-    if (!data.email.trim()) {
-      newErrors.email = 'Enter email';
-    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
-      newErrors.email = 'Incorrect email';
-    }
-
-    if (!data.password.trim()) {
-      newErrors.password = 'Enter password';
-    } else if (data.password.length < 6) {
-      newErrors.password = 'Password should be at least 6 characters';
-    }
-
-    if (!data.passwordConfirm.trim()) {
-      newErrors.passwordConfirm = 'Confirm your password';
-    } else if (data.passwordConfirm !== data.password) {
-      newErrors.passwordConfirm = 'Passwords do not match';
-    }
-
-    return newErrors;
-  };
-
   const handleSubmit = async (event: React.SubmitEvent) => {
     event.preventDefault();
 
@@ -82,9 +42,10 @@ const RegisterForm = () => {
 
     setBackendError(null);
 
-    const validationErrors = validate(formData);
+    const validationErrors = validateRegisterForm(formData);
+    const hasErrors = Object.values(validationErrors).some(Boolean);
 
-    if (Object.keys(validationErrors).length > 0) {
+    if (hasErrors) {
       setErrors(validationErrors);
       return;
     }
@@ -98,20 +59,25 @@ const RegisterForm = () => {
         displayName: formData.name,
       });
 
-      if (result.success) {
-        setFormData({
-          name: '',
-          email: '',
-          password: '',
-          passwordConfirm: '',
-        });
-      } else {
+      if (!result.success) {
+        setIsLoading(false);
         setBackendError(result.error.message);
       }
-    } finally {
-      setIsLoading(false);
+    } catch (error: unknown) {
+      handleError(error);
     }
   };
+
+  function handleError(error: unknown) {
+    let errorMessage = 'Something went wrong';
+
+    if (error instanceof FirebaseError) {
+      errorMessage = error.message;
+    }
+    setIsLoading(false);
+
+    setBackendError(errorMessage);
+  }
 
   return (
     <form onSubmit={handleSubmit} className='relative space-y-4' noValidate>
@@ -125,6 +91,7 @@ const RegisterForm = () => {
         onChange={handleChange}
         value={formData.name}
         error={errors.name}
+        maxLength={10}
         autoComplete='text'
         required
       />
@@ -136,6 +103,7 @@ const RegisterForm = () => {
         onChange={handleChange}
         value={formData.email}
         error={errors.email}
+        maxLength={25}
         autoComplete='email'
         required
       />
@@ -147,6 +115,7 @@ const RegisterForm = () => {
         onChange={handleChange}
         value={formData.password}
         error={errors.password}
+        maxLength={25}
         autoComplete='new-password'
         required
       />
@@ -158,6 +127,7 @@ const RegisterForm = () => {
         onChange={handleChange}
         value={formData.passwordConfirm}
         error={errors.passwordConfirm}
+        maxLength={25}
         autoComplete='new-password'
         required
       />
