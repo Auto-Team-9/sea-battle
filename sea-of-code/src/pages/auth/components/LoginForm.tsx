@@ -12,29 +12,18 @@ import {
 } from 'firebase/auth';
 import Message from '../../../components/ui/Message';
 import { FirebaseError } from 'firebase/app';
+import { validateLoginForm, type FormErrors, type LoginFormData } from './formValidation';
 
 type MessageType = 'error' | 'success' | null;
 
-type FormData = {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-};
-
-type Errors = {
-  email?: string;
-  password?: string;
-};
-
 const LoginForm = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: '',
     rememberMe: false,
   });
-
-  const [errors, setErrors] = useState<Errors>({});
-  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{
     type: MessageType;
     text: string;
@@ -70,8 +59,10 @@ const LoginForm = () => {
       setMessage({ type: null, text: '' });
     }
 
-    const validationErrors = validate(formData);
-    if (Object.keys(validationErrors).length > 0) {
+    const validationErrors = validateLoginForm(formData);
+    const hasErrors = Object.values(validationErrors).some(Boolean);
+
+    if (hasErrors) {
       setErrors(validationErrors);
       return;
     }
@@ -89,20 +80,15 @@ const LoginForm = () => {
         password: formData.password,
       });
 
-      if (result.success) {
-        setFormData({
-          email: '',
-          password: '',
-          rememberMe: false,
-        });
-      } else {
+      if (!result.success) {
+        setIsLoading(false);
         setMessage({
           type: 'error',
           text: result.error.message,
         });
       }
-    } finally {
-      setIsLoading(false);
+    } catch (error: unknown) {
+      handleError(error);
     }
   };
 
@@ -123,36 +109,23 @@ const LoginForm = () => {
         text: 'Check your email for reset link',
       });
     } catch (error: unknown) {
-      let errorMessage = 'Something went wrong';
-
-      if (error instanceof FirebaseError) {
-        errorMessage = error.message;
-      }
-
-      setMessage({
-        type: 'error',
-        text: errorMessage,
-      });
+      handleError(error);
     }
   };
 
-  const validate = (formData: FormData): Errors => {
-    const newErrors: Errors = {};
+  function handleError(error: unknown) {
+    let errorMessage = 'Something went wrong';
 
-    if (!formData.email.trim()) {
-      newErrors.email = 'Enter email';
-    } else if (!formData.email.includes('@')) {
-      newErrors.email = 'Incorrect email';
+    if (error instanceof FirebaseError) {
+      errorMessage = error.message;
     }
+    setIsLoading(false);
 
-    if (!formData.password.trim()) {
-      newErrors.password = 'Enter password';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Minimum 6 characters';
-    }
-
-    return newErrors;
-  };
+    setMessage({
+      type: 'error',
+      text: errorMessage,
+    });
+  }
 
   return (
     <form onSubmit={handleSubmit} className='space-y-4' noValidate>
@@ -167,6 +140,7 @@ const LoginForm = () => {
         onChange={handleChange}
         value={formData.email}
         error={errors.email}
+        maxLength={25}
         autoComplete='email'
         required
       />
@@ -177,6 +151,7 @@ const LoginForm = () => {
         onChange={handleChange}
         value={formData.password}
         error={errors.password}
+        maxLength={25}
         autoComplete='current-password'
         required
       />

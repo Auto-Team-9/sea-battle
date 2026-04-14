@@ -36,12 +36,14 @@ const GreetingMessage = ({
       </div>
 
       <div
-        className='flex h-full w-full flex-col justify-center transition-opacity duration-700'
+        className='flex h-full w-full flex-col justify-between transition-opacity duration-700'
         style={{ opacity: showMain ? 1 : 0 }}
       >
-        <p>{intro}</p>
+        <div className='flex-col justify-center'>
+          <p>{intro}</p>
 
-        <p>{main}</p>
+          <p>{main}</p>
+        </div>
 
         <p className='text-sm text-[--color-text] opacity-70'>
           {to_rank > 0 ? `${to_rank} XP to the next rank` : 'Maximum rank reached'}

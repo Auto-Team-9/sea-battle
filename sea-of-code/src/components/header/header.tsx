@@ -2,7 +2,7 @@ import { NavLink } from 'react-router';
 import logo from '../../assets/battleship-alt.svg';
 import { useAuth } from '../../firebase/useAuth';
 import { logoutUser } from '../../api/auth';
-import { defaultAvatar, profileImage, ranks } from '../../constants/images';
+import { defaultAvatar, profileImageKey, ranks } from '../../constants/images';
 import { useRef } from 'react';
 import Button from '../ui/Button';
 import logoutIcon from '../../assets/logout-icon.svg';
@@ -17,13 +17,13 @@ const Header = () => {
 
   if (loading || !userData) return <></>;
 
-  const avatar = localStorage.getItem(profileImage) || defaultAvatar;
+  const avatar = localStorage.getItem(profileImageKey(userData?.uid)) || defaultAvatar;
   const displayName = userData.displayName || 'player';
 
   const rankKey = userData.stats.rank as RankKey;
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `ease-in-out hover:text-indigo-500 transition duration-300 ${isActive ? 'text-indigo-500 cursor-default' : ''}`;
+    `hover:scale-110 active:scale-95 ease-in-out hover:text-indigo-500 transition duration-300 ${isActive ? 'text-indigo-500 cursor-default scale-110 active:scale-110' : ''}`;
 
   return (
     <header className='doodle-border my-4 flex items-center justify-between p-2 px-5'>

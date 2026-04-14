@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Loading from '../../components/ui/loading';
 import { useAuth } from '../../firebase/useAuth';
 import { type TopicId } from '../../types/topic';
 import { GreetingCard } from './components/GreetingCard';
@@ -10,7 +9,7 @@ import { topics } from '../../constants/topics';
 const topicList = Object.keys(topics) as TopicId[];
 
 const HomePage = () => {
-  const { userData, loading } = useAuth();
+  const { userData } = useAuth();
   const [topicIndex, setTopicIndex] = useState(0);
 
   const currentTopicId = topicList[topicIndex];
@@ -24,8 +23,6 @@ const HomePage = () => {
     setTopicIndex(prev => (prev - 1 + topicList.length) % topicList.length);
   };
 
-  if (loading) return <Loading />;
-
   return (
     <section className='doodle-border mb-4 flex max-h-[840px] flex-1 flex-col gap-3 p-1.5'>
       <div className='flex gap-3'>
@@ -37,12 +34,7 @@ const HomePage = () => {
         />
         <Sitrep currentTopic={currentTopic} />
       </div>
-      <MapComponent
-        key={currentTopic.id}
-        currentTopic={currentTopic}
-        onNext={handleNextTopic}
-        onPrev={handlePrevTopic}
-      />
+      <MapComponent currentTopic={currentTopic} onNext={handleNextTopic} onPrev={handlePrevTopic} />
     </section>
   );
 };

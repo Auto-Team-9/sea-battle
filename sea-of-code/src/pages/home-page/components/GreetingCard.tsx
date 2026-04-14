@@ -77,7 +77,7 @@ export const GreetingCard = ({ displayName, rank, streakDays, to_rank }: Greetin
     <div className='doodle doodle-border flex w-fit shrink-0 gap-5 p-4'>
       <RandomSailor />
 
-      <div className='relative flex flex-col'>
+      <div className='relative flex flex-col gap-1'>
         <div className='flex items-center gap-4'>
           <hr className='w-full flex-grow' />
           <p className='tracking-wide whitespace-nowrap uppercase opacity-70'>Assistant</p>

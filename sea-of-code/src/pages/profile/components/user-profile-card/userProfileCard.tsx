@@ -1,19 +1,27 @@
 import { useEffect, useRef, useState, type JSX } from 'react';
-import { defaultAvatar, profileImage, ranks } from '../../../../constants/images';
-import type { UserData } from '../../../../types/types';
+import { defaultAvatar, profileImageKey, ranks } from '../../../../constants/images';
+import type { UserData as UserProfileData } from '../../../../types/types';
 import { Pixelit } from '../pixel/pixel';
 import { Link } from 'react-router';
+import { useAuth } from '../../../../firebase/useAuth';
 
-const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
+const UserProfileCard = ({
+  userData: UserProfileData,
+}: {
+  userData: UserProfileData;
+}): JSX.Element => {
+  const { userData } = useAuth();
+  const UID = userData?.uid ?? '';
+
   const [avatar, setAvatar] = useState(() => {
-    const savedImage = localStorage.getItem(profileImage);
+    const savedImage = localStorage.getItem(profileImageKey(UID));
     return savedImage || defaultAvatar;
   });
 
   const {
     displayName,
     stats: { rank, to_rank, clan },
-  } = userData;
+  } = UserProfileData;
 
   const { name, src, alt } = ranks[rank as keyof typeof ranks];
 
@@ -29,7 +37,7 @@ const UserProfileCard = ({ userData }: { userData: UserData }): JSX.Element => {
     reader.onload = event => {
       if (event.target?.result && typeof event.target.result === 'string') {
         const image = event.target.result;
-        localStorage.setItem(profileImage, image);
+        localStorage.setItem(profileImageKey(UID), image);
         setAvatar(image);
       }
     };

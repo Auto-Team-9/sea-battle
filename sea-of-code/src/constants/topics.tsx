@@ -6,7 +6,7 @@ import LeavesPattern from '../assets/leaves.svg?react';
 import { Topics, type Topic, type TopicId } from '../types/topic';
 
 export enum TopicDescription {
-  Fundamentals = 'The basics of JavaScript: variables, types, and operators. Every sailor needs a solid deck to navigate! Master these fundamentals to keep your code steady and avoid running aground.',
+  Fundamentals = 'The basics of JavaScript: variables, types, and operators. Every sailor needs a solid deck to navigate! These are the planks that hold your ship together - learn them well to keep your code steady and sail smoothly into deeper waters.',
   FunctionsAndContext = 'Dive into functions, scope, and execution context. Mastering this keeps your ship steady in stormy seas. Remember: understanding how “this” behaves is like reading the winds - crucial for smooth sailing.',
   DataHandling = 'Manipulate arrays, objects, and data structures like a true navigator plotting coordinates on a map. Sorting, filtering, and mapping your data is like charting a course through treacherous waters - precision is key.',
   AsyncJavaScript = 'Promises, async/await, and event loops - sail through asynchronous waters with confidence. Timing and coordination are everything: a misstep can leave your ship stuck in a whirlpool of callbacks.',
@@ -48,7 +48,7 @@ export const topics: Record<TopicId, Topic> = {
     background: (
       <BgPattern
         key='bg1'
-        className='absolute inset-0 -z-10 h-full w-full object-cover object-center text-[var(--color-text)] opacity-10'
+        className='h-full w-full object-cover object-center text-[var(--color-text)] opacity-10'
         preserveAspectRatio='xMidYMid slice'
       />
     ),
@@ -64,7 +64,7 @@ export const topics: Record<TopicId, Topic> = {
     background: (
       <Bg2Pattern
         key='bg2'
-        className='absolute inset-0 -z-10 h-full w-full scale-[1.1] object-cover object-center text-[var(--color-text)] opacity-10'
+        className='h-full w-full scale-[1.1] object-cover object-center text-[var(--color-text)] opacity-10'
         preserveAspectRatio='xMidYMid slice'
       />
     ),
@@ -80,7 +80,7 @@ export const topics: Record<TopicId, Topic> = {
     background: (
       <HexPattern
         key='hex'
-        className='absolute inset-0 -z-10 h-full w-full scale-[15] text-[var(--color-text)] opacity-15'
+        className='h-full w-full scale-[15] text-[var(--color-text)] opacity-15'
         preserveAspectRatio='xMidYMid slice'
       />
     ),
@@ -96,7 +96,7 @@ export const topics: Record<TopicId, Topic> = {
     background: (
       <LinesPattern
         key='lines'
-        className='absolute inset-0 -z-10 h-full w-full object-cover object-center text-[var(--color-text)] opacity-10'
+        className='h-full w-full object-cover object-center text-[var(--color-text)] opacity-10'
         preserveAspectRatio='xMidYMid slice'
       />
     ),
@@ -112,7 +112,7 @@ export const topics: Record<TopicId, Topic> = {
     background: (
       <LeavesPattern
         key='leaves'
-        className='absolute inset-0 -z-10 h-full w-full object-cover object-center text-[var(--color-text)] opacity-10'
+        className='h-full w-full object-cover object-center text-[var(--color-text)] opacity-10'
         preserveAspectRatio='xMidYMid slice'
       />
     ),
