@@ -1,0 +1,21 @@
+.doodle-progress {
+  border-radius: 0.25rem;
+  appearance: none;
+  -webkit-appearance: none;
+  overflow: hidden;
+}
+
+.doodle-progress::-webkit-progress-bar {
+  background: var(--color-bg-primary);
+  border-radius: 0.25rem;
+}
+
+.doodle-progress::-webkit-progress-value {
+  background: var(--color-accent);
+  border-radius: 0.25rem;
+}
+
+.doodle-progress::-moz-progress-bar {
+  background: var(--color-accent);
+  border-radius: 0.25rem;
+}

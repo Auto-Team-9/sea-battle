@@ -1,0 +1,2 @@
+cd sea-of-code
+npx lint-staged
