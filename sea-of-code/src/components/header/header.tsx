@@ -23,7 +23,7 @@ const Header = () => {
   const rankKey = userData.stats.rank as RankKey;
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `hover:scale-110 active:scale-95 ease-in-out hover:text-indigo-500 transition duration-300 ${isActive ? 'text-indigo-500 cursor-default' : ''}`;
+    `hover:scale-110 active:scale-95 ease-in-out hover:text-indigo-500 transition duration-300 ${isActive ? 'text-indigo-500 cursor-default scale-110 active:scale-110' : ''}`;
 
   return (
     <header className='doodle-border my-4 flex items-center justify-between p-2 px-5'>

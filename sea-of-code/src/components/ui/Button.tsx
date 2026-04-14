@@ -15,7 +15,7 @@ const variantStyles: Record<ButtonVariant, string> = {
     'bg-[var(--color-btn-primary)] hover:bg-[var(--color-btn-primary-hover)] focus-visible:outline-offset-[-8px]',
   secondary:
     'bg-[var(--color-btn-secondary)] hover:bg-[var(--color-btn-secondary-hover)] focus-visible:outline-offset-[-8px]',
-  link: 'bg-none border-none text-end text-sm font-medium text-[var(--color-accent)] hover:opacity-80 !border-0 inline !p-0 focus-visible:outline-offset-0 rounded-none',
+  link: 'bg-none border-none text-end text-sm font-medium text-[var(--color-accent)] !border-0 inline !p-0 focus-visible:outline-offset-0 rounded-none',
   round: `relative hover:bg-[var(--color-btn-primary-hover)] !p-0 doodle-round-button w-fit h-fit !rounded-2xl`,
   arrow: `!p-0 !h-fit !w-fit border-none text-[var(--color-text)] hover:text-[var(--color-btn-primary-hover)] `,
 };
