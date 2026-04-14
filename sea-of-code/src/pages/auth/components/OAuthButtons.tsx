@@ -24,7 +24,7 @@ const OAuthButtons = () => {
         return;
       }
       console.log('User:', res.user);
-    } finally {
+    } catch {
       setIsLoading(false);
     }
   };
