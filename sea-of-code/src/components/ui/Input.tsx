@@ -9,7 +9,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input = ({ label, name, error, ...props }: InputProps) => {
   return (
     <div>
-      <label htmlFor={name} className='block text-sm font-medium'>
+      <label htmlFor={name} className='block text-sm'>
         {label}
       </label>
 
@@ -22,7 +22,7 @@ const Input = ({ label, name, error, ...props }: InputProps) => {
         />
       </div>
 
-      {error && <p className='block text-sm font-medium text-rose-500'>{error}</p>}
+      {error && <p className='block text-sm text-rose-500'>{error}</p>}
     </div>
   );
 };
