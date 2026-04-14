@@ -33,6 +33,62 @@ We are proud of taking our first serious steps in real-world development as a te
 - [feat/game](https://github.com/Auto-Team-9/sea-battle/pull/16)
 - [feat/Add Auth Validation](https://github.com/Auto-Team-9/sea-battle/pull/13)
 
+## Local Setup
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v18+
+- npm v9+
+
+### Steps
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/Auto-Team-9/sea-battle.git
+   cd sea-battle/sea-of-code
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+
+   Create a `.env` file in the `sea-of-code/` directory:
+
+   ```env
+   VITE_FIREBASE_API_KEY=your_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+   VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   VITE_FIREBASE_APP_ID=your_app_id
+   VITE_FIREBASE_DATABASE_URL=your_measurement_id
+   ```
+
+   Get these values from your [Firebase Console](https://console.firebase.google.com/) → Project Settings → Your apps.
+
+4. **Start the dev server**
+
+   ```bash
+   npm run dev
+   ```
+
+   The app will be available at `http://localhost:5173`.
+
+### Other useful commands
+
+| Command           | Description                        |
+| ----------------- | ---------------------------------- |
+| `npm run build`   | Production build                   |
+| `npm run preview` | Preview the production build       |
+| `npm run lint`    | Lint and auto-fix TypeScript files |
+| `npm run format`  | Format all files with Prettier     |
+| `npm run test`    | Run unit tests with Vitest         |
+
 ## Meeting Notes
 
 - https://youtu.be/ct0m-CUmHCY

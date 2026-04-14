@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Short+Stack&display=swap');
+@import './styles/vendor/doodleCss/doodle.css';
+@import 'tailwindcss';
+
+:root {
+  --color-text: #3c3c3c;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #bbdbe7;
+  --color-bg-surface: rgba(255, 255, 255, 0.4);
+  --color-accent: #6366f1;
+  --color-btn-primary: #7f81ff;
+  --color-btn-primary-hover: #686bff;
+  --color-btn-secondary: #cbd5f5;
+  --color-btn-secondary-hover: #94a3b8;
+
+  font-family: 'Short Stack', cursive;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  color: var(--color-text);
+  background-color: var(--color-bg-primary);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+
+  background:
+    linear-gradient(var(--color-bg-secondary), transparent 2px),
+    linear-gradient(90deg, var(--color-bg-secondary), transparent 2px);
+  background-size: 20px 20px;
+  background-position: center center;
+
+  user-select: none;
+}
+
+progress::-webkit-progress-bar {
+  background-color: var(--color-text);
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--color-accent);
+  border-radius: 10px;
+}
+
+.has-ship {
+  background-color: #3b82f6;
+}
+
+.doodle,
+.doodle-border {
+  background-color: var(--color-bg-surface);
+}
+
+[data-theme="dark"] {
+  --color-text: #ffffff;
+  --color-bg-primary: #242424;
+  --color-bg-secondary: #2d2d2d;
+  --color-bg-surface: rgba(0, 0, 0, 0.1);
+  --color-btn-primary: rgba(49, 44, 133, 0.5);
+  --color-btn-primary-hover: #6366f1;
+  --color-btn-secondary: #0f172a;
+  --color-btn-secondary-hover: #1e293b;
+}
